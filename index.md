@@ -76,7 +76,7 @@ feature_row:
 <p><em>등록된 FAQ가 없습니다.</em></p>
 {% endif %}
 
-<p><a class="btn btn--info" href="/faq/">전체 FAQ 보기</a></p>
+<p><a class="btn btn--info" href="/FAQ/">전체 FAQ 보기</a></p>
 </div>
 
 </div>
