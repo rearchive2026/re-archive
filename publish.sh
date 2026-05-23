@@ -28,4 +28,4 @@ git commit -m "Deploy site: $(date +'%Y-%m-%d %H:%M:%S')"
 git push origin main
 
 echo "🎉 모든 배포가 완료되었습니다!"
-echo "웹사이트 주소: https://rearchive2026.github.io/re-archive/"
+echo "웹사이트 주소: https://topkn.org/"
