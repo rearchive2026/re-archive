@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-01T15:56:18+09:00",
+  "hashAlgorithm": "SHA-256",
+  "passwordHash": "9bcb478f855eab2de9d710faf2de22b351e34a22191d84ee232cc0e7fdc72f47",
+  "normalization": {
+    "fields": [
+      "동",
+      "호수",
+      "이름",
+      "전화번호 뒷자리"
+    ],
+    "separator": "|",
+    "dong": "remove whitespace and leading zeros",
+    "ho": "remove whitespace and leading zeros",
+    "name": "trim and remove all whitespace",
+    "phoneLast4": "digits only, left-pad to 4 digits"
+  },
+  "records": [
+    {
+      "hash": "3adccb3764a82bb05fbc14d619758960f9bec168556c6e6d90ea4d07790274df",
+      "status": "대상",
+      "url": "https://sign.example.com/verify/topkn/101-301"
+    },
+    {
+      "hash": "aab254d5f6814767081a57567cfd545bbba2605a8f0ff8f83b809b05e8e48bc0",
+      "status": "대상",
+      "url": "https://sign.example.com/verify/topkn/101-702"
+    },
+    {
+      "hash": "51e11ab79df0b804961d243f8ad645d3fa13171a4f60893c4016748b73c99a10",
+      "status": "대상",
+      "url": "https://sign.example.com/verify/topkn/102-1104"
+    },
+    {
+      "hash": "e25a1938ce8558fc955d68d7869c035d5970cda1ac13b87da1140f9ae95dbd18",
+      "status": "대상",
+      "url": "https://sign.example.com/verify/topkn/103-1502"
+    },
+    {
+      "hash": "f2105ec66efa0ecd445c05d89db366ecb5bcd09787642d938ca42736f245ceca",
+      "status": "대상",
+      "url": "https://sign.example.com/verify/topkn/104-804"
+    },
+    {
+      "hash": "9c5627d669d57a9b4b6f8f67014abe4209450e54a92ed7e5514ee33c31ba5b37",
+      "status": "대상",
+      "url": "https://sign.example.com/verify/topkn/105-1201"
+    },
+    {
+      "hash": "d04d5cf69164fbfbe6c6f7bedbbbcc19a203b13921f9c9adfe669ae03b6dcf08",
+      "status": "보류",
+      "url": "https://sign.example.com/verify/topkn/106-503"
+    },
+    {
+      "hash": "7791aa685d53893f21a6716af50cd46376f5042a837bf42f9ae8668557056267",
+      "status": "대상",
+      "url": "https://sign.example.com/verify/topkn/107-1603"
+    },
+    {
+      "hash": "911b4b720d6c6117f2aed100a9183e5108dd4d68662dcd0fa7fdce495b338d29",
+      "status": "완료",
+      "url": "https://sign.example.com/verify/topkn/108-902"
+    },
+    {
+      "hash": "c46e8341548785836b6d80a9277e9528d52f8f547f5873ef074da200a1844eb2",
+      "status": "대상",
+      "url": "https://sign.example.com/verify/topkn/109-1305"
+    }
+  ]
+}
