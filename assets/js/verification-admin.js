@@ -6,8 +6,17 @@
   var STATUS_POLICIES = {
     "대상": {
       showQr: true,
-      message: "소유주 정보가 확인되었습니다. 아래 QR 코드로 전자서명을 진행해 주세요.",
-      linkLabel: "전자서명 열기",
+      message: "2차 재건축 전자 동의를 순서에 따라 작성해 주세요.",
+      linkLabel: "2차 재건축 전자 동의 열기",
+      statusLabel: "2차 재건축 전자 동의 필요",
+    },
+    "개인정보동의필요": {
+      showQr: true,
+      message:
+        "1차 개인정보 동의가 필요합니다. 1차 개인정보 동의를 먼저 완료해 주세요.\n" +
+        "1차 개인정보 동의가 이루어지면 약 5분 뒤 인증한 핸드폰으로 문자 발송되는 2차 재건축 전자 동의를 순서에 따라 작성 완료해 주세요.",
+      linkLabel: "1차 개인정보 동의 열기",
+      statusLabel: "1차 개인정보 동의 필요",
     },
     "보류": {
       showQr: false,
@@ -15,9 +24,11 @@
     },
     "완료": {
       showQr: false,
-      message: "이미 전자서명 절차가 완료된 정보입니다.",
+      message: "2차 재건축 전자 동의 제출이 완료되었습니다.",
+      statusLabel: "2차 재건축 전자 동의 완료",
     },
   };
+  var DEFAULT_PHONE_MISSING_URL = "https://www.naver.com";
   var dataCache = null;
 
   function byId(id) {
@@ -49,19 +60,47 @@
   }
 
   function normalizeRecord(dong, ho, name, phoneLast4) {
-    var normalizedPhone = normalizePhoneLast4(phoneLast4);
-    var normalizedName = normalizeName(name);
+    var identity = normalizeIdentity(dong, ho, name);
 
-    if (!normalizedPhone || !normalizedName) {
+    if (!identity) {
       return null;
     }
 
-    return [
-      normalizeNumber(dong),
-      normalizeNumber(ho),
-      normalizedName,
-      normalizedPhone,
-    ].join("|");
+    var normalizedPhone = normalizePhoneLast4(phoneLast4);
+    if (!normalizedPhone) {
+      return null;
+    }
+
+    return [identity, normalizedPhone].join("|");
+  }
+
+  function normalizeIdentity(dong, ho, name) {
+    var normalizedName = normalizeName(name);
+
+    if (!normalizedName) {
+      return null;
+    }
+
+    return [normalizeNumber(dong), normalizeNumber(ho), normalizedName].join("|");
+  }
+
+  function buildRecordIndexes(records) {
+    var fullHashMap = new Map();
+    var identityHashMap = new Map();
+
+    records.forEach(function (record) {
+      if (record.hash) {
+        fullHashMap.set(record.hash, record);
+      }
+      if (record.identityHash) {
+        identityHashMap.set(record.identityHash, record);
+      }
+    });
+
+    return {
+      fullHashMap: fullHashMap,
+      identityHashMap: identityHashMap,
+    };
   }
 
   function setBusy(form, busy) {
@@ -93,9 +132,10 @@
         return response.json();
       })
       .then(function (data) {
-        if (!data || !data.passwordHash || !Array.isArray(data.records)) {
+        if (!data || !Array.isArray(data.records)) {
           throw new Error("Verification data is invalid.");
         }
+        data.indexes = buildRecordIndexes(data.records);
         dataCache = data;
         return dataCache;
       });
@@ -108,6 +148,27 @@
     };
   }
 
+  function renderQr(url, linkLabel) {
+    var qrTarget = byId("verification-qr");
+    var link = byId("verification-link");
+
+    if (!window.qrcode) {
+      throw new Error("QR library is not loaded.");
+    }
+
+    var qr = window.qrcode(0, "M");
+    qr.addData(url);
+    qr.make();
+
+    qrTarget.innerHTML = qr.createSvgTag(6, 2);
+    show(qrTarget);
+    show(link);
+    link.href = url;
+    link.rel = "noopener noreferrer";
+    link.target = "_blank";
+    link.textContent = linkLabel || "2차 재건축 전자 동의 열기";
+  }
+
   function renderResult(record) {
     var qrTarget = byId("verification-qr");
     var link = byId("verification-link");
@@ -116,7 +177,7 @@
     var policy = getStatusPolicy(record.status);
 
     message.textContent = policy.message;
-    status.textContent = "상태: " + record.status;
+    status.textContent = "상태: " + (policy.statusLabel || record.status);
 
     if (!policy.showQr) {
       hide(qrTarget);
@@ -125,21 +186,18 @@
       return;
     }
 
-    if (!window.qrcode) {
-      throw new Error("QR library is not loaded.");
-    }
+    renderQr(record.url, policy.linkLabel || "2차 재건축 전자 동의 열기");
+    show(byId("verification-result"));
+  }
 
-    var qr = window.qrcode(0, "M");
-    qr.addData(record.url);
-    qr.make();
+  function renderPhoneMissingResult(data, record) {
+    var message = byId("verification-result-message");
+    var status = byId("verification-result-status");
+    var url = data.phoneMissingUrl || DEFAULT_PHONE_MISSING_URL;
 
-    qrTarget.innerHTML = qr.createSvgTag(6, 2);
-    show(qrTarget);
-    show(link);
-    link.href = record.url;
-    link.rel = "noopener noreferrer";
-    link.target = "_blank";
-    link.textContent = policy.linkLabel || "전자서명 열기";
+    message.textContent = "등록된 전화번호가 없어 별도 확인 QR로 안내합니다.";
+    status.textContent = "상태: " + record.status + " / 전화번호 미등록";
+    renderQr(url, "별도 확인 열기");
     show(byId("verification-result"));
   }
 
@@ -153,36 +211,8 @@
     byId("verification-result-message").textContent = "";
     byId("verification-result-status").textContent = "";
     link.removeAttribute("href");
-    link.textContent = "전자서명 열기";
+    link.textContent = "2차 재건축 전자 동의 열기";
     hide(byId("verification-result"));
-  }
-
-  function bindPasswordForm(root) {
-    var form = byId("verification-password-form");
-
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      setBusy(form, true);
-
-      loadData(root)
-        .then(function (data) {
-          var password = byId("verification-admin-password").value.trim();
-          if (!/^\d{10}$/.test(password) || sha256Hex(password) !== data.passwordHash) {
-            alert("암호가 일치하지 않습니다.");
-            return;
-          }
-
-          hide(byId("verification-password-panel"));
-          show(byId("verification-owner-panel"));
-          byId("verification-dong").focus();
-        })
-        .catch(function () {
-          alert("인증 데이터를 불러오지 못했습니다.");
-        })
-        .finally(function () {
-          setBusy(form, false);
-        });
-    });
   }
 
   function bindOwnerForm(root) {
@@ -201,23 +231,40 @@
             byId("verification-name").value,
             byId("verification-phone-last4").value
           );
+          var identityInput = normalizeIdentity(
+            byId("verification-dong").value,
+            byId("verification-ho").value,
+            byId("verification-name").value
+          );
 
-          if (!hashInput) {
+          if (!identityInput) {
             alert("해당 정보가 없습니다.");
             return;
           }
 
-          var recordHash = sha256Hex(hashInput);
-          var record = data.records.find(function (item) {
-            return item.hash === recordHash;
-          });
+          if (hashInput) {
+            var recordHash = sha256Hex(hashInput);
+            var record = data.indexes.fullHashMap.get(recordHash);
 
-          if (!record) {
-            alert("해당 정보가 없습니다.");
+            if (record) {
+              renderResult(record);
+              return;
+            }
+          }
+
+          var identityHash = sha256Hex(identityInput);
+          var identityRecord = data.indexes.identityHashMap.get(identityHash);
+          if (identityRecord && identityRecord.phoneMissing) {
+            renderPhoneMissingResult(data, identityRecord);
             return;
           }
 
-          renderResult(record);
+          if (identityRecord) {
+            alert("전화번호 뒷자리 확인이 필요합니다.");
+            return;
+          }
+
+          alert("해당 정보가 없습니다.");
         })
         .catch(function () {
           alert("QR 코드를 생성하지 못했습니다.");
@@ -234,16 +281,19 @@
       return;
     }
 
-    bindPasswordForm(root);
     bindOwnerForm(root);
+    byId("verification-dong").focus();
   }
 
   window.VerificationAdmin = {
     normalizeNumber: normalizeNumber,
     normalizeName: normalizeName,
     normalizePhoneLast4: normalizePhoneLast4,
+    normalizeIdentity: normalizeIdentity,
     normalizeRecord: normalizeRecord,
+    buildRecordIndexes: buildRecordIndexes,
     getStatusPolicy: getStatusPolicy,
+    renderPhoneMissingResult: renderPhoneMissingResult,
     sha256Hex: sha256Hex,
   };
 

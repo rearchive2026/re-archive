@@ -15,7 +15,7 @@
 <meta charset="utf-8">
 
 
-<!-- begin _includes/seo.html --><title>소유주 인증 QR — 탑마을 경남·벽산 재건축 추진 준비 위원회</title>
+<!-- begin _includes/seo.html --><title>소유주 인증/동의 — 탑마을 경남·벽산 재건축 추진 준비 위원회</title>
 <meta name="description" content="압도적 동의로 만드는 분당의 랜드마크, 탑마을 경남·벽산 재건축 추진 준비 위원회 공식 사이트입니다.">
 
 
@@ -26,8 +26,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="탑마을 경남·벽산 재건축 추진 준비 위원회">
-<meta property="og:title" content="소유주 인증 QR">
-<meta property="og:url" content="https://topkn.org/admin/">
+<meta property="og:title" content="소유주 인증/동의">
+<meta property="og:url" content="https://topkn.org/verification/">
 
 
   <meta property="og:description" content="압도적 동의로 만드는 분당의 랜드마크, 탑마을 경남·벽산 재건축 추진 준비 위원회 공식 사이트입니다.">
@@ -45,7 +45,7 @@
 
 
 
-<link rel="canonical" href="https://topkn.org/admin/">
+<link rel="canonical" href="https://topkn.org/verification/">
 
 
 
@@ -153,7 +153,7 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="소유주 인증 QR">
+    <meta itemprop="headline" content="소유주 인증/동의">
     
     
     
@@ -162,7 +162,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://topkn.org/admin/" itemprop="url">소유주 인증 QR
+            <a href="https://topkn.org/verification/" itemprop="url">소유주 인증/동의
 </a>
           </h1>
           
@@ -245,6 +245,7 @@
   .verification-result-message {
     margin: 0 0 18px;
     font-weight: 700;
+    white-space: pre-line;
   }
 
   .verification-qr svg {
@@ -273,20 +274,7 @@
 </style>
 
 <div class="verification-shell" data-verification-admin="" data-verification-data-url="/assets/data/verification-data.json">
-  <section id="verification-password-panel" class="verification-panel" aria-labelledby="verification-password-title">
-    <h2 id="verification-password-title">관리자 확인</h2>
-    <form id="verification-password-form" autocomplete="off">
-      <div class="verification-field">
-        <label for="verification-admin-password">암호</label>
-        <input id="verification-admin-password" name="admin-password" type="password" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" autocomplete="off" required="" />
-      </div>
-      <div class="verification-actions">
-        <button class="btn btn--primary" type="submit">확인</button>
-      </div>
-    </form>
-  </section>
-
-  <section id="verification-owner-panel" class="verification-panel verification-hidden" aria-labelledby="verification-owner-title">
+  <section id="verification-owner-panel" class="verification-panel" aria-labelledby="verification-owner-title">
     <h2 id="verification-owner-title">소유주 정보 확인</h2>
     <form id="verification-owner-form" autocomplete="off">
       <div class="verification-grid">
@@ -304,7 +292,7 @@
         </div>
         <div class="verification-field">
           <label for="verification-phone-last4">전화번호 뒷자리</label>
-          <input id="verification-phone-last4" name="phone-last4" type="text" inputmode="numeric" pattern="[0-9]{1,4}" maxlength="4" autocomplete="off" required="" />
+          <input id="verification-phone-last4" name="phone-last4" type="text" inputmode="numeric" pattern="[0-9]{1,4}" maxlength="4" autocomplete="off" />
         </div>
       </div>
       <div class="verification-actions">
@@ -317,7 +305,7 @@
       <p id="verification-result-message" class="verification-result-message"></p>
       <div id="verification-qr" class="verification-qr"></div>
       <p>
-        <a id="verification-link" class="btn btn--info">전자서명 열기</a>
+        <a id="verification-link" class="btn btn--info">2차 재건축 전자 동의 열기</a>
       </p>
     </div>
   </section>

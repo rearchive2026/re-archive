@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-01T15:56:18+09:00",
+  "generatedAt": "2026-06-02T21:19:25+09:00",
   "hashAlgorithm": "SHA-256",
-  "passwordHash": "9bcb478f855eab2de9d710faf2de22b351e34a22191d84ee232cc0e7fdc72f47",
+  "phoneMissingUrl": "https://www.naver.com",
   "normalization": {
     "fields": [
       "동",
@@ -14,58 +14,83 @@
     "dong": "remove whitespace and leading zeros",
     "ho": "remove whitespace and leading zeros",
     "name": "trim and remove all whitespace",
-    "phoneLast4": "digits only, left-pad to 4 digits"
+    "phoneLast4": "digits only, left-pad to 4 digits",
+    "identityHash": "SHA-256 of dong|ho|name",
+    "hash": "SHA-256 of dong|ho|name|phoneLast4",
+    "phoneMissing": "records without phoneLast4 have no full hash"
   },
   "records": [
     {
-      "hash": "3adccb3764a82bb05fbc14d619758960f9bec168556c6e6d90ea4d07790274df",
+      "identityHash": "5b127df40f374eb2472794bc715b987eac2952a2265fc9861f2e8b1a8affc344",
       "status": "대상",
-      "url": "https://sign.example.com/verify/topkn/101-301"
+      "url": "https://dev.buonestop.com/invitation/agreement/11769/66d9ce95bca942319e43115401791d0b&token=replay",
+      "hash": "cc9d7631545523a85fa142b27287a9fa43261b4d9627226333e715e3d0e384a2"
     },
     {
-      "hash": "aab254d5f6814767081a57567cfd545bbba2605a8f0ff8f83b809b05e8e48bc0",
+      "identityHash": "99e8888d7140166ba8c7fe6d8126261db5750a37f8b9606f1afd1bd2f5cb1626",
       "status": "대상",
-      "url": "https://sign.example.com/verify/topkn/101-702"
+      "url": "https://dev.buonestop.com/invitation/agreement/11771/a5b63310c4e64dc1ac237826a447f282&token=replay",
+      "hash": "80ecf8d668f2763c284dfb915fa637822702dbef58618f4f065434a1629a2b85"
     },
     {
-      "hash": "51e11ab79df0b804961d243f8ad645d3fa13171a4f60893c4016748b73c99a10",
+      "identityHash": "5f0f85167924d013bca90ba89f172fbb27e6d042cc6d25eb53d93c76b095286c",
       "status": "대상",
-      "url": "https://sign.example.com/verify/topkn/102-1104"
+      "url": "https://dev.buonestop.com/invitation/agreement/11772/d46aabdd63084189a0ba2bcbac7731c1&token=replay",
+      "hash": "2b7afa82f8f05b8d9bf441283a81b99797e49feefc059a986695b567d12c77ad"
     },
     {
-      "hash": "e25a1938ce8558fc955d68d7869c035d5970cda1ac13b87da1140f9ae95dbd18",
+      "identityHash": "d01be5874a005c5bfbbe59637322b12b4998b11fec2c291c76902fdcc3828b6f",
       "status": "대상",
-      "url": "https://sign.example.com/verify/topkn/103-1502"
+      "url": "https://dev.buonestop.com/invitation/agreement/11772/d46aabdd63084189a0ba2bcbac7731c1&token=replay",
+      "hash": "db9bf46f5aafe277807cc62d72f0b8f1ee38ea6417d12a05090095d3d0471eb0"
     },
     {
-      "hash": "f2105ec66efa0ecd445c05d89db366ecb5bcd09787642d938ca42736f245ceca",
-      "status": "대상",
-      "url": "https://sign.example.com/verify/topkn/104-804"
-    },
-    {
-      "hash": "9c5627d669d57a9b4b6f8f67014abe4209450e54a92ed7e5514ee33c31ba5b37",
-      "status": "대상",
-      "url": "https://sign.example.com/verify/topkn/105-1201"
-    },
-    {
-      "hash": "d04d5cf69164fbfbe6c6f7bedbbbcc19a203b13921f9c9adfe669ae03b6dcf08",
-      "status": "보류",
-      "url": "https://sign.example.com/verify/topkn/106-503"
-    },
-    {
-      "hash": "7791aa685d53893f21a6716af50cd46376f5042a837bf42f9ae8668557056267",
-      "status": "대상",
-      "url": "https://sign.example.com/verify/topkn/107-1603"
-    },
-    {
-      "hash": "911b4b720d6c6117f2aed100a9183e5108dd4d68662dcd0fa7fdce495b338d29",
+      "identityHash": "5cd7b0ce2dfa04c405c72d45f1d5235d623e3be14b57d63cae7b663401ea6398",
       "status": "완료",
-      "url": "https://sign.example.com/verify/topkn/108-902"
+      "url": "https://dev.buonestop.com/invitation/agreement/11773/5372013dee4a46bea2c7f88e0b33dc55&token=replay",
+      "hash": "003c0186faec712876c2b118913bb571e24f1ef207150de102130a11d5e03af1"
     },
     {
-      "hash": "c46e8341548785836b6d80a9277e9528d52f8f547f5873ef074da200a1844eb2",
+      "identityHash": "cf6bc61aa5470d31ed13e7b45804eb72d28e8c9b59b714a6b9f5fafe2b99eeac",
+      "status": "완료",
+      "url": "https://dev.buonestop.com/invitation/agreement/11773/5372013dee4a46bea2c7f88e0b33dc55&token=replay",
+      "hash": "6ff0aa14512ab3e79f3e4413f7baf4b0dd6ac34cc4ba1c7b393454b168112e90"
+    },
+    {
+      "identityHash": "184f9fe15a9c9fa78baefe2f6b49f093393909eda901efd40dfe4f0276f46131",
       "status": "대상",
-      "url": "https://sign.example.com/verify/topkn/109-1305"
+      "url": "https://dev.buonestop.com/invitation/agreement/11774/61300176a2d3413399afa1462f9ed70d&token=replay",
+      "hash": "370abe74993c88e1bfaf71d373a21ffa5fe8c6c0cefeaa2649edd207ce7d5405"
+    },
+    {
+      "identityHash": "093881487dc498defafa0ad0dd2340fb9b2a12f60a1740def87ebd505243427d",
+      "status": "대상",
+      "url": "https://dev.buonestop.com/invitation/agreement/11775/f0c09d89c5ec44f38f13a3492ed647a3&token=replay",
+      "hash": "a335cd655464981e57a2af4721a4a96de22f0304b5343fa99fbf2c1ddf471191"
+    },
+    {
+      "identityHash": "054b3ec0b256b2ad5e2c06eee10fe4d9d3d8a1f38a0d63f73ccf2172715eb212",
+      "status": "대상",
+      "url": "https://dev.buonestop.com/invitation/agreement/11776/8b5a0080abc940a4b6763ed59cce7413&token=replay",
+      "hash": "cde1e08cbe2388fee553b5e4ec02b5684487e84bdd5f97356193b680783bc16f"
+    },
+    {
+      "identityHash": "eaf20a955f1b385c400638e920bc544a735feb39f9f805b70075712523f6d966",
+      "status": "대상",
+      "url": "https://dev.buonestop.com/invitation/agreement/11777/85f5900842b846c4a72f593381a4f0e2&token=replay",
+      "hash": "9802fc1de283f20e0edb25c5dfdc46825e0cef76d7338f29aad3e6330392a611"
+    },
+    {
+      "identityHash": "c448a2d8bf10ab9e5c99794bec57da7f24f273e4a786cf88564793bcc0a91322",
+      "status": "대상",
+      "url": "https://dev.buonestop.com/invitation/agreement/11777/85f5900842b846c4a72f593381a4f0e2&token=replay",
+      "hash": "55144f6eba3df3fe149a51d93bf85b0586673a13039828bf2ed390dbe8591166"
+    },
+    {
+      "identityHash": "c80bc5cf408fb50118551ffd7c17ef25791c9c955812df37c8a986fdb7737220",
+      "status": "대상",
+      "url": "https://dev.buonestop.com/invitation/agreement/11778/b4143674b68344068b7fb2f259456795&token=replay",
+      "hash": "41ce3923b658fa74eafbe587ecca3af9982b54fe15aa4dfb92b5365746aa5751"
     }
   ]
 }

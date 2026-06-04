@@ -20,6 +20,8 @@ if load_dotenv:
 
 
 REQUIRED_COLUMNS = ["동", "호수", "이름", "전화번호 뒷자리", "상태", "url"]
+DEFAULT_PHONE_MISSING_URL = "https://www.naver.com"
+QR_REQUIRED_STATUSES = {"대상", "개인정보동의필요"}
 
 
 def sha256_hex(value):
@@ -39,26 +41,36 @@ def normalize_name(value):
 def normalize_phone_last4(value):
     digits = re.sub(r"\D+", "", str(value or ""))
     if not digits:
-        raise ValueError("전화번호 뒷자리가 비어 있습니다.")
+        return None
     if len(digits) > 4:
         raise ValueError("전화번호 뒷자리는 4자리 이하여야 합니다.")
     return digits.zfill(4)
 
 
-def normalize_record(row):
+def normalize_identity(row):
     dong = normalize_number(row["동"])
     ho = normalize_number(row["호수"])
     name = normalize_name(row["이름"])
-    phone_last4 = normalize_phone_last4(row["전화번호 뒷자리"])
 
     if not name:
         raise ValueError("이름이 비어 있습니다.")
 
-    return "|".join([dong, ho, name, phone_last4])
+    return "|".join([dong, ho, name])
 
 
-def validate_url(value):
+def normalize_record(row):
+    identity = normalize_identity(row)
+    phone_last4 = normalize_phone_last4(row["전화번호 뒷자리"])
+    if not phone_last4:
+        return None
+
+    return "|".join([identity, phone_last4])
+
+
+def validate_url(value, required=True):
     url = str(value or "").strip()
+    if not url and not required:
+        return ""
     if not url.startswith(("https://", "http://")):
         raise ValueError("url은 http:// 또는 https://로 시작해야 합니다.")
     return url
@@ -103,36 +115,52 @@ def read_rows(csv_file):
     return list(reader)
 
 
-def build_payload(rows, admin_password):
+def build_payload(rows, admin_password=None, phone_missing_url=DEFAULT_PHONE_MISSING_URL):
     records = []
     seen_hashes = {}
+    seen_identity_hashes = {}
+    phone_missing_url = validate_url(phone_missing_url)
 
     for row_number, row in enumerate(rows, start=2):
         try:
+            identity_hash_input = normalize_identity(row)
+            identity_hash = sha256_hex(identity_hash_input)
             hash_input = normalize_record(row)
-            record_hash = sha256_hex(hash_input)
+            record_hash = sha256_hex(hash_input) if hash_input else None
             status = str(row["상태"] or "").strip()
-            url = validate_url(row["url"])
+            url = validate_url(row["url"], required=status in QR_REQUIRED_STATUSES)
         except ValueError as exc:
             raise SystemExit(f"CSV {row_number}행 오류: {exc}") from exc
 
         if not status:
             raise SystemExit(f"CSV {row_number}행 오류: 상태가 비어 있습니다.")
 
-        if record_hash in seen_hashes:
-            raise SystemExit(
-                f"CSV {row_number}행 오류: 중복된 인증 정보입니다. "
-                f"이전 행: {seen_hashes[record_hash]}"
-            )
-        seen_hashes[record_hash] = row_number
+        if record_hash:
+            if record_hash in seen_hashes:
+                raise SystemExit(
+                    f"CSV {row_number}행 오류: 중복된 인증 정보입니다. "
+                    f"이전 행: {seen_hashes[record_hash]}"
+                )
+            seen_hashes[record_hash] = row_number
 
-        records.append(
-            {
-                "hash": record_hash,
-                "status": status,
-                "url": url,
-            }
-        )
+        if identity_hash in seen_identity_hashes:
+            raise SystemExit(
+                f"CSV {row_number}행 오류: 중복된 동/호수/이름 정보입니다. "
+                f"이전 행: {seen_identity_hashes[identity_hash]}"
+            )
+        seen_identity_hashes[identity_hash] = row_number
+
+        public_record = {
+            "identityHash": identity_hash,
+            "status": status,
+            "url": url,
+        }
+        if record_hash:
+            public_record["hash"] = record_hash
+        else:
+            public_record["phoneMissing"] = True
+
+        records.append(public_record)
 
     generated_at = datetime.now(ZoneInfo("Asia/Seoul")).isoformat(timespec="seconds")
 
@@ -140,7 +168,7 @@ def build_payload(rows, admin_password):
         "version": 1,
         "generatedAt": generated_at,
         "hashAlgorithm": "SHA-256",
-        "passwordHash": sha256_hex(admin_password),
+        "phoneMissingUrl": phone_missing_url,
         "normalization": {
             "fields": ["동", "호수", "이름", "전화번호 뒷자리"],
             "separator": "|",
@@ -148,6 +176,9 @@ def build_payload(rows, admin_password):
             "ho": "remove whitespace and leading zeros",
             "name": "trim and remove all whitespace",
             "phoneLast4": "digits only, left-pad to 4 digits",
+            "identityHash": "SHA-256 of dong|ho|name",
+            "hash": "SHA-256 of dong|ho|name|phoneLast4",
+            "phoneMissing": "records without phoneLast4 have no full hash",
         },
         "records": records,
     }
@@ -177,32 +208,33 @@ def parse_args():
     )
     parser.add_argument(
         "--admin-password",
-        default=os.getenv("ADMIN_PASSWORD"),
-        help="10-digit admin password. Can also be provided by ADMIN_PASSWORD.",
+        help="Legacy option kept for old commands. It is no longer used.",
+    )
+    parser.add_argument(
+        "--password-hash",
+        help="Legacy option kept for old commands. It is no longer used.",
     )
     parser.add_argument(
         "--csv-key",
         default=os.getenv("CSV_ENCRYPTION_KEY"),
         help="Encryption key for --encrypted-input. Can also be provided by CSV_ENCRYPTION_KEY.",
     )
+    parser.add_argument(
+        "--phone-missing-url",
+        default=os.getenv("PHONE_MISSING_URL", DEFAULT_PHONE_MISSING_URL),
+        help="QR URL used when a matched owner record has no phone number.",
+    )
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
-    admin_password = str(args.admin_password or "").strip()
-
-    if not re.fullmatch(r"\d{10}", admin_password):
-        raise SystemExit(
-            "관리자 암호는 10자리 숫자여야 합니다. "
-            "--admin-password 또는 ADMIN_PASSWORD로 전달하세요."
-        )
 
     if args.encrypted_input:
         rows = load_encrypted_rows(args.encrypted_input, args.csv_key)
     else:
         rows = load_rows(args.input)
-    payload = build_payload(rows, admin_password)
+    payload = build_payload(rows, phone_missing_url=args.phone_missing_url)
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8") as output_file:
