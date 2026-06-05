@@ -26,7 +26,10 @@ def main():
     
     try:
         decrypted = decrypt_data(encrypted, "72941")
-        print("Decrypted keys:", decrypted.keys())
+        print("Top-level keys:", decrypted.keys())
+        print("Total sub-keys:", decrypted['total'].keys())
+        print("Dong stats in Total:", 'dong_stats' in decrypted['total'])
+        print("Sample Dong Data:", decrypted['total']['dong_stats'][0] if decrypted['total'].get('dong_stats') else "None")
         print("Generated at:", decrypted.get('generated_at'))
     except Exception as e:
         print("Error:", e)
