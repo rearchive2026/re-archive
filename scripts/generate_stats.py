@@ -31,6 +31,25 @@ def encrypt_data(data_dict, password):
         "ciphertext": base64.b64encode(ciphertext).decode('utf-8')
     }
 
+PRIVACY_NEEDED_STATUS = "비대상"
+DONE_STATUS = "완료"
+SENT_STATUS = "발송"
+VIEWED_STATUS = "열람"
+RESERVED_STATUS = "예약"
+
+
+def display_participation_label(status):
+    labels = {
+        PRIVACY_NEEDED_STATUS: "개인정보 동의 필요(비대상)",
+        DONE_STATUS: "2차 전자 동의 완료",
+        SENT_STATUS: "발송 후 미열람",
+        VIEWED_STATUS: "열람 후 미완료",
+        RESERVED_STATUS: "예약",
+        "": "상태 없음",
+    }
+    return labels.get(status, status)
+
+
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
@@ -73,8 +92,17 @@ def main():
                 "full_done_households": 0,
                 "partial_done_households": 0,
                 "not_done_households": 0,
+                "privacy_needed_households": 0,
+                "sent_households": 0,
+                "viewed_households": 0,
+                "reserved_households": 0,
                 "shared_households": 0,
                 "single_households": 0,
+                "privacy_needed_members": 0,
+                "sent_members": 0,
+                "viewed_members": 0,
+                "reserved_members": 0,
+                "done_members": 0,
                 "participation_details": defaultdict(int),
                 "submission_details": defaultdict(int),
                 "dong_stats": defaultdict(lambda: {"total": 0, "done": 0})
@@ -89,7 +117,12 @@ def main():
         for (bonbun, dong, ho), members in households.items():
             apt = "gyeongnam" if bonbun in ["525", "526"] else "byeoksan"
             is_shared_household = any(m["is_shared"] for m in members) or len(members) > 1
-            done_members = [m for m in members if m["participation"] == "완료"]
+            member_statuses = [m["participation"] for m in members]
+            done_members = [m for m in members if m["participation"] == DONE_STATUS]
+            has_privacy_needed = any(status == PRIVACY_NEEDED_STATUS for status in member_statuses)
+            has_sent = any(status == SENT_STATUS for status in member_statuses)
+            has_viewed = any(status == VIEWED_STATUS for status in member_statuses)
+            has_reserved = any(status == RESERVED_STATUS for status in member_statuses)
             
             status = "미동의"
             if len(done_members) == len(members): status = "전원완료"
@@ -103,6 +136,10 @@ def main():
                 if status == "전원완료": s["full_done_households"] += 1
                 elif status == "일부완료": s["partial_done_households"] += 1
                 else: s["not_done_households"] += 1
+                if has_privacy_needed: s["privacy_needed_households"] += 1
+                if has_sent: s["sent_households"] += 1
+                if has_viewed: s["viewed_households"] += 1
+                if has_reserved: s["reserved_households"] += 1
                 
                 # Dong stats
                 if dong:
@@ -111,8 +148,19 @@ def main():
                         s["dong_stats"][dong]["done"] += 1
 
                 for m in members:
-                    s["participation_details"][m["participation"]] += 1
+                    participation = m["participation"]
+                    s["participation_details"][display_participation_label(participation)] += 1
                     s["submission_details"][m["submission"]] += 1
+                    if participation == PRIVACY_NEEDED_STATUS:
+                        s["privacy_needed_members"] += 1
+                    elif participation == SENT_STATUS:
+                        s["sent_members"] += 1
+                    elif participation == VIEWED_STATUS:
+                        s["viewed_members"] += 1
+                    elif participation == RESERVED_STATUS:
+                        s["reserved_members"] += 1
+                    elif participation == DONE_STATUS:
+                        s["done_members"] += 1
 
         def finalize(cat_data):
             count = cat_data["total_households"]
@@ -134,16 +182,58 @@ def main():
                 "full_done_count": cat_data["full_done_households"],
                 "full_done_rate": round((cat_data["full_done_households"] / count * 100), 1) if count > 0 else 0,
                 "partial_done_count": cat_data["partial_done_households"],
+                "remaining_household_count": count - cat_data["full_done_households"],
+                "privacy_needed_household_count": cat_data["privacy_needed_households"],
+                "privacy_needed_member_count": cat_data["privacy_needed_members"],
+                "sent_household_count": cat_data["sent_households"],
+                "sent_member_count": cat_data["sent_members"],
+                "viewed_household_count": cat_data["viewed_households"],
+                "viewed_member_count": cat_data["viewed_members"],
+                "reserved_household_count": cat_data["reserved_households"],
+                "reserved_member_count": cat_data["reserved_members"],
+                "done_member_count": cat_data["done_members"],
                 "shared_count": cat_data["shared_households"],
                 "single_count": cat_data["single_households"],
                 "household_stats": [
-                    {"label": "전원 동의 세대 (완료)", "value": cat_data["full_done_households"]},
-                    {"label": "일부 동의 세대 (진행중)", "value": cat_data["partial_done_households"]},
-                    {"label": "미동의 세대", "value": cat_data["not_done_households"]}
+                    {"label": "전원 완료 세대", "value": cat_data["full_done_households"]},
+                    {"label": "일부 완료 세대", "value": cat_data["partial_done_households"]},
+                    {"label": "미완료 세대", "value": cat_data["not_done_households"]}
                 ],
                 "owner_type_stats": [
                     {"label": "단독 소유 세대", "value": cat_data["single_households"]},
                     {"label": "공동 소유 세대", "value": cat_data["shared_households"]}
+                ],
+                "followup_details": [
+                    {
+                        "label": "1차 개인정보 동의 독려",
+                        "value": cat_data["privacy_needed_members"],
+                        "unit": "명",
+                        "sub": f"{cat_data['privacy_needed_households']}세대 포함",
+                    },
+                    {
+                        "label": "발송 후 미열람 리마인드",
+                        "value": cat_data["sent_members"],
+                        "unit": "명",
+                        "sub": f"{cat_data['sent_households']}세대 포함",
+                    },
+                    {
+                        "label": "열람 후 미완료 안내",
+                        "value": cat_data["viewed_members"],
+                        "unit": "명",
+                        "sub": f"{cat_data['viewed_households']}세대 포함",
+                    },
+                    {
+                        "label": "일부 완료 공유세대 추가 확인",
+                        "value": cat_data["partial_done_households"],
+                        "unit": "세대",
+                        "sub": "전원 완료 전환 가능 세대",
+                    },
+                    {
+                        "label": "예약 상태 확인",
+                        "value": cat_data["reserved_members"],
+                        "unit": "명",
+                        "sub": f"{cat_data['reserved_households']}세대 포함",
+                    },
                 ],
                 "participation_details": sorted([{"label": k, "value": v} for k, v in cat_data["participation_details"].items()], key=lambda x: x["value"], reverse=True),
                 "submission_details": sorted([{"label": k, "value": v} for k, v in cat_data["submission_details"].items()], key=lambda x: x["value"], reverse=True),
