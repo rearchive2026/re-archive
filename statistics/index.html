@@ -188,19 +188,12 @@
 </div>
 
 <div id="stats-main-content" style="display: none;">
-  <div class="stats-filter">
-    <button class="btn btn--primary filter-btn active" data-filter="total">통합 통계</button>
-    <button class="btn btn--info filter-btn" data-filter="gyeongnam">경남 아파트</button>
-    <button class="btn btn--info filter-btn" data-filter="byeoksan">벽산 아파트</button>
+  <div id="stats-meta" style="margin-bottom: 1rem; padding: 0.5rem 1rem; background: #fcfcfc; border: 1px solid #f0f0f0; border-radius: 6px; font-size: 0.85rem; color: #666; display: flex; justify-content: space-between; align-items: center;">
+    <span>📊 실시간 취합 데이터 대시보드</span>
+    <span>데이터 기준 일시: <strong id="generated-at" style="color: #333;"></strong></span>
   </div>
 
-  <div id="stats-display" style="margin-top: 1rem;">
-    <div id="stats-meta" style="text-align: right; font-size: 0.85rem; color: #888; margin-bottom: 1rem; display: none;">
-      데이터 기준 일시: <span id="generated-at"></span>
-    </div>
-    <div class="loading">데이터 및 시각화 도구를 준비 중입니다...</div>
-  </div>
-</div>
+  <div class="stats-filter">
 
 <style>
   .stats-filter { display: flex; gap: 0.5rem; margin-bottom: 2rem; }
@@ -373,7 +366,6 @@ document.addEventListener("DOMContentLoaded", function() {
           statsData = decrypted;
           if (decrypted.generated_at) {
             document.getElementById('generated-at').textContent = decrypted.generated_at;
-            document.getElementById('stats-meta').style.display = 'block';
           }
           authContainer.style.display = 'none';
           mainContent.style.display = 'block';
@@ -405,7 +397,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 </script>
-
+</div></div>
 
         
       </section>
