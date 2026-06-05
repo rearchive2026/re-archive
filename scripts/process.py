@@ -85,10 +85,11 @@ import subprocess
 def generate_stats():
     print("Generating statistics...")
     try:
-        # Run generate_stats.py from the same directory as process.py or root
+        # Use the same python interpreter as the current process
+        import sys
         script_dir = os.path.dirname(os.path.abspath(__file__))
         stats_script = os.path.join(script_dir, "generate_stats.py")
-        subprocess.run(["python3", stats_script], check=True)
+        subprocess.run([sys.executable, stats_script], check=True)
     except Exception as e:
         print(f"Error generating stats: {e}")
 
