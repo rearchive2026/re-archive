@@ -211,8 +211,10 @@
     border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; background: #fff;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column;
   }
+  .stat-card.wide { grid-column: 1 / -1; }
   .stat-card h3 { margin-top: 0; border-bottom: 2px solid #f1f1f1; padding-bottom: 0.7rem; font-size: 1.1rem; color: #333; text-align: center; }
   .chart-container { position: relative; height: 250px; width: 100%; margin-top: 1rem; }
+  .chart-container.large { height: 400px; }
   
   .highlight-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
   .highlight-card { padding: 1.5rem; border-radius: 12px; text-align: center; }
@@ -296,6 +298,11 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="chart-container"><canvas id="ownerTypeChart"></canvas></div>
         </div>
 
+        <div class="stat-card wide">
+          <h3>동별 동의 현황 (전원 완료 세대 기준)</h3>
+          <div class="chart-container large"><canvas id="dongChart"></canvas></div>
+        </div>
+
         <div class="stat-card">
           <h3>개별 인원 상태 (취합 전)</h3>
           <table class="stat-table">
@@ -359,6 +366,63 @@ document.addEventListener("DOMContentLoaded", function() {
         indexAxis: 'y',
         plugins: { legend: { display: false } },
         scales: { x: { grid: { display: false } }, y: { grid: { display: false } } }
+      }
+    }));
+
+    const ctx4 = document.getElementById('dongChart').getContext('2d');
+    charts.push(new Chart(ctx4, {
+      type: 'bar',
+      data: {
+        labels: data.dong_stats.map(s => s.label),
+        datasets: [
+          {
+            label: '동의율 (%)',
+            data: data.dong_stats.map(s => s.rate),
+            backgroundColor: data.dong_stats.map(s => s.rate >= 50 ? '#28a745' : '#dc3545'),
+            borderRadius: 5,
+            yAxisID: 'yRate'
+          },
+          {
+            label: '완료 세대',
+            data: data.dong_stats.map(s => s.done),
+            type: 'line',
+            borderColor: '#333',
+            borderWidth: 2,
+            fill: false,
+            yAxisID: 'yCount'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { 
+          legend: { position: 'top' },
+          tooltip: {
+            callbacks: {
+              footer: (items) => {
+                const i = items[0].dataIndex;
+                const d = data.dong_stats[i];
+                return `총 ${d.total}세대 중 ${d.done}세대 완료`;
+              }
+            }
+          }
+        },
+        scales: {
+          yRate: {
+            type: 'linear',
+            position: 'left',
+            min: 0,
+            max: 100,
+            title: { display: true, text: '동의율 (%)' }
+          },
+          yCount: {
+            type: 'linear',
+            position: 'right',
+            grid: { drawOnChartArea: false },
+            title: { display: true, text: '완료 세대수' }
+          }
+        }
       }
     }));
   }
