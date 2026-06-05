@@ -7,7 +7,7 @@ fi
 
 echo "🚀 데이터 가공을 시작합니다..."
 # 2. 로컬에서 AI 가공 실행
-python3 scripts/process.py
+./venv/bin/python3 scripts/process.py
 
 if [ $? -ne 0 ]; then
     echo "❌ 가공 실패! 스크립트를 확인해 주세요."

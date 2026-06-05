@@ -1,0 +1,195 @@
+{
+  "password_hash": "3dcd542f53a7bfc210c9bd9dde3165b8f9599fe536cd8b8868d9927be210e8b7",
+  "total": {
+    "count": 1583,
+    "full_done_count": 598,
+    "full_done_rate": 37.8,
+    "partial_done_count": 97,
+    "shared_count": 456,
+    "single_count": 1127,
+    "household_stats": [
+      {
+        "label": "전원 동의 세대 (완료)",
+        "value": 598
+      },
+      {
+        "label": "일부 동의 세대 (진행중)",
+        "value": 97
+      },
+      {
+        "label": "미동의 세대",
+        "value": 888
+      }
+    ],
+    "owner_type_stats": [
+      {
+        "label": "단독 소유 세대",
+        "value": 1127
+      },
+      {
+        "label": "공동 소유 세대",
+        "value": 456
+      }
+    ],
+    "participation_details": [
+      {
+        "label": "비대상",
+        "value": 931
+      },
+      {
+        "label": "완료",
+        "value": 851
+      },
+      {
+        "label": "발송",
+        "value": 240
+      },
+      {
+        "label": "열람",
+        "value": 22
+      },
+      {
+        "label": "예약",
+        "value": 15
+      }
+    ],
+    "submission_details": [
+      {
+        "label": "전자",
+        "value": 1969
+      },
+      {
+        "label": "서면",
+        "value": 90
+      }
+    ]
+  },
+  "gyeongnam": {
+    "count": 905,
+    "full_done_count": 387,
+    "full_done_rate": 42.8,
+    "partial_done_count": 63,
+    "shared_count": 280,
+    "single_count": 625,
+    "household_stats": [
+      {
+        "label": "전원 동의 세대 (완료)",
+        "value": 387
+      },
+      {
+        "label": "일부 동의 세대 (진행중)",
+        "value": 63
+      },
+      {
+        "label": "미동의 세대",
+        "value": 455
+      }
+    ],
+    "owner_type_stats": [
+      {
+        "label": "단독 소유 세대",
+        "value": 625
+      },
+      {
+        "label": "공동 소유 세대",
+        "value": 280
+      }
+    ],
+    "participation_details": [
+      {
+        "label": "완료",
+        "value": 557
+      },
+      {
+        "label": "비대상",
+        "value": 506
+      },
+      {
+        "label": "발송",
+        "value": 114
+      },
+      {
+        "label": "열람",
+        "value": 14
+      },
+      {
+        "label": "예약",
+        "value": 5
+      }
+    ],
+    "submission_details": [
+      {
+        "label": "전자",
+        "value": 1127
+      },
+      {
+        "label": "서면",
+        "value": 69
+      }
+    ]
+  },
+  "byeoksan": {
+    "count": 678,
+    "full_done_count": 211,
+    "full_done_rate": 31.1,
+    "partial_done_count": 34,
+    "shared_count": 176,
+    "single_count": 502,
+    "household_stats": [
+      {
+        "label": "전원 동의 세대 (완료)",
+        "value": 211
+      },
+      {
+        "label": "일부 동의 세대 (진행중)",
+        "value": 34
+      },
+      {
+        "label": "미동의 세대",
+        "value": 433
+      }
+    ],
+    "owner_type_stats": [
+      {
+        "label": "단독 소유 세대",
+        "value": 502
+      },
+      {
+        "label": "공동 소유 세대",
+        "value": 176
+      }
+    ],
+    "participation_details": [
+      {
+        "label": "비대상",
+        "value": 425
+      },
+      {
+        "label": "완료",
+        "value": 294
+      },
+      {
+        "label": "발송",
+        "value": 126
+      },
+      {
+        "label": "예약",
+        "value": 10
+      },
+      {
+        "label": "열람",
+        "value": 8
+      }
+    ],
+    "submission_details": [
+      {
+        "label": "전자",
+        "value": 842
+      },
+      {
+        "label": "서면",
+        "value": 21
+      }
+    ]
+  }
+}

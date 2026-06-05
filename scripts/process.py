@@ -4,7 +4,7 @@ import shutil
 from datetime import datetime
 import fitz  # PyMuPDF
 from pptx import Presentation
-import google.generativeai as genai
+from google import genai
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -12,11 +12,10 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    client = genai.Client(api_key=GEMINI_API_KEY)
 else:
     print("Warning: GEMINI_API_KEY not found. AI features will be disabled.")
-    model = None
+    client = None
 
 def extract_text_from_pdf(file_path):
     text = ""
@@ -41,7 +40,7 @@ def extract_text_from_pptx(file_path):
     return text
 
 def get_ai_summary(text, category):
-    if not model:
+    if not client:
         return {
             "title": "Untitled Document",
             "summary": "AI summary unavailable.",
@@ -65,7 +64,10 @@ def get_ai_summary(text, category):
     """
     
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model='gemini-2.0-flash',
+            contents=prompt
+        )
         # Remove markdown code block if present
         cleaned_response = response.text.strip().replace("```json", "").replace("```", "")
         return json.loads(cleaned_response)
@@ -78,7 +80,20 @@ def get_ai_summary(text, category):
             "content": text[:500] + "..."
         }
 
+import subprocess
+
+def generate_stats():
+    print("Generating statistics...")
+    try:
+        # Run generate_stats.py from the same directory as process.py or root
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        stats_script = os.path.join(script_dir, "generate_stats.py")
+        subprocess.run(["python3", stats_script], check=True)
+    except Exception as e:
+        print(f"Error generating stats: {e}")
+
 def process_data():
+    generate_stats()
     raw_data_root = 'raw_data'
     # 로컬 작업 시 바로 옆의 re-archive 폴더로 결과물을 보냅니다.
     output_root = '../re-archive'
@@ -165,12 +180,16 @@ def process_data():
         if os.path.exists(folder):
             dest = os.path.join(output_root, folder)
             if folder == 'assets':
-                # Skip copy if dest already exists to avoid issues, or copy content
-                if not os.path.exists(dest):
-                    shutil.copytree(folder, dest)
-                else:
-                    # Sync logic or skip
-                    pass
+                # For assets, we want to sync files within it
+                for item in os.listdir(folder):
+                    s = os.path.join(folder, item)
+                    d = os.path.join(dest, item)
+                    if os.path.isdir(s):
+                        if os.path.exists(d):
+                            shutil.rmtree(d)
+                        shutil.copytree(s, d)
+                    else:
+                        shutil.copy2(s, d)
             else:
                 if os.path.exists(dest):
                     shutil.rmtree(dest)

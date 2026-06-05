@@ -1,0 +1,461 @@
+
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
+  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
+  Copyright 2024-2026 iBug - ibugone.com | @iBug
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="ko-KR" class="no-js">
+  <head>
+    
+<meta charset="utf-8">
+
+
+<!-- begin _includes/seo.html --><title>참여 현황 통계 — 탑마을 경남·벽산 통합 재건축 추진 준비 위원회</title>
+<meta name="description" content="압도적 동의로 만드는 분당의 랜드마크, 탑마을 경남·벽산 통합 재건축 추진 준비 위원회 공식 사이트입니다.">
+
+
+  <meta name="author" content="탑마을 경남·벽산 통합 재건축 추진 준비 위원회">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="탑마을 경남·벽산 통합 재건축 추진 준비 위원회">
+<meta property="og:title" content="참여 현황 통계">
+<meta property="og:url" content="https://topkn.org/statistics/">
+
+
+  <meta property="og:description" content="압도적 동의로 만드는 분당의 랜드마크, 탑마을 경남·벽산 통합 재건축 추진 준비 위원회 공식 사이트입니다.">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://topkn.org/statistics/">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="탑마을 경남·벽산 통합 재건축 추진 준비 위원회 Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single" dir="ltr">
+    
+<nav class="skip-links" aria-label="Skip links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
+        
+        <a class="site-title" href="/">
+          탑마을 경남·벽산 통합 재건축 추진 준비 위원회
+          <span class="site-subtitle">공식 사이트</span>
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a
+                href="/agreement/"
+                
+                
+              >소유주 인증/동의</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/FAQ/"
+                
+                
+              >재건축 FAQ</a>
+            </li><li class="masthead__menu-item">
+              <a
+                href="/project-value/"
+                
+                
+              >사업 안내</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="참여 현황 통계">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://topkn.org/statistics/" itemprop="url">참여 현황 통계
+</a>
+          </h1>
+          
+
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <!-- Chart.js & CryptoJS Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="/assets/js/vendor/crypto-js.min.js"></script>
+
+<div id="stats-auth-container" style="max-width: 400px; margin: 4rem auto; padding: 2rem; border: 1px solid #e5e5e5; border-radius: 12px; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;">
+  <h2 style="margin-top: 0; font-size: 1.25rem;">🔒 보안 인증</h2>
+  <p style="color: #666; font-size: 0.9rem; margin-bottom: 1.5rem;">통계 페이지 접근을 위해 비밀번호를 입력해 주세요.</p>
+  <input type="password" id="stats-password" placeholder="비밀번호 5자리" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; margin-bottom: 1rem; text-align: center; letter-spacing: 0.5rem;" />
+  <button id="auth-btn" class="btn btn--primary" style="width: 100%; margin: 0; padding: 12px;">확인</button>
+  <div id="auth-error" style="color: #dc3545; font-size: 0.85rem; margin-top: 1rem; display: none;">비밀번호가 올바르지 않습니다.</div>
+</div>
+
+<div id="stats-main-content" style="display: none;">
+  <div class="stats-filter">
+    <button class="btn btn--primary filter-btn active" data-filter="total">통합 통계</button>
+    <button class="btn btn--info filter-btn" data-filter="gyeongnam">경남 아파트</button>
+    <button class="btn btn--info filter-btn" data-filter="byeoksan">벽산 아파트</button>
+  </div>
+
+  <div id="stats-display" style="margin-top: 2rem;">
+    <div class="loading">데이터 및 시각화 도구를 준비 중입니다...</div>
+  </div>
+</div>
+
+<style>
+  .stats-filter { display: flex; gap: 0.5rem; margin-bottom: 2rem; }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+  .stat-card {
+    border: 1px solid #e5e5e5; border-radius: 12px; padding: 1.5rem; background: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column;
+  }
+  .stat-card h3 { margin-top: 0; border-bottom: 2px solid #f1f1f1; padding-bottom: 0.7rem; font-size: 1.1rem; color: #333; text-align: center; }
+  .chart-container { position: relative; height: 250px; width: 100%; margin-top: 1rem; }
+  
+  .highlight-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .highlight-card { padding: 1.5rem; border-radius: 12px; text-align: center; }
+  .total-count-box { background: #f8f9fa; border: 1px solid #dee2e6; }
+  .done-count-box { background: #e7f3ff; border: 1px solid #b8daff; color: #004085; }
+  .partial-count-box { background: #fff3cd; border: 1px solid #ffeeba; color: #856404; }
+  
+  .h-label { display: block; font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 500; }
+  .h-value { display: block; font-size: 1.8rem; font-weight: 800; }
+  .h-sub { display: block; font-size: 0.85rem; margin-top: 0.3rem; opacity: 0.8; }
+
+  .stat-table { width: 100%; margin-top: 1rem; border-collapse: collapse; }
+  .stat-table tr { border-bottom: 1px solid #f0f0f0; }
+  .stat-table td { padding: 8px 0; font-size: 0.9rem; }
+  .stat-table td:last-child { text-align: right; font-weight: 600; }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const authContainer = document.getElementById('stats-auth-container');
+  const mainContent = document.getElementById('stats-main-content');
+  const passwordInput = document.getElementById('stats-password');
+  const authBtn = document.getElementById('auth-btn');
+  const authError = document.getElementById('auth-error');
+  const display = document.getElementById('stats-display');
+  const buttons = document.querySelectorAll('.filter-btn');
+  
+  let statsData = null;
+  let charts = [];
+
+  function sha256Hex(value) {
+    if (!window.CryptoJS || !window.CryptoJS.SHA256) return "";
+    return window.CryptoJS.SHA256(value).toString();
+  }
+
+  function destroyCharts() {
+    charts.forEach(chart => chart.destroy());
+    charts = [];
+  }
+
+  function renderStats(filter) {
+    destroyCharts();
+    const data = statsData[filter];
+    if (!data) return;
+
+    let html = `
+      <div class="highlight-box">
+        <div class="highlight-card total-count-box">
+          <span class="h-label">총 관리 세대</span>
+          <span class="h-value">${data.count.toLocaleString()} <small>세대</small></span>
+          <span class="h-sub">단독: ${data.single_count} / 공동: ${data.shared_count}</span>
+        </div>
+        <div class="highlight-card done-count-box">
+          <span class="h-label">세대별 전원 완료율</span>
+          <span class="h-value">${data.full_done_rate}%</span>
+          <span class="h-sub">${data.full_done_count.toLocaleString()} 세대 최종 통과</span>
+        </div>
+        <div class="highlight-card partial-count-box">
+          <span class="h-label">일부 동의 (공유자 누락)</span>
+          <span class="h-value">${data.partial_done_count.toLocaleString()} <small>세대</small></span>
+          <span class="h-sub">전원 완료로 전환 가능군</span>
+        </div>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>세대별 취합 상태</h3>
+          <div class="chart-container"><canvas id="householdChart"></canvas></div>
+        </div>
+
+        <div class="stat-card">
+          <h3>소유 형태 비중</h3>
+          <div class="chart-container"><canvas id="ownerTypeChart"></canvas></div>
+        </div>
+
+        <div class="stat-card">
+          <h3>개별 인원 상태 (취합 전)</h3>
+          <table class="stat-table">
+            ${data.participation_details.map(item => `
+              <tr><td>${item.label}</td><td>${item.value.toLocaleString()}명</td></tr>
+            `).join('')}
+          </table>
+        </div>
+
+        <div class="stat-card">
+          <h3>제출 형태별 통계</h3>
+          <div class="chart-container"><canvas id="submissionChart"></canvas></div>
+        </div>
+      </div>
+    `;
+    display.innerHTML = html;
+
+    // Charts rendering logic (same as before)
+    const ctx1 = document.getElementById('householdChart').getContext('2d');
+    charts.push(new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        labels: data.household_stats.map(s => s.label),
+        datasets: [{
+          data: data.household_stats.map(s => s.value),
+          backgroundColor: ['#28a745', '#ffc107', '#dc3545'],
+          borderWidth: 0
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+    }));
+
+    const ctx2 = document.getElementById('ownerTypeChart').getContext('2d');
+    charts.push(new Chart(ctx2, {
+      type: 'pie',
+      data: {
+        labels: data.owner_type_stats.map(s => s.label),
+        datasets: [{
+          data: data.owner_type_stats.map(s => s.value),
+          backgroundColor: ['#6c757d', '#17a2b8'],
+          borderWidth: 0
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+    }));
+
+    const ctx3 = document.getElementById('submissionChart').getContext('2d');
+    charts.push(new Chart(ctx3, {
+      type: 'bar',
+      data: {
+        labels: data.submission_details.map(s => s.label),
+        datasets: [{
+          label: '제출 건수',
+          data: data.submission_details.map(s => s.value),
+          backgroundColor: '#007bff',
+          borderRadius: 5
+        }]
+      },
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: false, 
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: { x: { grid: { display: false } }, y: { grid: { display: false } } }
+      }
+    }));
+  }
+
+  function tryAuth() {
+    const pwd = passwordInput.value.trim();
+    if (!pwd) return;
+    
+    fetch('/assets/data/stats.json', { cache: "no-store" })
+      .then(response => response.json())
+      .then(data => {
+        const hashedInput = sha256Hex(pwd);
+        if (hashedInput === data.password_hash) {
+          statsData = data;
+          authContainer.style.display = 'none';
+          mainContent.style.display = 'block';
+          renderStats('total');
+        } else {
+          authError.style.display = 'block';
+          passwordInput.value = '';
+          passwordInput.focus();
+        }
+      })
+      .catch(error => {
+        alert("데이터를 불러오는 중 오류가 발생했습니다.");
+      });
+  }
+
+  authBtn.addEventListener('click', tryAuth);
+  passwordInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') tryAuth();
+  });
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      buttons.forEach(b => b.classList.remove('active', 'btn--primary'));
+      buttons.forEach(b => b.classList.add('btn--info'));
+      this.classList.add('active', 'btn--primary');
+      this.classList.remove('btn--info');
+      renderStats(this.dataset.filter);
+    });
+  });
+});
+</script>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+  
+
+  
+
+
+        
+
+
+
+      </footer>
+
+      
+
+      
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+      
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-copyright">
+  &copy; 2026 <a href="https://topkn.org">탑마을 경남·벽산 통합 재건축 추진 준비 위원회</a>.
+  <br>
+  <a href="/disclaimer/">면책공지(Disclaimer)</a>
+</div>
+
+      </footer>
+    </div>
+
+    
+
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

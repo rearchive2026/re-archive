@@ -1,5 +1,5 @@
 pymupdf
 python-pptx
-google-generativeai
+google-genai
 python-dotenv
 cryptography
