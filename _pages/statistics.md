@@ -1,183 +1,12 @@
-
-
-<!doctype html>
-<!--
-  Minimal Mistakes Jekyll Theme 4.28.0 by Michael Rose
-  Copyright 2013-2026 Michael Rose - mademistakes.com | @mmistakes
-  Copyright 2024-2026 iBug - ibugone.com | @iBug
-  Free for personal and commercial use under the MIT license
-  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-
-<html lang="ko-KR" class="no-js">
-  <head>
-    
-<meta charset="utf-8">
-
-
-<!-- begin _includes/seo.html --><title>참여 현황 통계 — 탑마을 경남·벽산 통합 재건축 추진 준비 위원회</title>
-<meta name="description" content="압도적 동의로 만드는 분당의 랜드마크, 탑마을 경남·벽산 통합 재건축 추진 준비 위원회 공식 사이트입니다.">
-
-
-  <meta name="author" content="탑마을 경남·벽산 통합 재건축 추진 준비 위원회">
-  
-
-
-<meta property="og:type" content="website">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:site_name" content="탑마을 경남·벽산 통합 재건축 추진 준비 위원회">
-<meta property="og:title" content="참여 현황 통계">
-<meta property="og:url" content="https://topkn.org/statistics/">
-
-
-  <meta property="og:description" content="압도적 동의로 만드는 분당의 랜드마크, 탑마을 경남·벽산 통합 재건축 추진 준비 위원회 공식 사이트입니다.">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="canonical" href="https://topkn.org/statistics/">
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- end _includes/seo.html -->
-
-
-
-  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="탑마을 경남·벽산 통합 재건축 추진 준비 위원회 Feed">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<script>
-  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
-  
-</script>
-
-<!-- For all browsers -->
-<link rel="stylesheet" href="/assets/css/main.css">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
-
-
-
-    <!-- start custom head snippets -->
-
-<!-- insert favicons. use https://realfavicongenerator.net/ -->
-
-<!-- end custom head snippets -->
-
-  </head>
-
-  <body class="layout--single" dir="ltr">
-    
-<nav class="skip-links" aria-label="Skip links">
-  <ul>
-    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
-    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
-    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
-  </ul>
-</nav>
-
-    
-
-
-<div class="masthead">
-  <div class="masthead__inner-wrap">
-    <div class="masthead__menu">
-      <nav id="site-nav" class="greedy-nav" aria-label="Primary navigation">
-        
-        <a class="site-title" href="/">
-          탑마을 경남·벽산 통합 재건축 추진 준비 위원회
-          <span class="site-subtitle">공식 사이트</span>
-        </a>
-        <ul class="visible-links"><li class="masthead__menu-item">
-              <a
-                href="/agreement/"
-                
-                
-              >소유주 인증/동의</a>
-            </li><li class="masthead__menu-item">
-              <a
-                href="/FAQ/"
-                
-                
-              >재건축 FAQ</a>
-            </li><li class="masthead__menu-item">
-              <a
-                href="/project-value/"
-                
-                
-              >사업 안내</a>
-            </li></ul>
-        
-        <button class="greedy-nav__toggle hidden" type="button">
-          <span class="visually-hidden">토글 메뉴</span>
-          <div class="navicon"></div>
-        </button>
-        <ul class="hidden-links hidden"></ul>
-      </nav>
-    </div>
-  </div>
-</div>
-
-
-    <div class="initial-content">
-      
-
-
-
-
-
-
-
-<div id="main" role="main">
-  
-
-
-
-  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="참여 현황 통계">
-    
-    
-    
-
-    <div class="page__inner-wrap">
-      
-        <header>
-          <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://topkn.org/statistics/" itemprop="url">참여 현황 통계
-</a>
-          </h1>
-          
-
-
-
-        </header>
-      
-
-      <section class="page__content e-content" itemprop="text">
-        
-        <!-- Chart.js & CryptoJS Library -->
+---
+layout: single
+title: "참여 현황 통계"
+permalink: /statistics/
+---
+
+<!-- Chart.js & CryptoJS Library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script src="/assets/js/vendor/crypto-js.min.js"></script>
+<script src="{{ '/assets/js/vendor/crypto-js.min.js' | relative_url }}"></script>
 
 <div id="stats-auth-container" style="max-width: 400px; margin: 4rem auto; padding: 2rem; border: 1px solid #e5e5e5; border-radius: 12px; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;">
   <h2 style="margin-top: 0; font-size: 1.25rem;">🔒 보안 인증</h2>
@@ -194,16 +23,6 @@
   </div>
 
   <div class="stats-filter">
-    <button class="btn btn--primary filter-btn active" data-filter="total">통합 통계</button>
-    <button class="btn btn--info filter-btn" data-filter="gyeongnam">경남 아파트</button>
-    <button class="btn btn--info filter-btn" data-filter="byeoksan">벽산 아파트</button>
-  </div>
-
-  <div id="stats-display" style="margin-top: 1rem;">
-    <div class="loading">데이터 및 시각화 도구를 준비 중입니다...</div>
-  </div>
-</div>
-
 
 <style>
   .stats-filter { display: flex; gap: 0.5rem; margin-bottom: 2rem; }
@@ -368,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const pwd = passwordInput.value.trim();
     if (!pwd) return;
     
-    fetch('/assets/data/stats.json', { cache: "no-store" })
+    fetch('{{ "/assets/data/stats.json" | relative_url }}', { cache: "no-store" })
       .then(response => response.json())
       .then(encrypted => {
         const decrypted = decryptData(encrypted, pwd);
@@ -407,71 +226,3 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 </script>
-
-
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-
-  
-
-  
-
-
-        
-
-
-
-      </footer>
-
-      
-
-      
-
-
-    </div>
-
-    
-  </article>
-
-  
-  
-</div>
-
-      
-    </div>
-
-    
-
-    <div id="footer" class="page__footer">
-      <footer>
-        <!-- start custom footer snippets -->
-
-<!-- end custom footer snippets -->
-        <div class="page__footer-copyright">
-  &copy; 2026 <a href="https://topkn.org">탑마을 경남·벽산 통합 재건축 추진 준비 위원회</a>.
-  <br>
-  <a href="/disclaimer/">면책공지(Disclaimer)</a>
-</div>
-
-      </footer>
-    </div>
-
-    
-
-  <script src="/assets/js/main.min.js"></script>
-
-
-
-
-
-
-
-
-
-
-  </body>
-</html>
