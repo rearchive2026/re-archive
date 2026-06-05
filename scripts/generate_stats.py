@@ -2,7 +2,11 @@ import sys
 import os
 import json
 import hashlib
+import base64
 from collections import defaultdict
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives import padding
+from cryptography.hazmat.backends import default_backend
 
 # Add scripts directory to path to import load_xlsx_rows
 sys.path.append(os.path.join(os.getcwd(), 're-archive-data', 'scripts'))
@@ -11,6 +15,28 @@ from import_verification_xlsx import load_xlsx_rows
 
 def sha256_hex(value):
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+def encrypt_data(data_dict, password):
+    # Derive a 32-byte key from the password
+    key = hashlib.sha256(password.encode()).digest()
+    iv = os.urandom(16)
+    
+    # JSON string to bytes
+    json_data = json.dumps(data_dict, ensure_ascii=False).encode('utf-8')
+    
+    # Pad data for AES
+    padder = padding.PKCS7(128).padder()
+    padded_data = padder.update(json_data) + padder.finalize()
+    
+    # Encrypt
+    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+    encryptor = cipher.encryptor()
+    ciphertext = encryptor.update(padded_data) + encryptor.finalize()
+    
+    return {
+        "iv": base64.b64encode(iv).decode('utf-8'),
+        "ciphertext": base64.b64encode(ciphertext).decode('utf-8')
+    }
 
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -21,9 +47,8 @@ def main():
         print(f"Error: {path} not found.")
         return
 
-    # Simple 5-digit random password for now
+    # Static password for now
     stats_password = "72941" 
-    hashed_password = sha256_hex(stats_password)
 
     try:
         rows = load_xlsx_rows(path)
@@ -31,10 +56,7 @@ def main():
             print("No data found.")
             return
 
-        # Data starts from row 1
         data_rows = rows[1:]
-        
-        # Group by household (Dong-Ho)
         households = defaultdict(list)
         
         for row in data_rows:
@@ -73,32 +95,21 @@ def main():
 
         for (bonbun, dong, ho), members in households.items():
             apt = "gyeongnam" if bonbun in ["525", "526"] else "byeoksan"
-            
             is_shared_household = any(m["is_shared"] for m in members) or len(members) > 1
             done_members = [m for m in members if m["participation"] == "완료"]
             
             status = "미동의"
-            if len(done_members) == len(members):
-                status = "전원완료"
-            elif len(done_members) > 0:
-                status = "일부완료"
+            if len(done_members) == len(members): status = "전원완료"
+            elif len(done_members) > 0: status = "일부완료"
             
             for category in ["total", apt]:
                 s = stats[category]
                 s["total_households"] += 1
-                
-                if is_shared_household:
-                    s["shared_households"] += 1
-                else:
-                    s["single_households"] += 1
-                    
-                if status == "전원완료":
-                    s["full_done_households"] += 1
-                elif status == "일부완료":
-                    s["partial_done_households"] += 1
-                else:
-                    s["not_done_households"] += 1
-                
+                if is_shared_household: s["shared_households"] += 1
+                else: s["single_households"] += 1
+                if status == "전원완료": s["full_done_households"] += 1
+                elif status == "일부완료": s["partial_done_households"] += 1
+                else: s["not_done_households"] += 1
                 for m in members:
                     s["participation_details"][m["participation"]] += 1
                     s["submission_details"][m["submission"]] += 1
@@ -125,18 +136,20 @@ def main():
                 "submission_details": sorted([{"label": k, "value": v} for k, v in cat_data["submission_details"].items()], key=lambda x: x["value"], reverse=True)
             }
 
-        final_stats = {
-            "password_hash": hashed_password,
+        raw_stats = {
             "total": finalize(stats["total"]),
             "gyeongnam": finalize(stats["gyeongnam"]),
             "byeoksan": finalize(stats["byeoksan"])
         }
         
+        # Encrypt the entire stats object
+        final_payload = encrypt_data(raw_stats, stats_password)
+        
         output_path = os.path.join(project_root, 'assets', 'data', 'stats.json')
         with open(output_path, 'w', encoding='utf-8') as f:
-            json.dump(final_stats, f, ensure_ascii=False, indent=2)
+            json.dump(final_payload, f, ensure_ascii=False, indent=2)
             
-        print(f"Precise Stats generated with password: {output_path}")
+        print(f"ENCRYPTED Stats generated: {output_path}")
         print(f"Stats Password: {stats_password}")
 
     except Exception as e:

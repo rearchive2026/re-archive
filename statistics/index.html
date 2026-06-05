@@ -238,9 +238,17 @@ document.addEventListener("DOMContentLoaded", function() {
   let statsData = null;
   let charts = [];
 
-  function sha256Hex(value) {
-    if (!window.CryptoJS || !window.CryptoJS.SHA256) return "";
-    return window.CryptoJS.SHA256(value).toString();
+  function decryptData(encrypted, password) {
+    try {
+      const key = CryptoJS.SHA256(password);
+      const iv = CryptoJS.enc.Base64.parse(encrypted.iv);
+      const decrypted = CryptoJS.AES.decrypt(encrypted.ciphertext, key, { iv: iv });
+      const plaintext = decrypted.toString(CryptoJS.enc.Utf8);
+      return JSON.parse(plaintext);
+    } catch (e) {
+      console.error("Decryption failed:", e);
+      return null;
+    }
   }
 
   function destroyCharts() {
@@ -300,7 +308,6 @@ document.addEventListener("DOMContentLoaded", function() {
     `;
     display.innerHTML = html;
 
-    // Charts rendering logic (same as before)
     const ctx1 = document.getElementById('householdChart').getContext('2d');
     charts.push(new Chart(ctx1, {
       type: 'doughnut',
@@ -357,10 +364,10 @@ document.addEventListener("DOMContentLoaded", function() {
     
     fetch('/assets/data/stats.json', { cache: "no-store" })
       .then(response => response.json())
-      .then(data => {
-        const hashedInput = sha256Hex(pwd);
-        if (hashedInput === data.password_hash) {
-          statsData = data;
+      .then(encrypted => {
+        const decrypted = decryptData(encrypted, pwd);
+        if (decrypted) {
+          statsData = decrypted;
           authContainer.style.display = 'none';
           mainContent.style.display = 'block';
           renderStats('total');
