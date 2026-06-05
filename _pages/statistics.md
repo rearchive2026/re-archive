@@ -50,6 +50,7 @@ permalink: /statistics/
   .total-count-box { background: #f8f9fa; border: 1px solid #dee2e6; }
   .done-count-box { background: #e7f3ff; border: 1px solid #b8daff; color: #004085; }
   .partial-count-box { background: #fff3cd; border: 1px solid #ffeeba; color: #856404; }
+  .privacy-count-box { background: #f2fbf7; border: 1px solid #badbcc; color: #0f5132; }
   
   .h-label { display: block; font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 500; }
   .h-value { display: block; font-size: 1.8rem; font-weight: 800; }
@@ -59,6 +60,7 @@ permalink: /statistics/
   .stat-table tr { border-bottom: 1px solid #f0f0f0; }
   .stat-table td { padding: 8px 0; font-size: 0.9rem; }
   .stat-table td:last-child { text-align: right; font-weight: 600; }
+  .row-sub { display: block; margin-top: 0.25rem; color: #777; font-size: 0.78rem; line-height: 1.3; }
 </style>
 
 <script>
@@ -96,29 +98,38 @@ document.addEventListener("DOMContentLoaded", function() {
     destroyCharts();
     const data = statsData[filter];
     if (!data) return;
+    const remainingHouseholds = data.remaining_household_count ?? Math.max(0, data.count - data.full_done_count);
+    const privacyNeededMembers = data.privacy_needed_member_count || 0;
+    const privacyNeededHouseholds = data.privacy_needed_household_count || 0;
+    const followups = data.followup_details || [];
 
     let html = `
       <div class="highlight-box">
         <div class="highlight-card total-count-box">
-          <span class="h-label">총 관리 세대</span>
+          <span class="h-label">총 대상 세대</span>
           <span class="h-value">${data.count.toLocaleString()} <small>세대</small></span>
           <span class="h-sub">단독: ${data.single_count} / 공동: ${data.shared_count}</span>
         </div>
         <div class="highlight-card done-count-box">
-          <span class="h-label">세대별 전원 완료율</span>
+          <span class="h-label">최종 동의 완료율</span>
           <span class="h-value">${data.full_done_rate}%</span>
-          <span class="h-sub">${data.full_done_count.toLocaleString()} 세대 최종 통과</span>
+          <span class="h-sub">${data.full_done_count.toLocaleString()}세대 완료 / ${remainingHouseholds.toLocaleString()}세대 남음</span>
         </div>
         <div class="highlight-card partial-count-box">
-          <span class="h-label">일부 동의 (공유자 누락)</span>
+          <span class="h-label">일부 완료 세대</span>
           <span class="h-value">${data.partial_done_count.toLocaleString()} <small>세대</small></span>
-          <span class="h-sub">전원 완료로 전환 가능군</span>
+          <span class="h-sub">공유자 추가 확인 시 전환 가능</span>
+        </div>
+        <div class="highlight-card privacy-count-box">
+          <span class="h-label">개인정보 동의 독려</span>
+          <span class="h-value">${privacyNeededMembers.toLocaleString()} <small>명</small></span>
+          <span class="h-sub">${privacyNeededHouseholds.toLocaleString()}세대 포함</span>
         </div>
       </div>
       
       <div class="stats-grid">
         <div class="stat-card">
-          <h3>세대별 취합 상태</h3>
+          <h3>세대 기준 최종 동의 상태</h3>
           <div class="chart-container"><canvas id="householdChart"></canvas></div>
         </div>
 
@@ -133,7 +144,19 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
 
         <div class="stat-card">
-          <h3>개별 인원 상태 (취합 전)</h3>
+          <h3>동의율 상승 우선순위</h3>
+          <table class="stat-table">
+            ${followups.map(item => `
+              <tr>
+                <td><strong>${item.label}</strong><span class="row-sub">${item.sub || ''}</span></td>
+                <td>${item.value.toLocaleString()}${item.unit || '명'}</td>
+              </tr>
+            `).join('')}
+          </table>
+        </div>
+
+        <div class="stat-card">
+          <h3>소유자별 진행 상태</h3>
           <table class="stat-table">
             ${data.participation_details.map(item => `
               <tr><td>${item.label}</td><td>${item.value.toLocaleString()}명</td></tr>
