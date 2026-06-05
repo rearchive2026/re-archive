@@ -3,6 +3,7 @@ import os
 import json
 import hashlib
 import base64
+from datetime import datetime
 from collections import defaultdict
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
@@ -137,6 +138,7 @@ def main():
             }
 
         raw_stats = {
+            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "total": finalize(stats["total"]),
             "gyeongnam": finalize(stats["gyeongnam"]),
             "byeoksan": finalize(stats["byeoksan"])

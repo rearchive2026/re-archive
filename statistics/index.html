@@ -194,7 +194,10 @@
     <button class="btn btn--info filter-btn" data-filter="byeoksan">벽산 아파트</button>
   </div>
 
-  <div id="stats-display" style="margin-top: 2rem;">
+  <div id="stats-display" style="margin-top: 1rem;">
+    <div id="stats-meta" style="text-align: right; font-size: 0.85rem; color: #888; margin-bottom: 1rem; display: none;">
+      데이터 기준 일시: <span id="generated-at"></span>
+    </div>
     <div class="loading">데이터 및 시각화 도구를 준비 중입니다...</div>
   </div>
 </div>
@@ -368,6 +371,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const decrypted = decryptData(encrypted, pwd);
         if (decrypted) {
           statsData = decrypted;
+          if (decrypted.generated_at) {
+            document.getElementById('generated-at').textContent = decrypted.generated_at;
+            document.getElementById('stats-meta').style.display = 'block';
+          }
           authContainer.style.display = 'none';
           mainContent.style.display = 'block';
           renderStats('total');
