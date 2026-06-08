@@ -3,16 +3,26 @@ import os
 import json
 import hashlib
 import base64
+import re
 from datetime import datetime
 from collections import defaultdict
+from pathlib import Path
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.backends import default_backend
 
-# Add scripts directory to path to import load_xlsx_rows
-sys.path.append(os.path.join(os.getcwd(), 're-archive-data', 'scripts'))
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent
+sys.path.insert(0, str(SCRIPT_DIR))
 
 from import_verification_xlsx import load_xlsx_rows
+from stats_source import (
+    build_stats_column_map,
+    cell_value,
+    display_dong_label,
+    effective_submission,
+    sort_dong_key,
+)
 
 def sha256_hex(value):
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
@@ -50,10 +60,22 @@ def display_participation_label(status):
     return labels.get(status, status)
 
 
+def resolve_source_path(project_root):
+    raw_data_path = project_root / "raw_data"
+    dated_sources = []
+    for path in raw_data_path.glob("발송현황_*.xlsx"):
+        match = re.fullmatch(r"발송현황_(\d{8})\.xlsx", path.name)
+        if match:
+            dated_sources.append((match.group(1), path))
+
+    if dated_sources:
+        return max(dated_sources, key=lambda item: item[0])[1]
+    return raw_data_path / "발송현황.xlsx"
+
+
 def main():
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(script_dir)
-    path = os.path.join(project_root, 'raw_data', '발송현황.xlsx')
+    project_root = PROJECT_ROOT
+    path = resolve_source_path(project_root)
     
     if not os.path.exists(path):
         print(f"Error: {path} not found.")
@@ -68,22 +90,24 @@ def main():
             return
 
         data_rows = rows[1:]
+        column_map = build_stats_column_map(rows[0], data_rows)
         households = defaultdict(list)
         
         for row in data_rows:
-            if len(row) < 11: continue
-            bonbun = str(row[3]).strip()
-            dong = str(row[4]).strip()
-            ho = str(row[5]).strip()
-            participation = str(row[10]).strip()
-            is_shared = "공유 O" in str(row[0])
-            submission = str(row[9]).strip() or "미제출"
+            bonbun = cell_value(row, column_map, "bonbun")
+            dong = cell_value(row, column_map, "dong")
+            ho = cell_value(row, column_map, "ho")
+            participation = cell_value(row, column_map, "participation")
+            is_shared = "공유 O" in cell_value(row, column_map, "shared")
+            submission = effective_submission(row, column_map)
+            if not any([bonbun, dong, ho, participation, submission]):
+                continue
             
             households[(bonbun, dong, ho)].append({
                 "participation": participation,
                 "is_shared": is_shared,
                 "submission": submission,
-                "dong": dong
+                "dong": dong or "기타"
             })
 
         def create_stat_structure():
@@ -142,10 +166,10 @@ def main():
                 if has_reserved: s["reserved_households"] += 1
                 
                 # Dong stats
-                if dong:
-                    s["dong_stats"][dong]["total"] += 1
-                    if status == "전원완료":
-                        s["dong_stats"][dong]["done"] += 1
+                dong_key = members[0]["dong"]
+                s["dong_stats"][dong_key]["total"] += 1
+                if status == "전원완료":
+                    s["dong_stats"][dong_key]["done"] += 1
 
                 for m in members:
                     participation = m["participation"]
@@ -165,13 +189,13 @@ def main():
         def finalize(cat_data):
             count = cat_data["total_households"]
             # Sort dongs numerically or alphabetically
-            sorted_dongs = sorted(cat_data["dong_stats"].keys(), key=lambda x: (x.isdigit(), int(x) if x.isdigit() else x))
+            sorted_dongs = sorted(cat_data["dong_stats"].keys(), key=sort_dong_key)
             dong_list = []
             for d in sorted_dongs:
                 d_total = cat_data["dong_stats"][d]["total"]
                 d_done = cat_data["dong_stats"][d]["done"]
                 dong_list.append({
-                    "label": f"{d}동",
+                    "label": display_dong_label(d),
                     "total": d_total,
                     "done": d_done,
                     "rate": round((d_done / d_total * 100), 1) if d_total > 0 else 0
@@ -242,6 +266,7 @@ def main():
 
         raw_stats = {
             "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "source_file": Path(path).name,
             "total": finalize(stats["total"]),
             "gyeongnam": finalize(stats["gyeongnam"]),
             "byeoksan": finalize(stats["byeoksan"])
