@@ -102,6 +102,11 @@
 
   .btn--naver,
   .btn--naver:visited {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2em;
+    min-width: 5.8em;
     background-color: #03c75a;
     color: #fff;
   }
@@ -122,8 +127,44 @@
     color: #fff;
     font-size: 0.95em;
     font-weight: 900;
+    flex: 0 0 auto;
     line-height: 1;
     vertical-align: -0.12em;
+  }
+
+  .btn--naver span:last-child {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 37.5em) {
+    .page__share .btn--naver {
+      min-width: 3.2rem;
+      padding-inline: 0.55rem;
+    }
+
+    .page__share .btn--naver .naver-share-logo {
+      position: static;
+      width: 1.35em;
+      height: 1.35em;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+      clip: auto;
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      font-size: 0.9em;
+    }
+
+    .page__share .btn--naver span:last-child {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
   }
 </style>
 <script>
