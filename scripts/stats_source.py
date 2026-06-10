@@ -21,7 +21,22 @@ def normalize_header(value):
 
 
 def normalize_cell(value):
-    return str(value or "").strip()
+    if value is None:
+        return ""
+    if isinstance(value, bool):
+        return str(value).strip()
+    if isinstance(value, int):
+        return str(value)
+    if isinstance(value, float) and value.is_integer():
+        return str(int(value))
+    return str(value).strip()
+
+
+def excel_number_if_possible(value):
+    text = normalize_cell(value)
+    if re.fullmatch(r"\d+", text):
+        return int(text)
+    return text
 
 
 def cell_value(row, column_map, field):
@@ -78,14 +93,22 @@ def build_stats_column_map(header, rows):
     return column_map
 
 
+def has_written_consent_text(value):
+    return WRITTEN_CONSENT_MEMO_TEXT in normalize_header(value)
+
+
 def has_written_consent_memo(row, column_map):
-    return WRITTEN_CONSENT_MEMO_TEXT in normalize_header(cell_value(row, column_map, "memo"))
+    return has_written_consent_text(cell_value(row, column_map, "memo"))
 
 
-def effective_submission(row, column_map):
+def final_submission(row, column_map):
     if has_written_consent_memo(row, column_map):
         return "서면"
     return cell_value(row, column_map, "submission") or "미제출"
+
+
+def effective_submission(row, column_map):
+    return final_submission(row, column_map)
 
 
 def row_with_effective_submission(row, column_map):
@@ -96,6 +119,18 @@ def row_with_effective_submission(row, column_map):
     while len(output) <= submission_index:
         output.append(None)
     output[submission_index] = effective_submission(row, column_map)
+    return output
+
+
+def row_with_excel_numeric_dong_ho(row, column_map):
+    output = list(row)
+    for field in ("dong", "ho"):
+        index = column_map.get(field)
+        if index is None:
+            continue
+        while len(output) <= index:
+            output.append(None)
+        output[index] = excel_number_if_possible(output[index])
     return output
 
 

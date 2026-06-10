@@ -20,7 +20,7 @@ from stats_source import (
     build_stats_column_map,
     cell_value,
     display_dong_label,
-    effective_submission,
+    final_submission,
     sort_dong_key,
 )
 
@@ -99,7 +99,7 @@ def main():
             ho = cell_value(row, column_map, "ho")
             participation = cell_value(row, column_map, "participation")
             is_shared = "공유 O" in cell_value(row, column_map, "shared")
-            submission = effective_submission(row, column_map)
+            submission = cell_value(row, column_map, "submission") or "미제출"
             if not any([bonbun, dong, ho, participation, submission]):
                 continue
             
@@ -107,7 +107,8 @@ def main():
                 "participation": participation,
                 "is_shared": is_shared,
                 "submission": submission,
-                "dong": dong or "기타"
+                "dong": dong or "기타",
+                "row": row,
             })
 
         def create_stat_structure():
@@ -143,6 +144,10 @@ def main():
             is_shared_household = any(m["is_shared"] for m in members) or len(members) > 1
             member_statuses = [m["participation"] for m in members]
             done_members = [m for m in members if m["participation"] == DONE_STATUS]
+            final_submissions = [
+                final_submission(m["row"], column_map)
+                for m in members
+            ]
             has_privacy_needed = any(status == PRIVACY_NEEDED_STATUS for status in member_statuses)
             has_sent = any(status == SENT_STATUS for status in member_statuses)
             has_viewed = any(status == VIEWED_STATUS for status in member_statuses)
@@ -171,10 +176,10 @@ def main():
                 if status == "전원완료":
                     s["dong_stats"][dong_key]["done"] += 1
 
-                for m in members:
+                for m, final_submission_value in zip(members, final_submissions):
                     participation = m["participation"]
                     s["participation_details"][display_participation_label(participation)] += 1
-                    s["submission_details"][m["submission"]] += 1
+                    s["submission_details"][final_submission_value] += 1
                     if participation == PRIVACY_NEEDED_STATUS:
                         s["privacy_needed_members"] += 1
                     elif participation == SENT_STATUS:
