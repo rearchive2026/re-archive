@@ -83,7 +83,60 @@
 
 
 
-    <link rel="stylesheet" href="/assets/css/mobile-nav.css?v=20260610-nav3">
+    <link rel="stylesheet" href="/assets/css/mobile-nav.css?v=20260610-nav4">
+<script>
+  (function () {
+    var mobileNavQuery = "(max-width: 1200px)";
+
+    function restoreMobileNav() {
+      if (window.matchMedia && !window.matchMedia(mobileNavQuery).matches) {
+        return;
+      }
+
+      var nav = document.getElementById("site-nav");
+      if (!nav) {
+        return;
+      }
+
+      var visibleLinks = nav.querySelector(".visible-links");
+      var hiddenLinks = nav.querySelector(".hidden-links");
+      var toggle = nav.querySelector(".greedy-nav__toggle");
+
+      if (!visibleLinks || !hiddenLinks) {
+        return;
+      }
+
+      while (hiddenLinks.firstElementChild) {
+        visibleLinks.appendChild(hiddenLinks.firstElementChild);
+      }
+
+      visibleLinks.classList.remove("hidden");
+      hiddenLinks.classList.add("hidden");
+
+      if (toggle) {
+        toggle.classList.add("hidden");
+        toggle.classList.remove("close");
+        toggle.setAttribute("aria-hidden", "true");
+      }
+    }
+
+    function scheduleRestore() {
+      restoreMobileNav();
+      window.setTimeout(restoreMobileNav, 0);
+      window.setTimeout(restoreMobileNav, 120);
+      window.setTimeout(restoreMobileNav, 500);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", scheduleRestore);
+    } else {
+      scheduleRestore();
+    }
+
+    window.addEventListener("load", scheduleRestore);
+    window.addEventListener("resize", scheduleRestore);
+  })();
+</script>
 
   </head>
 
