@@ -90,7 +90,88 @@
   .layout--splash .page__hero--overlay {
     background-position: left bottom !important;
   }
+
+  .btn--native-share,
+  .btn--native-share:visited {
+    background-color: #3d4144;
+    color: #fff;
+  }
+
+  .btn--native-share:hover {
+    background-color: #25282b;
+    color: #fff;
+  }
+
+  .btn--naver,
+  .btn--naver:visited {
+    background-color: #03c75a;
+    color: #fff;
+  }
+
+  .btn--naver:hover {
+    background-color: #02a94d;
+    color: #fff;
+  }
+
+  .naver-share-logo {
+    display: inline-grid;
+    width: 1.15em;
+    height: 1.15em;
+    margin-inline-end: 0.2em;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    border-radius: 0.18em;
+    color: #fff;
+    font-size: 0.95em;
+    font-weight: 900;
+    line-height: 1;
+    vertical-align: -0.12em;
+  }
 </style>
+<script>
+  (function () {
+    function initNativeShare() {
+      var shareButtons = document.querySelectorAll(".js-native-share");
+
+      if (!shareButtons.length || !navigator.share) {
+        return;
+      }
+
+      shareButtons.forEach(function (button) {
+        button.hidden = false;
+
+        button.addEventListener("click", function () {
+          var canonical = document.querySelector('link[rel="canonical"]');
+          var title = document.querySelector('meta[property="og:title"]');
+          var description = document.querySelector('meta[property="og:description"]');
+          var shareData = {
+            title: title && title.content ? title.content : document.title,
+            url: canonical && canonical.href ? canonical.href : window.location.href
+          };
+
+          if (description && description.content) {
+            shareData.text = description.content;
+          }
+
+          navigator.share(shareData).catch(function (error) {
+            if (!error || error.name === "AbortError") {
+              return;
+            }
+
+            // 공유 실패는 기존 채널별 공유 버튼으로 대체할 수 있도록 조용히 기록합니다.
+            console.warn("Native share failed", error);
+          });
+        });
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initNativeShare);
+    } else {
+      initNativeShare();
+    }
+  })();
+</script>
 <script>
   (function () {
     var mobileNavQuery = "(max-width: 1200px)";
@@ -527,8 +608,17 @@
       </footer>
 
       
+
 <section class="page__share">
   <h4 class="page__share-title">공유하기</h4>
+
+  <button type="button" class="btn btn--native-share js-native-share" hidden aria-label="기기 공유하기" title="기기 공유하기">
+    <i class="fas fa-fw fa-share-alt" aria-hidden="true"></i><span> 공유하기</span>
+  </button>
+
+  <a href="https://share.naver.com/web/shareView?url=https%3A%2F%2Ftopkn.org%2Ffaq%2F2026%2F06%2F10%2F%25EC%259E%25AC%25EA%25B1%25B4%25EC%25B6%2595-%25EA%25BC%25AD-%25EC%2595%258C%25EC%2595%2584%25EC%2595%25BC-%25ED%2595%25A0-%25ED%2595%25B5%25EC%258B%25AC%25EB%25A7%258C-%25EC%25A0%2595%25EB%25A6%25AC.html&title=%EC%9E%AC%EA%B1%B4%EC%B6%95%2C+%EA%BC%AD+%EC%95%8C%EC%95%84%EC%95%BC+%ED%95%A0+%ED%95%B5%EC%8B%AC%EB%A7%8C+%EC%A0%95%EB%A6%AC%ED%96%88%EC%8A%B5%EB%8B%88%EB%8B%A4" class="btn btn--naver" aria-label="네이버로 공유하기" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=640,toolbar=1,resizable=0'); return false;" title="공유하기 Naver">
+    <span class="naver-share-logo" aria-hidden="true">N</span><span> 네이버</span>
+  </a>
 
   <a href="https://x.com/intent/tweet?text=%EC%9E%AC%EA%B1%B4%EC%B6%95%2C+%EA%BC%AD+%EC%95%8C%EC%95%84%EC%95%BC+%ED%95%A0+%ED%95%B5%EC%8B%AC%EB%A7%8C+%EC%A0%95%EB%A6%AC%ED%96%88%EC%8A%B5%EB%8B%88%EB%8B%A4%20https%3A%2F%2Ftopkn.org%2Ffaq%2F2026%2F06%2F10%2F%25EC%259E%25AC%25EA%25B1%25B4%25EC%25B6%2595-%25EA%25BC%25AD-%25EC%2595%258C%25EC%2595%2584%25EC%2595%25BC-%25ED%2595%25A0-%25ED%2595%25B5%25EC%258B%25AC%25EB%25A7%258C-%25EC%25A0%2595%25EB%25A6%25AC.html" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 X">
     <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
@@ -540,10 +630,6 @@
 
   <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://topkn.org/faq/2026/06/10/%EC%9E%AC%EA%B1%B4%EC%B6%95-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-%ED%95%B5%EC%8B%AC%EB%A7%8C-%EC%A0%95%EB%A6%AC.html" class="btn btn--linkedin" aria-label="Share on LinkedIn" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn">
     <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span>
-  </a>
-
-  <a href="https://bsky.app/intent/compose?text=%EC%9E%AC%EA%B1%B4%EC%B6%95%2C+%EA%BC%AD+%EC%95%8C%EC%95%84%EC%95%BC+%ED%95%A0+%ED%95%B5%EC%8B%AC%EB%A7%8C+%EC%A0%95%EB%A6%AC%ED%96%88%EC%8A%B5%EB%8B%88%EB%8B%A4%20https%3A%2F%2Ftopkn.org%2Ffaq%2F2026%2F06%2F10%2F%25EC%259E%25AC%25EA%25B1%25B4%25EC%25B6%2595-%25EA%25BC%25AD-%25EC%2595%258C%25EC%2595%2584%25EC%2595%25BC-%25ED%2595%25A0-%25ED%2595%25B5%25EC%258B%25AC%25EB%25A7%258C-%25EC%25A0%2595%25EB%25A6%25AC.html" class="btn btn--bluesky" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Bluesky">
-    <i class="fab fa-fw fa-bluesky" aria-hidden="true"></i><span> Bluesky</span>
   </a>
 </section>
 

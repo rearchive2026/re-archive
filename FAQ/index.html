@@ -84,7 +84,88 @@
   .layout--splash .page__hero--overlay {
     background-position: left bottom !important;
   }
+
+  .btn--native-share,
+  .btn--native-share:visited {
+    background-color: #3d4144;
+    color: #fff;
+  }
+
+  .btn--native-share:hover {
+    background-color: #25282b;
+    color: #fff;
+  }
+
+  .btn--naver,
+  .btn--naver:visited {
+    background-color: #03c75a;
+    color: #fff;
+  }
+
+  .btn--naver:hover {
+    background-color: #02a94d;
+    color: #fff;
+  }
+
+  .naver-share-logo {
+    display: inline-grid;
+    width: 1.15em;
+    height: 1.15em;
+    margin-inline-end: 0.2em;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    border-radius: 0.18em;
+    color: #fff;
+    font-size: 0.95em;
+    font-weight: 900;
+    line-height: 1;
+    vertical-align: -0.12em;
+  }
 </style>
+<script>
+  (function () {
+    function initNativeShare() {
+      var shareButtons = document.querySelectorAll(".js-native-share");
+
+      if (!shareButtons.length || !navigator.share) {
+        return;
+      }
+
+      shareButtons.forEach(function (button) {
+        button.hidden = false;
+
+        button.addEventListener("click", function () {
+          var canonical = document.querySelector('link[rel="canonical"]');
+          var title = document.querySelector('meta[property="og:title"]');
+          var description = document.querySelector('meta[property="og:description"]');
+          var shareData = {
+            title: title && title.content ? title.content : document.title,
+            url: canonical && canonical.href ? canonical.href : window.location.href
+          };
+
+          if (description && description.content) {
+            shareData.text = description.content;
+          }
+
+          navigator.share(shareData).catch(function (error) {
+            if (!error || error.name === "AbortError") {
+              return;
+            }
+
+            // 공유 실패는 기존 채널별 공유 버튼으로 대체할 수 있도록 조용히 기록합니다.
+            console.warn("Native share failed", error);
+          });
+        });
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initNativeShare);
+    } else {
+      initNativeShare();
+    }
+  })();
+</script>
 <script>
   (function () {
     var mobileNavQuery = "(max-width: 1200px)";
