@@ -224,7 +224,7 @@
   .briefing-notice-layer {
     position: fixed;
     inset: 0;
-    z-index: 10000;
+    z-index: 2147483000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -305,6 +305,10 @@
     background: #fff;
   }
 
+  .home-quick-links {
+    margin-bottom: 2rem;
+  }
+
   @media (max-width: 480px) {
     .briefing-notice-layer {
       padding: 10px;
@@ -318,6 +322,85 @@
       font-size: 0.9rem;
     }
   }
+
+  @media (max-width: 900px) {
+    .home-quick-links .feature__wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .home-quick-links .feature__item {
+      width: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .home-quick-links .archive__item {
+      height: 100%;
+      margin: 0;
+      border: 1px solid #d8dee6;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+
+    .home-quick-links .archive__item-body {
+      min-height: 156px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.45rem;
+      padding: 0.85rem 0.65rem;
+      text-align: center;
+    }
+
+    .home-quick-links .archive__item-title {
+      margin: 0;
+      color: #202a36;
+      font-size: 0.98rem;
+      line-height: 1.28;
+      word-break: keep-all;
+    }
+
+    .home-quick-links .archive__item-excerpt {
+      margin: 0;
+      color: #5d6672;
+      font-size: 0.76rem;
+      line-height: 1.35;
+    }
+
+    .home-quick-links .archive__item-excerpt p {
+      margin: 0;
+    }
+
+    .home-quick-links .archive__item-excerpt br,
+    .home-quick-links .archive__item-excerpt .quick-link-excerpt-text {
+      display: none;
+    }
+
+    .home-quick-links .kakao-channel-qr {
+      width: 72px;
+      margin: 0 auto;
+      border-radius: 6px;
+    }
+
+    .home-quick-links .archive__item-body > p {
+      margin: 0;
+    }
+
+    .home-quick-links .btn {
+      min-width: 0;
+      width: 100%;
+      margin: 0;
+      padding: 0.45rem 0.35rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      line-height: 1.2;
+      white-space: normal;
+    }
+  }
 </style>
 
 <script>
@@ -327,6 +410,10 @@
     var hideToday = document.getElementById("briefing-notice-hide-today");
     var hitarea = layer ? layer.querySelector(".briefing-notice-hitarea") : null;
     var storageKey = "briefingNoticeHiddenDate";
+
+    if (layer && layer.parentNode !== document.body) {
+      document.body.appendChild(layer);
+    }
 
     function todayKey() {
       var now = new Date();
@@ -356,6 +443,7 @@
       if (hideToday && hideToday.checked) {
         setHiddenDate();
       }
+      document.body.classList.remove("briefing-notice-open");
       layer.classList.add("briefing-notice-layer--hidden");
     }
 
@@ -371,6 +459,7 @@
     }
 
     if (getHiddenDate() !== todayKey()) {
+      document.body.classList.add("briefing-notice-open");
       layer.classList.remove("briefing-notice-layer--hidden");
     }
 
@@ -417,7 +506,13 @@
 
 </div>
 
+<h2 id="-서면동의서-제출-안내">📝 서면동의서 제출 안내</h2>
+<p><a href="/agreement/" class="align-center" style="max-width: 720px; width: 100%; height: auto;"><img src="/assets/images/written-consent-notice.png?v=20260610-kakao-channel" alt="서면동의서 제출 방식 변경 안내" /></a></p>
+
 <h2 id="️-주요-업무-바로가기">🏛️ 주요 업무 바로가기</h2>
+<section class="home-quick-links" aria-label="주요 업무 바로가기">
+
+
 
 <div class="feature__wrapper">
 
@@ -479,7 +574,7 @@
 
           
             <div class="archive__item-excerpt">
-              <p><a href="https://pf.kakao.com/_FlxkGX" aria-label="공식 카카오 채널 열기"><img src="/assets/images/kakao-channel-qr-only.png?v=20260610" alt="탑경남벽산 통합재건축 공식 카카오 채널 QR" class="kakao-channel-qr" /></a><br />공식 카카오 채널에서 공지와 문의 안내를 확인할 수 있습니다.</p>
+              <p><a href="https://pf.kakao.com/_FlxkGX" aria-label="공식 카카오 채널 열기"><img src="/assets/images/kakao-channel-qr-only.png?v=20260610" alt="탑경남벽산 통합재건축 공식 카카오 채널 QR" class="kakao-channel-qr" /></a><span class="quick-link-excerpt-text"><br />공식 카카오 채널에서 공지와 문의 안내를 확인할 수 있습니다.</span></p>
 
             </div>
           
@@ -517,8 +612,7 @@
 
 </div>
 
-<h2 id="-서면동의서-제출-안내">📝 서면동의서 제출 안내</h2>
-<p><a href="/agreement/" class="align-center" style="max-width: 720px; width: 100%; height: auto;"><img src="/assets/images/written-consent-notice.png?v=20260610-kakao-channel" alt="서면동의서 제출 방식 변경 안내" /></a></p>
+</section>
 
 <div class="grid__wrapper" style="display:grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
 
