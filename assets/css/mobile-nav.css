@@ -1,4 +1,4 @@
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
   .masthead__inner-wrap {
     padding: 0.55rem 0.85rem !important;
   }
@@ -40,11 +40,13 @@
     overflow: visible !important;
   }
 
-  .greedy-nav .visible-links .masthead__menu-item {
+  .greedy-nav .visible-links .masthead__menu-item,
+  .greedy-nav .hidden-links .masthead__menu-item {
     display: block !important;
   }
 
-  .greedy-nav .visible-links .masthead__menu-item > a {
+  .greedy-nav .visible-links .masthead__menu-item > a,
+  .greedy-nav .hidden-links .masthead__menu-item > a {
     display: inline-block !important;
     padding: 0.28rem 0.45rem !important;
     border-radius: 4px;
@@ -53,9 +55,23 @@
     font-size: 0.78rem !important;
   }
 
-  .greedy-nav__toggle,
-  .greedy-nav .hidden-links {
+  .greedy-nav__toggle {
     display: none !important;
+  }
+
+  .greedy-nav .hidden-links:not(:empty) {
+    position: static !important;
+    display: flex !important;
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    margin: 0.45rem 0 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 0.25rem 0.35rem;
   }
 }
 
