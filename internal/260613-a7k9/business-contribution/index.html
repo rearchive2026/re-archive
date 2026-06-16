@@ -488,6 +488,10 @@
     background: #ffecea;
   }
 
+  .internal-doc .contribution-mobile-list {
+    display: none;
+  }
+
   .internal-doc .doc-steps,
   .internal-doc .doc-checklist {
     margin: 0.8rem 0 1.35rem;
@@ -561,6 +565,96 @@
 
     .internal-doc .contribution-case {
       min-height: auto;
+    }
+
+    .internal-doc table {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .internal-doc th,
+    .internal-doc td {
+      padding: 0.58rem 0.55rem;
+      overflow-wrap: anywhere;
+    }
+
+    .internal-doc .contribution-table-wrap {
+      display: none;
+    }
+
+    .internal-doc .contribution-mobile-list {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1rem 0 1.35rem;
+    }
+
+    .internal-doc .contribution-mobile-card {
+      border: 1px solid var(--doc-line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .internal-doc .contribution-mobile-card__head {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--doc-line);
+      background: var(--doc-soft);
+    }
+
+    .internal-doc .contribution-mobile-card__head h3 {
+      margin: 0;
+      color: var(--doc-blue);
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .internal-doc .contribution-mobile-card__head p {
+      margin: 0.25rem 0 0;
+      color: var(--doc-muted);
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .internal-doc .contribution-mobile-values {
+      margin: 0;
+      padding: 0.2rem 0.9rem;
+    }
+
+    .internal-doc .contribution-mobile-values div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+      min-height: 2.55rem;
+      border-bottom: 1px solid #edf1f5;
+    }
+
+    .internal-doc .contribution-mobile-values div:last-child {
+      border-bottom: 0;
+    }
+
+    .internal-doc .contribution-mobile-values dt {
+      color: var(--doc-muted);
+      font-size: 0.88rem;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .internal-doc .contribution-mobile-values dd {
+      margin: 0;
+      color: var(--doc-ink);
+      font-size: 0.95rem;
+      font-weight: 900;
+      line-height: 1.35;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .internal-doc .contribution-mobile-values dd.amount-refund {
+      color: var(--doc-teal);
+    }
+
+    .internal-doc .contribution-mobile-values dd.amount-burden {
+      color: var(--doc-red);
     }
 
     .internal-doc .doc-nav a {
@@ -1016,6 +1110,86 @@
       </tbody>
     </table>
   </div>
+  <div class="contribution-mobile-list" aria-label="모바일 평형별 추정분담금">
+    <article class="contribution-mobile-card">
+      <div class="contribution-mobile-card__head">
+        <h3>종전 24평</h3>
+        <p>종전자산 13.0억 · 권리가액 14.31억</p>
+      </div>
+      <dl class="contribution-mobile-values">
+        <div><dt>신축 24평</dt><dd class="amount-refund">환급 0.17억</dd></div>
+        <div><dt>신축 30평</dt><dd class="amount-burden">부담 2.41억</dd></div>
+        <div><dt>신축 35평</dt><dd class="amount-burden">부담 3.91억</dd></div>
+        <div><dt>신축 41평</dt><dd class="amount-burden">부담 6.24억</dd></div>
+        <div><dt>신축 48평</dt><dd class="amount-burden">부담 8.49억</dd></div>
+      </dl>
+    </article>
+    <article class="contribution-mobile-card">
+      <div class="contribution-mobile-card__head">
+        <h3>종전 27평</h3>
+        <p>종전자산 14.5억 · 권리가액 15.96억</p>
+      </div>
+      <dl class="contribution-mobile-values">
+        <div><dt>신축 24평</dt><dd class="amount-refund">환급 1.82억</dd></div>
+        <div><dt>신축 30평</dt><dd class="amount-burden">부담 0.76억</dd></div>
+        <div><dt>신축 35평</dt><dd class="amount-burden">부담 2.26억</dd></div>
+        <div><dt>신축 41평</dt><dd class="amount-burden">부담 4.59억</dd></div>
+        <div><dt>신축 48평</dt><dd class="amount-burden">부담 6.84억</dd></div>
+      </dl>
+    </article>
+    <article class="contribution-mobile-card">
+      <div class="contribution-mobile-card__head">
+        <h3>종전 32평</h3>
+        <p>종전자산 16.0억 · 권리가액 17.61억</p>
+      </div>
+      <dl class="contribution-mobile-values">
+        <div><dt>신축 24평</dt><dd class="amount-refund">환급 3.47억</dd></div>
+        <div><dt>신축 30평</dt><dd class="amount-refund">환급 0.89억</dd></div>
+        <div><dt>신축 35평</dt><dd class="amount-burden">부담 0.61억</dd></div>
+        <div><dt>신축 41평</dt><dd class="amount-burden">부담 2.94억</dd></div>
+        <div><dt>신축 48평</dt><dd class="amount-burden">부담 5.19억</dd></div>
+      </dl>
+    </article>
+    <article class="contribution-mobile-card">
+      <div class="contribution-mobile-card__head">
+        <h3>종전 38평</h3>
+        <p>종전자산 16.6억 · 권리가액 18.27억</p>
+      </div>
+      <dl class="contribution-mobile-values">
+        <div><dt>신축 24평</dt><dd class="amount-refund">환급 4.13억</dd></div>
+        <div><dt>신축 30평</dt><dd class="amount-refund">환급 1.55억</dd></div>
+        <div><dt>신축 35평</dt><dd class="amount-refund">환급 0.05억</dd></div>
+        <div><dt>신축 41평</dt><dd class="amount-burden">부담 2.28억</dd></div>
+        <div><dt>신축 48평</dt><dd class="amount-burden">부담 4.53억</dd></div>
+      </dl>
+    </article>
+    <article class="contribution-mobile-card">
+      <div class="contribution-mobile-card__head">
+        <h3>종전 42평</h3>
+        <p>종전자산 17.0억 · 권리가액 18.71억</p>
+      </div>
+      <dl class="contribution-mobile-values">
+        <div><dt>신축 24평</dt><dd class="amount-refund">환급 4.57억</dd></div>
+        <div><dt>신축 30평</dt><dd class="amount-refund">환급 1.99억</dd></div>
+        <div><dt>신축 35평</dt><dd class="amount-refund">환급 0.49억</dd></div>
+        <div><dt>신축 41평</dt><dd class="amount-burden">부담 1.84억</dd></div>
+        <div><dt>신축 48평</dt><dd class="amount-burden">부담 4.09억</dd></div>
+      </dl>
+    </article>
+    <article class="contribution-mobile-card">
+      <div class="contribution-mobile-card__head">
+        <h3>종전 49평</h3>
+        <p>종전자산 19.0억 · 권리가액 20.91억</p>
+      </div>
+      <dl class="contribution-mobile-values">
+        <div><dt>신축 24평</dt><dd class="amount-refund">환급 6.77억</dd></div>
+        <div><dt>신축 30평</dt><dd class="amount-refund">환급 4.19억</dd></div>
+        <div><dt>신축 35평</dt><dd class="amount-refund">환급 2.69억</dd></div>
+        <div><dt>신축 41평</dt><dd class="amount-refund">환급 0.36억</dd></div>
+        <div><dt>신축 48평</dt><dd class="amount-burden">부담 1.89억</dd></div>
+      </dl>
+    </article>
+  </div>
 
   <h2 id="sensitivity">민감도 설명</h2>
   <ul class="doc-checklist">
@@ -1070,6 +1244,58 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="contribution-mobile-list contribution-mobile-list--scenario" aria-label="모바일 추정분담금 세 가지 유형">
+    <article class="contribution-mobile-card">
+      <div class="contribution-mobile-card__head">
+        <h3>적용 비례율</h3>
+      </div>
+      <dl class="contribution-mobile-values">
+        <div><dt>보수적 기준안</dt><dd>110.05%</dd></div>
+        <div><dt>동반 상승안</dt><dd>110.65%</dd></div>
+        <div><dt>공격적 가정안</dt><dd>118.11%</dd></div>
+      </dl>
+    </article>
+    <article class="contribution-mobile-card">
+      <div class="contribution-mobile-card__head">
+        <h3>24평 → 24평</h3>
+      </div>
+      <dl class="contribution-mobile-values">
+        <div><dt>보수적 기준안</dt><dd class="amount-refund">환급 0.17억</dd></div>
+        <div><dt>동반 상승안</dt><dd class="amount-refund">환급 0.24억</dd></div>
+        <div><dt>공격적 가정안</dt><dd class="amount-refund">환급 1.50억</dd></div>
+      </dl>
+    </article>
+    <article class="contribution-mobile-card">
+      <div class="contribution-mobile-card__head">
+        <h3>32평 → 35평</h3>
+      </div>
+      <dl class="contribution-mobile-values">
+        <div><dt>보수적 기준안</dt><dd class="amount-burden">부담 0.61억</dd></div>
+        <div><dt>동반 상승안</dt><dd class="amount-burden">부담 0.52억</dd></div>
+        <div><dt>공격적 가정안</dt><dd class="amount-refund">환급 1.03억</dd></div>
+      </dl>
+    </article>
+    <article class="contribution-mobile-card">
+      <div class="contribution-mobile-card__head">
+        <h3>42평 → 41평</h3>
+      </div>
+      <dl class="contribution-mobile-values">
+        <div><dt>보수적 기준안</dt><dd class="amount-burden">부담 1.84억</dd></div>
+        <div><dt>동반 상승안</dt><dd class="amount-burden">부담 1.74억</dd></div>
+        <div><dt>공격적 가정안</dt><dd class="amount-burden">부담 0.10억</dd></div>
+      </dl>
+    </article>
+    <article class="contribution-mobile-card">
+      <div class="contribution-mobile-card__head">
+        <h3>49평 → 48평</h3>
+      </div>
+      <dl class="contribution-mobile-values">
+        <div><dt>보수적 기준안</dt><dd class="amount-burden">부담 1.89억</dd></div>
+        <div><dt>동반 상승안</dt><dd class="amount-burden">부담 1.78억</dd></div>
+        <div><dt>공격적 가정안</dt><dd class="amount-refund">환급 0.06억</dd></div>
+      </dl>
+    </article>
   </div>
 
   <section class="doc-callout warning">
