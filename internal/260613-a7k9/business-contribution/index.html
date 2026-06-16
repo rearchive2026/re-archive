@@ -616,7 +616,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc" aria-label="Table of contents">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
-              <ul class="toc__menu"><li><a href="#assumptions">기준 시나리오</a></li><li><a href="#unit-plan">세대 구성</a></li><li><a href="#contribution-table">평형별 추정분담금</a></li><li><a href="#sensitivity">민감도 설명</a></li><li><a href="#appraisal-limits">추정분담금 표의 한계</a></li></ul>
+              <ul class="toc__menu"><li><a href="#assumptions">기준 시나리오</a></li><li><a href="#unit-plan">세대 구성</a></li><li><a href="#contribution-table">평형별 추정분담금</a></li><li><a href="#sensitivity">민감도 설명</a></li><li><a href="#three-types">추정분담금 세 가지 유형</a></li><li><a href="#appraisal-limits">추정분담금 표의 한계</a></li></ul>
             </nav>
           </aside>
         
@@ -845,9 +845,61 @@
   <ul class="doc-checklist">
     <li><strong>공사비가 오르면</strong> 사업비가 커져 비례율이 낮아지고 분담금이 증가할 수 있습니다.</li>
     <li><strong>일반분양가가 오르면</strong> 종후자산과 수입이 커져 비례율이 높아지고 분담금이 낮아질 수 있습니다.</li>
-    <li><strong>발표자료 표 기준</strong> 공사비 840만원, 일반분양가 6,500만원 조합에서는 비례율이 약 117.13% 수준으로 제시됐습니다.</li>
-    <li><strong>비례율 120% 가능성</strong>은 발표 중 구두로 언급된 낙관 시나리오 성격이며, 표에 직접 표시된 기준값과는 구분해 안내하는 것이 안전합니다.</li>
+    <li><strong>세 가지 추정분담금 표</strong>가 확인됩니다. 기준안은 880만원/6,000만원, 보정안은 900만원/6,200만원, 낙관안은 840만원/6,800만원으로 제시됐습니다.</li>
+    <li><strong>낙관안 주의</strong>: 중앙감정평가 re 자료의 낙관안 표는 제목은 840만원/6,800만원이지만 계산에는 비례율 118.11%가 적용됐습니다. 민감도 표상 840만원/6,800만원 교차값은 120.32%라서 정확한 낙관안 금액은 재확인이 필요합니다.</li>
   </ul>
+
+  <h2 id="three-types">추정분담금 세 가지 유형</h2>
+  <p>아래 비교는 주민들이 가장 많이 확인하는 대표 케이스만 추린 것입니다. 금액은 억원 단위이며, "-"는 환급, "+"는 부담입니다.</p>
+  <div class="doc-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>대표 케이스</th>
+          <th class="num">기준안<br />880만원 / 6,000만원</th>
+          <th class="num">보정안<br />900만원 / 6,200만원</th>
+          <th class="num">낙관안 표 표시값<br />840만원 / 6,800만원</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>적용 비례율</td>
+          <td class="num">110.05%</td>
+          <td class="num">110.65%</td>
+          <td class="num">118.11%</td>
+        </tr>
+        <tr>
+          <td>24평 → 24평</td>
+          <td class="num">-0.17억</td>
+          <td class="num">-0.24억</td>
+          <td class="num">-1.50억</td>
+        </tr>
+        <tr>
+          <td>32평 → 35평</td>
+          <td class="num">+0.61억</td>
+          <td class="num">+0.52억</td>
+          <td class="num">-1.03억</td>
+        </tr>
+        <tr>
+          <td>42평 → 41평</td>
+          <td class="num">+1.84억</td>
+          <td class="num">+1.74억</td>
+          <td class="num">+0.10억</td>
+        </tr>
+        <tr>
+          <td>49평 → 48평</td>
+          <td class="num">+1.89억</td>
+          <td class="num">+1.78억</td>
+          <td class="num">-0.06억</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <section class="doc-callout warning">
+    <h2>낙관안은 금액 확정표가 아닙니다</h2>
+    <p>낙관안 표의 하단에는 "분담금 15,000만원 내외 감소"라고 되어 있지만, 표 안의 권리가액은 118.11%로 계산됐습니다. 바로 앞 민감도 표에서 118.11%는 880만원/6,800만원 교차값이고, 840만원/6,800만원 교차값은 120.32%입니다. 따라서 낙관안은 방향성 참고용으로만 보고, 정확한 금액은 발표자료 작성 주체에 재확인해야 합니다.</p>
+  </section>
 
   <h2 id="appraisal-limits">추정분담금 표의 한계</h2>
   <ul class="doc-checklist">
