@@ -558,6 +558,16 @@
     background: #fff;
   }
 
+  .internal-doc .site-plan-zoom {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #fff;
+    cursor: zoom-in;
+  }
+
   .internal-doc .site-plan-figure figcaption {
     padding: 0.55rem 0.75rem;
     border-top: 1px solid var(--doc-line);
@@ -566,6 +576,53 @@
     font-size: 0.88rem;
     font-weight: 900;
     line-height: 1.4;
+  }
+
+  .site-plan-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(0.75rem, 3vw, 2rem);
+    background: rgba(9, 16, 29, 0.86);
+  }
+
+  .site-plan-lightbox.is-open {
+    display: flex;
+  }
+
+  .site-plan-lightbox__dialog {
+    position: relative;
+    max-width: min(96vw, 1600px);
+    max-height: 94vh;
+  }
+
+  .site-plan-lightbox__image {
+    display: block;
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.35);
+  }
+
+  .site-plan-lightbox__close {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.55rem;
+    display: inline-grid;
+    width: 2.35rem;
+    height: 2.35rem;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.78);
+    border-radius: 999px;
+    background: rgba(9, 16, 29, 0.72);
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
   }
 
   .internal-doc .doc-steps,
@@ -749,6 +806,90 @@
     }
   }
 </style>
+<script>
+  (function () {
+    function initSitePlanLightbox() {
+      var zoomButtons = document.querySelectorAll(".site-plan-zoom");
+
+      if (!zoomButtons.length) {
+        return;
+      }
+
+      var lightbox = document.createElement("div");
+      var dialog = document.createElement("div");
+      var image = document.createElement("img");
+      var closeButton = document.createElement("button");
+      var previousTrigger = null;
+
+      lightbox.className = "site-plan-lightbox";
+      lightbox.hidden = true;
+      lightbox.setAttribute("role", "dialog");
+      lightbox.setAttribute("aria-modal", "true");
+      dialog.className = "site-plan-lightbox__dialog";
+      image.className = "site-plan-lightbox__image";
+      closeButton.className = "site-plan-lightbox__close";
+      closeButton.type = "button";
+      closeButton.setAttribute("aria-label", "닫기");
+      closeButton.textContent = "×";
+
+      dialog.appendChild(image);
+      dialog.appendChild(closeButton);
+      lightbox.appendChild(dialog);
+      document.body.appendChild(lightbox);
+
+      function openLightbox(trigger) {
+        var sourceImage = trigger.querySelector("img");
+
+        if (!sourceImage) {
+          return;
+        }
+
+        previousTrigger = trigger;
+        image.src = sourceImage.currentSrc || sourceImage.src;
+        image.alt = sourceImage.alt || "";
+        lightbox.hidden = false;
+        lightbox.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+        closeButton.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.hidden = true;
+        image.removeAttribute("src");
+        document.body.style.overflow = "";
+
+        if (previousTrigger) {
+          previousTrigger.focus();
+        }
+      }
+
+      zoomButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          openLightbox(button);
+        });
+      });
+
+      closeButton.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+      document.addEventListener("keydown", function (event) {
+        if (!lightbox.hidden && event.key === "Escape") {
+          closeLightbox();
+        }
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initSitePlanLightbox);
+    } else {
+      initSitePlanLightbox();
+    }
+  })();
+</script>
 <script>
   (function () {
     function initNativeShare() {
