@@ -492,6 +492,78 @@
     display: none;
   }
 
+  .internal-doc .site-plan-gallery {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 0 1.4rem;
+  }
+
+  .internal-doc .site-plan-section {
+    margin: 1.25rem 0 1.75rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--doc-line);
+  }
+
+  .internal-doc .site-plan-section:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .internal-doc .site-plan-copy {
+    max-width: 940px;
+    margin-bottom: 0.85rem;
+  }
+
+  .internal-doc .site-plan-copy h2 {
+    margin: 0;
+    color: var(--doc-blue);
+    font-size: 1.35rem;
+    line-height: 1.35;
+  }
+
+  .internal-doc .site-plan-copy p {
+    margin: 0.5rem 0 0;
+    color: var(--doc-muted);
+    line-height: 1.7;
+  }
+
+  .internal-doc .site-plan-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.35rem 1rem;
+    margin: 0.75rem 0 0;
+    padding-left: 1.15rem;
+  }
+
+  .internal-doc .site-plan-list li {
+    line-height: 1.6;
+  }
+
+  .internal-doc .site-plan-figure {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--doc-line);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .internal-doc .site-plan-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #fff;
+  }
+
+  .internal-doc .site-plan-figure figcaption {
+    padding: 0.55rem 0.75rem;
+    border-top: 1px solid var(--doc-line);
+    background: var(--doc-soft);
+    color: var(--doc-blue);
+    font-size: 0.88rem;
+    font-weight: 900;
+    line-height: 1.4;
+  }
+
   .internal-doc .doc-steps,
   .internal-doc .doc-checklist {
     margin: 0.8rem 0 1.35rem;
@@ -565,6 +637,10 @@
 
     .internal-doc .contribution-case {
       min-height: auto;
+    }
+
+    .internal-doc .site-plan-list {
+      grid-template-columns: 1fr;
     }
 
     .internal-doc table {
@@ -870,6 +946,7 @@
     <a href="/internal/260613-a7k9/briefing-summary/">설명회 요약</a>
     <a href="/internal/260613-a7k9/consent-guide/" aria-current="page">동의 안내</a>
     <a href="/internal/260613-a7k9/roadmap/">로드맵</a>
+    <a href="/internal/260613-a7k9/site-plan/">단지계획안</a>
     <a href="/internal/260613-a7k9/business-contribution/">사업성·분담금</a>
   </nav>
 
