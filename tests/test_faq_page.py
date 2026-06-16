@@ -30,6 +30,23 @@ class FaqPageTests(unittest.TestCase):
         self.assertTrue(post.exists())
         self.assertIn("categories: FAQ", post.read_text())
 
+    def test_second_special_district_qna_has_faq_post(self):
+        post = (
+            REPO_ROOT
+            / "_posts"
+            / "2026-06-13-2차-특별정비구역-주민-설명회-QnA.md"
+        )
+        source = post.read_text()
+
+        self.assertTrue(post.exists())
+        self.assertIn('title: "2차 특별정비구역 주민 설명회 QnA"', source)
+        self.assertIn("categories: FAQ", source)
+        self.assertIn("permalink: /FAQ/2026/06/13/2차-특별정비구역-주민-설명회-QnA.html", source)
+        self.assertIn(".qna-detail h3", source)
+        self.assertIn('<section class="qna-detail"', source)
+        self.assertIn("일반분양 756세대", source)
+        self.assertIn("전자동의와 서면동의를 합쳐 경남·벽산 통합 기준 약 50% 수준", source)
+
 
 if __name__ == "__main__":
     unittest.main()

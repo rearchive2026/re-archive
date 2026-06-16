@@ -82,7 +82,28 @@
 <link rel="stylesheet" href="/assets/css/mobile-nav.css?v=20260610-nav4">
 <style>
   .layout--splash .page__hero--overlay {
-    background-position: center bottom !important;
+    min-height: clamp(620px, 70vh, 760px);
+    background-position: center center, 56% center !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100%, cover !important;
+  }
+
+  .layout--splash .page__hero--overlay .wrapper > p:not(.page__lead) {
+    margin-top: clamp(14rem, 34vh, 19rem);
+  }
+
+  @media (min-width: 48em) {
+    .layout--splash .page__hero--overlay {
+      min-height: clamp(680px, 56.25vw, 920px);
+      background-position: center center, center center !important;
+      background-size: 100% 100%, contain !important;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .layout--splash .page__hero--overlay .wrapper > p:not(.page__lead) {
+      margin-top: clamp(20rem, 28vw, 30rem);
+    }
   }
 
   .btn--native-share,
@@ -290,7 +311,7 @@
                 href="/agreement/"
                 
                 
-              >서면동의 안내</a>
+              >전자동의 안내</a>
             </li><li class="masthead__menu-item">
               <a
                 href="/FAQ/"

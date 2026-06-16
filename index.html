@@ -95,7 +95,28 @@
 <link rel="stylesheet" href="/assets/css/mobile-nav.css?v=20260610-nav4">
 <style>
   .layout--splash .page__hero--overlay {
-    background-position: center bottom !important;
+    min-height: clamp(620px, 70vh, 760px);
+    background-position: center center, 56% center !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100%, cover !important;
+  }
+
+  .layout--splash .page__hero--overlay .wrapper > p:not(.page__lead) {
+    margin-top: clamp(14rem, 34vh, 19rem);
+  }
+
+  @media (min-width: 48em) {
+    .layout--splash .page__hero--overlay {
+      min-height: clamp(680px, 56.25vw, 920px);
+      background-position: center center, center center !important;
+      background-size: 100% 100%, contain !important;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .layout--splash .page__hero--overlay .wrapper > p:not(.page__lead) {
+      margin-top: clamp(20rem, 28vw, 30rem);
+    }
   }
 
   .btn--native-share,
@@ -303,7 +324,7 @@
                 href="/agreement/"
                 
                 
-              >서면동의 안내</a>
+              >전자동의 안내</a>
             </li><li class="masthead__menu-item">
               <a
                 href="/FAQ/"
@@ -343,7 +364,7 @@
 
 
 <div class="page__hero--overlay"
-  style="background-color: #000; background-image: linear-gradient(rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.32)), url('/assets/images/home-hero-20260612.jpg?v=20260612-clear');"
+  style="background-color: #fff; background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('/assets/images/home-hero-20260612.jpg?v=20260612-clear');"
 >
   
     <div class="wrapper">
@@ -354,7 +375,7 @@
         
       </h1>
       
-        <p class="page__lead">분당의 새로운 중심, 경남·벽산의 미래 가치를 함께 만듭니다.<br /><br /><br /><br /><br /><br /><br /><br />
+        <p class="page__lead">분당의 새로운 중심, 경남·벽산의 미래 가치를 함께 만듭니다.
 </p>
       
       
@@ -364,7 +385,7 @@
       
         <p>
         
-          <a href="/agreement/" class="btn btn--light-outline btn--large">서면동의 안내</a>
+          <a href="/agreement/" class="btn btn--light-outline btn--large">전자동의 안내</a>
         
           <a href="/FAQ/" class="btn btn--light-outline btn--large">재건축 FAQ</a>
         
@@ -386,18 +407,34 @@
 
     <section class="page__content" itemprop="text">
       
-<div id="briefing-notice-layer" class="briefing-notice-layer briefing-notice-layer--hidden" role="dialog" aria-modal="true" aria-labelledby="briefing-notice-title" data-notice-url="/notices/2026/06/04/2%EC%B0%A8-%ED%8A%B9%EB%B3%84%EC%A0%95%EB%B9%84%EA%B5%AC%EC%97%AD-%EC%A7%80%EC%A0%95-%EC%B5%9C%EC%A2%85-%EC%A3%BC%EB%AF%BC%EC%84%A4%EB%AA%85%ED%9A%8C-%EC%95%88%EB%82%B4.html">
-  <div class="briefing-notice-dialog">
+<div class="briefing-notice-layer briefing-notice-layer--hidden" role="dialog" aria-modal="true" aria-labelledby="briefing-notice-title-1" data-notice-url="/notices/2026/06/16/%ED%8A%B9%EB%B3%84%EC%A0%95%EB%B9%84%EA%B5%AC%EC%97%AD-%EC%8B%A0%EC%B2%AD-%EB%8F%99%EC%9D%98%EC%9C%A8-50-%EB%8B%AC%EC%84%B1.html" data-notice-storage-key="briefingNoticeHiddenDate20260616ConsentRate50">
+  <div class="briefing-notice-dialog" style="--notice-dialog-width: 860px;">
     <button type="button" class="briefing-notice-hitarea" aria-label="공지사항으로 이동">
-      <span id="briefing-notice-title" class="screen-reader-text">2차 특별정비구역 지정을 위한 최종 주민설명회 안내</span>
-      <img src="/assets/images/%EC%9E%AC%EA%B1%B4%EC%B6%95%EC%A3%BC%EB%AF%BC%EC%84%A4%EB%AA%85%ED%9A%8C.jpeg?v=20260610-seomyeon-kakao-channel-centered" alt="2026 탑마을 경남·벽산 2차 특별정비구역 지정을 위한 최종 주민설명회 안내 포스터" />
+      <span id="briefing-notice-title-1" class="screen-reader-text">특별정비구역 신청 동의율 50% 달성</span>
+      <img src="/assets/images/consent-rate-50-achievement.png?v=20260616-50" alt="특별정비구역 신청 동의율 전자 서면 50% 달성 감사 안내" />
     </button>
     <div class="briefing-notice-actions">
       <label class="briefing-notice-checkbox">
-        <input type="checkbox" id="briefing-notice-hide-today" />
+        <input type="checkbox" class="briefing-notice-hide-today" />
         <span>하루동안 닫기</span>
       </label>
-      <button type="button" id="briefing-notice-close" class="btn btn--primary">닫기</button>
+      <button type="button" class="briefing-notice-close btn btn--primary">닫기</button>
+    </div>
+  </div>
+</div>
+
+<div class="briefing-notice-layer briefing-notice-layer--hidden" role="dialog" aria-modal="true" aria-labelledby="briefing-notice-title-2" data-notice-url="/notices/2026/06/16/%EC%9E%AC%EA%B1%B4%EC%B6%95-%EC%A0%84%EC%9E%90%EB%8F%99%EC%9D%98-%EC%9E%AC%EA%B0%9C-%EC%95%88%EB%82%B4.html" data-notice-storage-key="briefingNoticeHiddenDate20260616ElectronicConsentResume">
+  <div class="briefing-notice-dialog" style="--notice-dialog-width: 595px;">
+    <button type="button" class="briefing-notice-hitarea" aria-label="공지사항으로 이동">
+      <span id="briefing-notice-title-2" class="screen-reader-text">재건축 전자동의 재개 안내</span>
+      <img src="/assets/images/electronic-consent-resume-notice.png?v=20260616" alt="재건축 동의 방식 전자동의 재개 안내 포스터" />
+    </button>
+    <div class="briefing-notice-actions">
+      <label class="briefing-notice-checkbox">
+        <input type="checkbox" class="briefing-notice-hide-today" />
+        <span>하루동안 닫기</span>
+      </label>
+      <button type="button" class="briefing-notice-close btn btn--primary">닫기</button>
     </div>
   </div>
 </div>
@@ -419,7 +456,7 @@
   }
 
   .briefing-notice-dialog {
-    width: min(595px, 100%);
+    width: min(var(--notice-dialog-width, 860px), 100%);
     max-height: calc(100vh - 32px);
     display: flex;
     flex-direction: column;
@@ -471,7 +508,7 @@
     margin: 0;
   }
 
-  #briefing-notice-close {
+  .briefing-notice-close {
     margin: 0;
     white-space: nowrap;
   }
@@ -587,15 +624,8 @@
 
 <script>
   (function () {
-    var layer = document.getElementById("briefing-notice-layer");
-    var closeButton = document.getElementById("briefing-notice-close");
-    var hideToday = document.getElementById("briefing-notice-hide-today");
-    var hitarea = layer ? layer.querySelector(".briefing-notice-hitarea") : null;
-    var storageKey = "briefingNoticeHiddenDate";
-
-    if (layer && layer.parentNode !== document.body) {
-      document.body.appendChild(layer);
-    }
+    var layers = Array.prototype.slice.call(document.querySelectorAll(".briefing-notice-layer"));
+    var pendingLayers = [];
 
     function todayKey() {
       var now = new Date();
@@ -605,61 +635,103 @@
       return [year, month, day].join("-");
     }
 
-    function getHiddenDate() {
+    function getHiddenDate(layer) {
       try {
-        return window.localStorage.getItem(storageKey);
+        return window.localStorage.getItem(layer.getAttribute("data-notice-storage-key"));
       } catch (error) {
         return null;
       }
     }
 
-    function setHiddenDate() {
+    function setHiddenDate(layer) {
       try {
-        window.localStorage.setItem(storageKey, todayKey());
+        window.localStorage.setItem(layer.getAttribute("data-notice-storage-key"), todayKey());
       } catch (error) {
         return;
       }
     }
 
-    function closeLayer() {
-      if (hideToday && hideToday.checked) {
-        setHiddenDate();
-      }
-      document.body.classList.remove("briefing-notice-open");
+    function hideLayer(layer) {
       layer.classList.add("briefing-notice-layer--hidden");
     }
 
-    function openNotice() {
+    function showNextLayer() {
+      var nextLayer = pendingLayers.shift();
+
+      if (!nextLayer) {
+        document.body.classList.remove("briefing-notice-open");
+        return;
+      }
+
+      document.body.classList.add("briefing-notice-open");
+      nextLayer.classList.remove("briefing-notice-layer--hidden");
+    }
+
+    function closeLayer(layer) {
+      var hideToday = layer.querySelector(".briefing-notice-hide-today");
+
       if (hideToday && hideToday.checked) {
-        setHiddenDate();
+        setHiddenDate(layer);
+      }
+      hideLayer(layer);
+      showNextLayer();
+    }
+
+    function openNotice(layer) {
+      var hideToday = layer.querySelector(".briefing-notice-hide-today");
+
+      if (hideToday && hideToday.checked) {
+        setHiddenDate(layer);
       }
       window.location.href = layer.getAttribute("data-notice-url");
     }
 
-    if (!layer || !closeButton || !hideToday || !hitarea) {
+    if (!layers.length) {
       return;
     }
 
-    if (getHiddenDate() !== todayKey()) {
-      document.body.classList.add("briefing-notice-open");
-      layer.classList.remove("briefing-notice-layer--hidden");
-    }
+    layers.forEach(function (layer) {
+      var closeButton = layer.querySelector(".briefing-notice-close");
+      var hideToday = layer.querySelector(".briefing-notice-hide-today");
+      var hitarea = layer.querySelector(".briefing-notice-hitarea");
 
-    closeButton.addEventListener("click", function (event) {
-      event.stopPropagation();
-      closeLayer();
-    });
-
-    hideToday.addEventListener("click", function (event) {
-      event.stopPropagation();
-    });
-
-    hitarea.addEventListener("click", openNotice);
-    layer.addEventListener("click", function (event) {
-      if (event.target === layer) {
-        openNotice();
+      if (layer.parentNode !== document.body) {
+        document.body.appendChild(layer);
       }
+
+      hideLayer(layer);
+
+      if (getHiddenDate(layer) !== todayKey()) {
+        pendingLayers.push(layer);
+      }
+
+      if (closeButton) {
+        closeButton.addEventListener("click", function (event) {
+          event.stopPropagation();
+          closeLayer(layer);
+        });
+      }
+
+      if (hideToday) {
+        hideToday.addEventListener("click", function (event) {
+          event.stopPropagation();
+        });
+      }
+
+      if (hitarea) {
+        hitarea.addEventListener("click", function () {
+          openNotice(layer);
+        });
+      }
+
+      layer.addEventListener("click", function (event) {
+        if (event.target === layer) {
+          openNotice(layer);
+        }
+      });
     });
+
+    showNextLayer();
   })();
 </script>
 
@@ -688,8 +760,8 @@
 
 </div>
 
-<h2 id="-서면동의서-제출-안내">📝 서면동의서 제출 안내</h2>
-<p><a href="/agreement/" class="align-center" style="max-width: 720px; width: 100%; height: auto;"><img src="/assets/images/written-consent-notice.png?v=20260610-kakao-channel" alt="서면동의서 제출 방식 변경 안내" /></a></p>
+<h2 id="-재건축-전자동의-재개-안내">📝 재건축 전자동의 재개 안내</h2>
+<p><a href="/agreement/" class="align-center" style="max-width: 720px; width: 100%; height: auto;"><img src="/assets/images/electronic-consent-resume-notice.png?v=20260616" alt="재건축 전자동의 재개 안내" /></a></p>
 
 <h2 id="️-주요-업무-바로가기">🏛️ 주요 업무 바로가기</h2>
 <section class="home-quick-links" aria-label="주요 업무 바로가기">
@@ -705,18 +777,18 @@
 
         <div class="archive__item-body">
           
-            <h2 class="archive__item-title">📝 서면동의서 제출 안내</h2>
+            <h2 class="archive__item-title">📝 재건축 전자동의 안내</h2>
           
 
           
             <div class="archive__item-excerpt">
-              <p>온라인 동의 대신 서면동의서 제출 방식으로 전환되었습니다. 제출 일정과 준비물을 확인하세요.</p>
+              <p>전자동의를 다시 시작하고 서면동의도 함께 접수합니다. 전자 또는 서면 중 편리한 방법으로 참여해 주세요.</p>
 
             </div>
           
 
           
-            <p><a href="/agreement/" class="btn btn--primary">제출 안내 보기</a></p>
+            <p><a href="/agreement/" class="btn btn--primary">참여 안내 보기</a></p>
           
         </div>
       </div>
@@ -804,13 +876,15 @@
 
 <ul>
 
-<li><a href="/notices/2026/06/10/%EC%99%B8%EB%B6%80%EA%B1%B0%EC%A3%BC-%EC%86%8C%EC%9C%A0%EC%A3%BC-%EC%84%9C%EB%A9%B4%EB%8F%99%EC%9D%98%EC%84%9C-%EB%93%B1%EA%B8%B0%EB%B0%9C%EC%86%A1-%EC%95%88%EB%82%B4.html" style="text-decoration: none;">📢 외부 거주 소유주 서면동의서 등기 발송 안내</a> <small style="color:#888;">2026.06.10</small></li>
+<li><a href="/notices/2026/06/16/%ED%8A%B9%EB%B3%84%EC%A0%95%EB%B9%84%EA%B5%AC%EC%97%AD-%EC%8B%A0%EC%B2%AD-%EB%8F%99%EC%9D%98%EC%9C%A8-50-%EB%8B%AC%EC%84%B1.html" style="text-decoration: none;">🎉 특별정비구역 신청 동의율 50% 달성</a> <small style="color:#888;">2026.06.16</small></li>
+
+<li><a href="/notices/2026/06/16/%EC%9E%AC%EA%B1%B4%EC%B6%95-%EC%A0%84%EC%9E%90%EB%8F%99%EC%9D%98-%EC%9E%AC%EA%B0%9C-%EC%95%88%EB%82%B4.html" style="text-decoration: none;">📢 재건축 전자동의 재개 안내</a> <small style="color:#888;">2026.06.16</small></li>
+
+<li><a href="/notices/2026/06/10/%EC%99%B8%EB%B6%80%EA%B1%B0%EC%A3%BC-%EC%86%8C%EC%9C%A0%EC%A3%BC-%EC%84%9C%EB%A9%B4%EB%8F%99%EC%9D%98%EC%84%9C-%EB%93%B1%EA%B8%B0%EB%B0%9C%EC%86%A1-%EC%95%88%EB%82%B4.html" style="text-decoration: none;">📢 외부 거주 소유주 전자동의 및 서면동의 안내</a> <small style="color:#888;">2026.06.10</small></li>
 
 <li><a href="/notices/2026/06/04/2%EC%B0%A8-%ED%8A%B9%EB%B3%84%EC%A0%95%EB%B9%84%EA%B5%AC%EC%97%AD-%EC%A7%80%EC%A0%95-%EC%B5%9C%EC%A2%85-%EC%A3%BC%EB%AF%BC%EC%84%A4%EB%AA%85%ED%9A%8C-%EC%95%88%EB%82%B4.html" style="text-decoration: none;">📢 2차 특별정비구역 지정을 위한 최종 주민설명회 안내</a> <small style="color:#888;">2026.06.04</small></li>
 
-<li><a href="/notices/2026/05/22/%ED%8A%B9%EB%B3%84%EC%A0%95%EB%B9%84%EA%B5%AC%EC%97%AD-%EC%A7%80%EC%A0%95-%EB%8F%99%EC%9D%98%EC%84%9C-%EC%95%88%EB%82%B4.html" style="text-decoration: none;">📢 탑마을 경남/벽산 특별정비구역 지정 동의서 제출 안내</a> <small style="color:#888;">2026.05.22</small></li>
-
-<li><a href="/disclaimer/" style="text-decoration: none;">⚠️ [필독] 면책공지 (Disclaimer)</a> <small style="color:#888;">2026.05.22</small></li>
+<li><a href="/notices/2026/05/22/%ED%8A%B9%EB%B3%84%EC%A0%95%EB%B9%84%EA%B5%AC%EC%97%AD-%EC%A7%80%EC%A0%95-%EB%8F%99%EC%9D%98%EC%84%9C-%EC%95%88%EB%82%B4.html" style="text-decoration: none;">📢 탑마을 경남/벽산 특별정비구역 지정 동의서 참여 안내</a> <small style="color:#888;">2026.05.22</small></li>
 
 </ul>
 
@@ -825,6 +899,8 @@
 
 
 <ul>
+
+<li><a href="/FAQ/2026/06/13/2%EC%B0%A8-%ED%8A%B9%EB%B3%84%EC%A0%95%EB%B9%84%EA%B5%AC%EC%97%AD-%EC%A3%BC%EB%AF%BC-%EC%84%A4%EB%AA%85%ED%9A%8C-QnA.html" style="text-decoration: none;">2차 특별정비구역 주민 설명회 QnA</a> <small style="color:#888;">2026.06.13</small></li>
 
 <li><a href="/faq/2026/06/10/%EC%9E%AC%EA%B1%B4%EC%B6%95-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-%ED%95%B5%EC%8B%AC%EB%A7%8C-%EC%A0%95%EB%A6%AC.html" style="text-decoration: none;">재건축, 꼭 알아야 할 핵심만 정리했습니다</a> <small style="color:#888;">2026.06.10</small></li>
 

@@ -15,7 +15,7 @@
 <meta charset="utf-8">
 
 
-<!-- begin _includes/seo.html --><title>서면동의서 제출 안내 — 탑마을 경남·벽산 통합 재건축 추진 준비 위원회</title>
+<!-- begin _includes/seo.html --><title>재건축 전자동의 안내 — 탑마을 경남·벽산 통합 재건축 추진 준비 위원회</title>
 <meta name="description" content="압도적 동의로 만드는 분당의 랜드마크, 탑마을 경남·벽산 통합 재건축 추진 준비 위원회 공식 사이트입니다.">
 
 
@@ -26,7 +26,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="탑마을 경남·벽산 통합 재건축 추진 준비 위원회">
-<meta property="og:title" content="서면동의서 제출 안내">
+<meta property="og:title" content="재건축 전자동의 안내">
 <meta property="og:url" content="https://topkn.org/agreement/">
 
 
@@ -82,7 +82,28 @@
 <link rel="stylesheet" href="/assets/css/mobile-nav.css?v=20260610-nav4">
 <style>
   .layout--splash .page__hero--overlay {
-    background-position: center bottom !important;
+    min-height: clamp(620px, 70vh, 760px);
+    background-position: center center, 56% center !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100%, cover !important;
+  }
+
+  .layout--splash .page__hero--overlay .wrapper > p:not(.page__lead) {
+    margin-top: clamp(14rem, 34vh, 19rem);
+  }
+
+  @media (min-width: 48em) {
+    .layout--splash .page__hero--overlay {
+      min-height: clamp(680px, 56.25vw, 920px);
+      background-position: center center, center center !important;
+      background-size: 100% 100%, contain !important;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .layout--splash .page__hero--overlay .wrapper > p:not(.page__lead) {
+      margin-top: clamp(20rem, 28vw, 30rem);
+    }
   }
 
   .btn--native-share,
@@ -290,7 +311,7 @@
                 href="/agreement/"
                 
                 
-              >서면동의 안내</a>
+              >전자동의 안내</a>
             </li><li class="masthead__menu-item">
               <a
                 href="/FAQ/"
@@ -331,7 +352,7 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="서면동의서 제출 안내">
+    <meta itemprop="headline" content="재건축 전자동의 안내">
     
     
     
@@ -340,7 +361,7 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="https://topkn.org/agreement/" itemprop="url">서면동의서 제출 안내
+            <a href="https://topkn.org/agreement/" itemprop="url">재건축 전자동의 안내
 </a>
           </h1>
           
@@ -380,7 +401,9 @@
   }
   .notice-image {
     margin: 1.5rem auto 1.75rem;
+    width: 100%;
     max-width: 760px;
+    box-sizing: border-box;
   }
   .notice-image img {
     display: block;
@@ -461,6 +484,16 @@
   .agreement-contact a {
     font-weight: 800;
   }
+  .agreement-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin: 1rem 0 0;
+  }
+  .agreement-buttons .btn {
+    margin: 0;
+  }
   .notice-note {
     margin: 1.4rem 0 0;
     padding: 0.9rem 1rem;
@@ -484,40 +517,44 @@
 
 <div class="agreement-brief">
   <section class="agreement-hero">
-    <h1>서면동의서 제출 안내</h1>
-    <p>기존 온라인 동의 안내는 중단하고, 소유주 동의의 법적 안정성을 위해 서면동의서 제출 방식으로 진행합니다.</p>
+    <h1>재건축 전자동의 안내</h1>
+    <p>전자동의를 다시 시작하고, 서면동의도 함께 접수합니다. 전자 또는 서면 중 편리한 방법으로 참여해 주세요.</p>
   </section>
 
   <figure class="notice-image">
-    <img src="/assets/images/written-consent-notice.png?v=20260610-kakao-channel" alt="재건축 동의서 제출 방식 변경 안내문. 전자 방식에서 서면동의서 제출 방식으로 전환하며 2026년 6월 13일과 6월 14일 제출 일정을 안내합니다." />
+    <img src="/assets/images/electronic-consent-resume-notice.png?v=20260616" alt="재건축 동의 방식 전자동의 재개 안내문. 전자동의를 다시 시작하고 서면동의도 함께 접수한다는 내용을 안내합니다." />
   </figure>
 
-  <section class="submission-summary" aria-label="서면동의서 제출 안내 요약">
-    <h2>서면동의서 제출 안내</h2>
+  <section class="submission-summary" aria-label="재건축 전자동의 안내 요약">
+    <h2>전자동의 참여 안내</h2>
     <dl>
-      <dt>방식 변경</dt>
-      <dd>절차상 분쟁을 예방하고 소유주 동의의 법적 안정성을 확보하기 위해 <span class="important">서면동의서 제출</span>로 전환합니다.</dd>
-      <dt>일시 1</dt>
-      <dd>2026년 6월 13일(토) 돌마초 설명회 현장, 13:00 ~ 18:00</dd>
-      <dt>일시 2</dt>
-      <dd>2026년 6월 14일(일) 관리동 2층 회의실, 10:00 ~ 21:00</dd>
-      <dt>준비물</dt>
-      <dd>소유주 본인 실물 신분증 <span class="important">(모바일 신분증 불가)</span></dd>
+      <dt>참여 방식</dt>
+      <dd><span class="important">전자동의를 다시 시작</span>하고, 서면동의도 함께 접수합니다.</dd>
+      <dt>전자동의</dt>
+      <dd>소유주 인증 페이지에서 본인 확인 후, 추가로 도착하는 문자 속 <span class="important">재건축 전자동의 링크</span>에서 최종 동의해 주세요.</dd>
+      <dt>서면동의</dt>
+      <dd>부득이하게 서면동의를 원하는 경우 공식 카카오 채널로 문의해 주세요.</dd>
       <dt>공동소유자</dt>
       <dd><span class="important">소유자 전원 동의가 필요합니다.</span></dd>
+      <dt>중복 참여</dt>
+      <dd>전자와 서면으로 중복 참여한 경우에도 <span class="important">1인의 동의로만 반영</span>됩니다.</dd>
     </dl>
+    <div class="agreement-buttons">
+      <a href="/verification/" class="btn btn--primary btn--large">전자동의 인증하기</a>
+      <a href="https://pf.kakao.com/_FlxkGX/chat" class="btn btn--info btn--large" target="_blank" rel="noopener">카카오 채널 문의</a>
+    </div>
   </section>
 
   <section class="context-box">
-    <h2>왜 서면동의서로 전환하나요?</h2>
-    <p>단순 휴대전화 문자 인증 방식은 본인확인 절차로 볼 수는 있지만, 법령상 요구되는 동의서 요건 충족 여부에 대해 향후 논란이 생길 수 있다는 우려가 있습니다.</p>
-    <p>소유주 여러분의 소중한 동의가 행정절차나 법적 검토 과정에서 문제되지 않도록, 가장 명확하고 안전한 서면동의서 제출 방식으로 전환합니다.</p>
-    <p><strong>이미 온라인 방식으로 참여하신 소유주께서도 서면동의서를 다시 제출해 주셔야 합니다.</strong></p>
+    <h2>왜 다시 변경하나요?</h2>
+    <p>전자동의 관련 민원과 성남시의 초기 안내로 서면동의 방식으로 우선 전환했으나, 이후 과학기술정보통신부 검토와 성남시 재공지를 통해 현재 전자동의 진행에 문제가 없다는 점이 공식 확인되었습니다.</p>
+    <p>혼선을 줄이고 더 편리하고 확실하게 참여하실 수 있도록 전자동의를 다시 시작하고, 서면동의도 함께 접수합니다.</p>
+    <p><strong>전자 또는 서면 중 편리한 방법으로 참여해 주세요.</strong></p>
   </section>
 
   <section class="agreement-contact">
     <h2>소유주 여러분의 협조를 부탁드립니다</h2>
-    <p>이번 변경은 절차를 더 안전하고 확실하게 진행하기 위한 조치입니다. 우리 단지 재건축이 흔들림 없이 추진될 수 있도록 서면동의서 제출에 적극 협조해 주세요.</p>
+    <p>공식 검토와 재안내 과정에서 동의 방식이 변경되어 혼선을 드린 점 진심으로 사과드립니다. 우리 단지의 소중한 기회를 지킬 수 있도록 적극 참여해 주세요.</p>
     <p><strong>문의:</strong> <a href="https://pf.kakao.com/_FlxkGX" target="_blank" rel="noopener">공식 카카오 채널</a> / <a href="https://pf.kakao.com/_FlxkGX/chat" target="_blank" rel="noopener">공식 카카오 채널 채팅</a></p>
   </section>
 
@@ -531,11 +568,11 @@
     <i class="fas fa-fw fa-share-alt" aria-hidden="true"></i><span> 공유하기</span>
   </button>
 
-  <a href="https://share.naver.com/web/shareView?url=https%3A%2F%2Ftopkn.org%2Fagreement%2F&amp;title=%EC%84%9C%EB%A9%B4%EB%8F%99%EC%9D%98%EC%84%9C+%EC%A0%9C%EC%B6%9C+%EC%95%88%EB%82%B4" class="btn btn--naver" aria-label="네이버로 공유하기" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=640,toolbar=1,resizable=0'); return false;" title="공유하기 Naver">
+  <a href="https://share.naver.com/web/shareView?url=https%3A%2F%2Ftopkn.org%2Fagreement%2F&amp;title=%EC%9E%AC%EA%B1%B4%EC%B6%95+%EC%A0%84%EC%9E%90%EB%8F%99%EC%9D%98+%EC%95%88%EB%82%B4" class="btn btn--naver" aria-label="네이버로 공유하기" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=640,toolbar=1,resizable=0'); return false;" title="공유하기 Naver">
     <span class="naver-share-logo" aria-hidden="true">N</span><span> 네이버</span>
   </a>
 
-  <a href="https://x.com/intent/tweet?text=%EC%84%9C%EB%A9%B4%EB%8F%99%EC%9D%98%EC%84%9C+%EC%A0%9C%EC%B6%9C+%EC%95%88%EB%82%B4%20https%3A%2F%2Ftopkn.org%2Fagreement%2F" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 X">
+  <a href="https://x.com/intent/tweet?text=%EC%9E%AC%EA%B1%B4%EC%B6%95+%EC%A0%84%EC%9E%90%EB%8F%99%EC%9D%98+%EC%95%88%EB%82%B4%20https%3A%2F%2Ftopkn.org%2Fagreement%2F" class="btn btn--x" aria-label="Share on X" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 X">
     <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i><span> X</span>
   </a>
 
