@@ -64,7 +64,7 @@ class FaqPageTests(unittest.TestCase):
         self.assertIn(".qna-detail h3", source)
         self.assertIn('<section class="qna-detail"', source)
         self.assertIn("일반분양 756세대", source)
-        self.assertIn("전자동의와 서면동의를 합쳐 경남·벽산 통합 기준 약 50% 수준", source)
+        self.assertIn("전자동의와 서면동의를 합쳐 경남/벽산 통합 기준 약 50% 수준", source)
 
 
 if __name__ == "__main__":
