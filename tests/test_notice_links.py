@@ -38,7 +38,25 @@ class NoticeLinkTests(unittest.TestCase):
             source,
         )
         self.assertIn('href="{{ post.url | relative_url }}"', source)
+        self.assertIn("{% for post in notices %}", source)
+        self.assertNotIn("{% for post in notices limit:5 %}", source)
         self.assertNotIn('href="/agreement/" style="text-decoration: none;">{{ post.title }}', source)
+
+    def test_home_notice_list_links_to_notice_index(self):
+        source = (REPO_ROOT / "index.md").read_text()
+
+        self.assertIn("{{ '/notices/' | relative_url }}", source)
+        self.assertNotIn("/categories/#notices", source)
+
+    def test_notice_index_lists_notice_category_posts(self):
+        source = (REPO_ROOT / "_pages" / "notices.md").read_text()
+
+        self.assertIn("permalink: /notices/", source)
+        self.assertIn(
+            '{% assign notice_posts = site.posts | where_exp: "post", "post.categories contains \'Notices\'" %}',
+            source,
+        )
+        self.assertIn("{% include archive-single.html %}", source)
 
     def test_home_notice_layer_uses_consent_rate_achievement_notice(self):
         source = (REPO_ROOT / "index.md").read_text()

@@ -30,6 +30,25 @@ class FaqPageTests(unittest.TestCase):
         self.assertTrue(post.exists())
         self.assertIn("categories: FAQ", post.read_text())
 
+    def test_faq_index_uses_array_category_filter(self):
+        source = (REPO_ROOT / "_pages" / "faq.md").read_text()
+
+        self.assertIn(
+            '{% assign faq_posts = site.posts | where_exp: "post", "post.categories contains \'FAQ\'" %}',
+            source,
+        )
+        self.assertNotIn('{% assign faq_posts = site.posts | where: "categories", "FAQ" %}', source)
+
+    def test_home_faq_list_shows_all_faq_posts(self):
+        source = (REPO_ROOT / "index.md").read_text()
+
+        self.assertIn(
+            '{% assign faqs = site.posts | where_exp: "p", "p.categories contains \'FAQ\'" %}',
+            source,
+        )
+        self.assertIn("{% for post in faqs %}", source)
+        self.assertNotIn("{% for post in faqs limit:5 %}", source)
+
     def test_second_special_district_qna_has_faq_post(self):
         post = (
             REPO_ROOT
