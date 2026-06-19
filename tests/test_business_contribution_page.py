@@ -20,7 +20,12 @@ class BusinessContributionPageTests(unittest.TestCase):
         source = SOURCE.read_text()
 
         self.assertIn("사업조건 변화에 따른 가상 예시자료", source)
-        self.assertIn("공개 안내 금액이 아닙니다", source)
+        self.assertIn("공개 안내 금액이 아니며", source)
+        self.assertIn("분담금은 두 가지 숫자에 따라 달라집니다", source)
+        self.assertIn("공사비가 오르면", source)
+        self.assertIn("사업비가 커져 분담금이 늘어날 수 있습니다.", source)
+        self.assertIn("일반분양가가 오르면", source)
+        self.assertIn("분양수입이 커져 분담금이 줄어들 수 있습니다.", source)
         self.assertIn("가상 예시 1", source)
         self.assertIn("가상 예시 2", source)
         self.assertNotIn("조건 변화안", source)
