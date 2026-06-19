@@ -15,6 +15,10 @@ class BusinessContributionPageTests(unittest.TestCase):
         self.assertIn("32평에서 35평 선택 기준", source)
         self.assertIn("부담 약 6,100만 원", source)
         self.assertIn("32평형 소유자 선택 예시", source)
+        self.assertIn("49평 → 41평", source)
+        self.assertIn("환급 0.36억", source)
+        self.assertIn("작은 평형 선택 시 기준 추정", source)
+        self.assertNotIn("가장 큰 기존 평형 선택 예시", source)
 
     def test_alternative_values_are_labeled_as_hypothetical_examples(self):
         source = SOURCE.read_text()
