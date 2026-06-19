@@ -1,6 +1,0 @@
-pymupdf
-python-pptx
-google-genai
-python-dotenv
-cryptography
-openpyxl
