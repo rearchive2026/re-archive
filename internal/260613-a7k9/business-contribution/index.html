@@ -625,6 +625,119 @@
     line-height: 1.65;
   }
 
+  .internal-doc .contribution-drivers {
+    margin: 1rem 0 1.4rem;
+  }
+
+  .internal-doc .contribution-drivers h2,
+  .internal-doc .contribution-tabs h2 {
+    margin-bottom: 0.35rem;
+    color: var(--doc-blue);
+  }
+
+  .internal-doc .contribution-drivers > p,
+  .internal-doc .contribution-tabs > p {
+    margin: 0 0 0.8rem;
+    color: var(--doc-muted);
+    line-height: 1.65;
+  }
+
+  .internal-doc .scenario-tabs {
+    margin: 1rem 0 1.4rem;
+  }
+
+  .internal-doc .scenario-tab-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .internal-doc .scenario-tab-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .internal-doc .scenario-tab-list label {
+    display: grid;
+    min-height: 4.2rem;
+    align-content: center;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--doc-line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--doc-blue);
+    font-size: 0.95rem;
+    font-weight: 900;
+    line-height: 1.35;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .internal-doc .scenario-tab-list label span {
+    margin-top: 0.15rem;
+    color: var(--doc-muted);
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+
+  .internal-doc #scenario-base:checked ~ .scenario-tab-list label[for="scenario-base"],
+  .internal-doc #scenario-one:checked ~ .scenario-tab-list label[for="scenario-one"],
+  .internal-doc #scenario-two:checked ~ .scenario-tab-list label[for="scenario-two"] {
+    border-color: var(--doc-blue);
+    background: var(--doc-blue);
+    color: #fff;
+  }
+
+  .internal-doc #scenario-base:checked ~ .scenario-tab-list label[for="scenario-base"] span,
+  .internal-doc #scenario-one:checked ~ .scenario-tab-list label[for="scenario-one"] span,
+  .internal-doc #scenario-two:checked ~ .scenario-tab-list label[for="scenario-two"] span {
+    color: rgba(255, 255, 255, 0.84);
+  }
+
+  .internal-doc .scenario-panel {
+    display: none;
+    padding: 1rem;
+    border: 1px solid var(--doc-line);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .internal-doc #scenario-base:checked ~ .scenario-panels .scenario-panel--base,
+  .internal-doc #scenario-one:checked ~ .scenario-panels .scenario-panel--one,
+  .internal-doc #scenario-two:checked ~ .scenario-panels .scenario-panel--two {
+    display: block;
+  }
+
+  .internal-doc .scenario-panel__title {
+    margin: 0;
+    color: var(--doc-blue);
+    font-size: 1.25rem;
+    font-weight: 900;
+    line-height: 1.35;
+  }
+
+  .internal-doc .scenario-panel__summary,
+  .internal-doc .scenario-panel__note {
+    margin: 0.45rem 0 0;
+    color: var(--doc-muted);
+    line-height: 1.65;
+  }
+
+  .internal-doc .scenario-panel__note {
+    padding: 0.75rem 0.85rem;
+    border: 1px solid #f1d0cb;
+    border-radius: 8px;
+    background: #fff8f6;
+    color: var(--doc-ink);
+    font-weight: 800;
+  }
+
+  .internal-doc .scenario-metrics {
+    margin-top: 0.85rem;
+  }
+
   .internal-doc .contribution-table tbody tr:hover td {
     background: #f8fbff;
   }
@@ -864,6 +977,14 @@
 
     .internal-doc .contribution-logic__cases {
       grid-template-columns: 1fr;
+    }
+
+    .internal-doc .scenario-tab-list {
+      grid-template-columns: 1fr;
+    }
+
+    .internal-doc .scenario-panel {
+      padding: 0.85rem;
     }
 
     .internal-doc .site-plan-list {
@@ -1254,7 +1375,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc" aria-label="Table of contents">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
-              <ul class="toc__menu"><li><a href="#contribution-quick">추정분담금 먼저 보기</a></li><li><a href="#assumptions">기본 산정안 산정 조건</a></li><li><a href="#unit-plan">세대 구성</a></li><li><a href="#contribution-table">평형별 추정분담금</a></li><li><a href="#contribution-logic-title">평수가 줄어도 분담금이 나올 수 있습니다</a></li><li><a href="#sensitivity">분담금은 두 가지 숫자에 따라 달라집니다</a></li><li><a href="#three-types">사업조건 변화에 따른 가상 예시자료</a></li><li><a href="#appraisal-limits">추정분담금 표의 한계</a></li></ul>
+              <ul class="toc__menu"><li><a href="#contribution-drivers-title">분담금을 움직이는 두 가지 숫자</a></li><li><a href="#contribution-quick">추정분담금 먼저 보기</a></li><li><a href="#assumptions">기본 산정안 산정 조건</a></li><li><a href="#unit-plan">세대 구성</a></li><li><a href="#contribution-table">시나리오별 상세 보기</a></li><li><a href="#contribution-logic-title">평수가 줄어도 분담금이 나올 수 있습니다</a></li><li><a href="#scenario-tabs-title">세 가지 산정 방향</a></li><li><a href="#appraisal-limits">추정분담금 표의 한계</a></li></ul>
             </nav>
           </aside>
         
@@ -1272,7 +1393,7 @@
   <section class="doc-hero">
     <p class="doc-kicker">중앙감정평가 발표자료 기준</p>
     <h1>사업성·추정분담금 설명</h1>
-    <p>기본 산정 기준은 공사비 평당 880만원, 일반분양가 평균 평당 6,000만원입니다. 이 기준에서 32평에서 35평을 선택하는 예시의 추정분담금은 약 6,100만 원이며, 다른 조건의 금액은 사업조건 변화에 따라 분담금이 어떻게 달라질 수 있는지 보여주는 가상 예시자료로만 구분해 설명합니다.</p>
+    <p>추정분담금은 크게 <strong>공사비</strong>와 <strong>일반분양 평단가</strong>에 따라 달라집니다. 공사비가 오르면 사업비가 커져 분담금이 늘 수 있고, 일반분양 평단가가 오르면 분양수입이 커져 분담금이 줄 수 있습니다.</p>
   </section>
 
   <section class="doc-grid" aria-label="사업성 핵심 지표">
@@ -1286,7 +1407,7 @@
     </div>
     <div class="doc-card">
       <strong>평당 6,000만원</strong>
-      <span>기본 산정 기준 일반분양가 평균</span>
+      <span>기본 산정 기준 일반분양 평단가</span>
     </div>
     <div class="doc-card">
       <strong>110.05%</strong>
@@ -1299,11 +1420,30 @@
     <p><strong>새로 받을 집의 기준가격</strong>에서 <strong>내 기존 집 인정금액</strong>을 뺀 차액이 분담금 또는 환급금입니다. 새집 기준가격이 더 높으면 부담, 내 기존 집 인정금액이 더 높으면 환급으로 표시됩니다. 공식 용어로는 기존 집 인정금액을 권리가액, 새집 기준가격을 조합원분양가라고 부릅니다.</p>
   </section>
 
+  <section class="contribution-drivers" aria-labelledby="contribution-drivers-title">
+    <h2 id="contribution-drivers-title">분담금을 움직이는 두 가지 숫자</h2>
+    <p>아래 금액은 확정 분담금이 아니라, 공사비와 일반분양 평단가가 바뀔 때 분담금이 어느 방향으로 움직이는지 보여주는 설명용 추정치입니다.</p>
+    <section class="doc-grid" aria-label="분담금 변동 요인">
+      <div class="doc-card">
+        <strong>공사비가 오르면</strong>
+        <span>사업비가 커져 분담금이 늘어날 수 있습니다.</span>
+      </div>
+      <div class="doc-card">
+        <strong>일반분양 평단가가 오르면</strong>
+        <span>분양수입이 커져 분담금이 줄어들 수 있습니다.</span>
+      </div>
+      <div class="doc-card">
+        <strong>같이 봐야 합니다</strong>
+        <span>공사비와 일반분양 평단가가 함께 변하면 최종 분담금은 두 효과가 합쳐져 달라집니다.</span>
+      </div>
+    </section>
+  </section>
+
   <section class="contribution-focus" aria-labelledby="contribution-quick">
     <div class="contribution-focus__head">
       <p class="doc-kicker">기본 산정 기준</p>
       <h2 id="contribution-quick">추정분담금 먼저 보기</h2>
-      <p><strong>공사비 평당 880만원·일반분양가 평균 평당 6,000만원·비례율 110.05%</strong>를 기본 산정 기준으로 봅니다. 이 기준에서 32평에서 35평을 선택하는 경우의 추정분담금은 <strong>약 6,100만 원</strong>입니다.</p>
+      <p><strong>공사비 평당 880만원·일반분양 평단가 평균 6,000만원·비례율 110.05%</strong>를 기본 산정 기준으로 봅니다. 이 기준에서 32평에서 35평을 선택하는 경우의 추정분담금은 <strong>약 6,100만 원</strong>입니다.</p>
     </div>
     <div class="contribution-case-grid">
       <article class="contribution-case contribution-case--refund">
@@ -1360,7 +1500,7 @@
           <td>약 1,255억원</td>
         </tr>
         <tr>
-          <td>일반분양가</td>
+          <td>일반분양 평단가</td>
           <td>평당 6,000만원 내외</td>
         </tr>
         <tr>
@@ -1423,8 +1563,8 @@
     </table>
   </div>
 
-  <h2 id="contribution-table">평형별 추정분담금</h2>
-  <p>아래 표는 공사비 평당 880만원, 일반분양가 평균 평당 6,000만원, 비례율 110.05%를 적용한 기본 산정 기준입니다. 32평에서 35평 선택 기준의 약 6,100만 원은 여러 평형 이동 중 하나의 예시이며, 나머지 평형별 금액도 선택 평형에 따라 달라지는 참고값으로 봅니다. "+"는 부담, "-"는 환급을 뜻합니다.</p>
+  <h2 id="contribution-table">시나리오별 상세 보기</h2>
+  <p>아래 금액은 공사비와 일반분양 평단가를 달리 적용했을 때의 추정분담금입니다. 금액은 억원 단위이며, "부담"은 추가로 내는 금액, "환급"은 돌려받는 금액을 뜻합니다.</p>
 
   <section class="contribution-logic" aria-labelledby="contribution-logic-title">
     <div class="contribution-logic__intro">
@@ -1472,285 +1612,149 @@
     <p class="contribution-logic__note">즉, 새 41평·48평은 새 아파트 대형 평형에 해당해 기준가격이 높게 잡힙니다. 그래서 새집 기준가격이 내 기존 집 인정금액보다 높으면 부담, 낮으면 환급으로 표시됩니다.</p>
   </section>
 
-  <div class="doc-table-wrap contribution-table-wrap">
-    <table class="contribution-table contribution-table--detail">
-      <thead>
-        <tr>
-          <th>종전 평형</th>
-          <th class="num">기존 집 추정가</th>
-          <th class="num">기존 집 인정금액</th>
-          <th class="num">신축 24평</th>
-          <th class="num">신축 30평</th>
-          <th class="num">신축 35평</th>
-          <th class="num">신축 41평</th>
-          <th class="num">신축 48평</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>24평</td>
-          <td class="num">13.0억</td>
-          <td class="num">14.31억</td>
-          <td class="num amount-refund">-0.17억</td>
-          <td class="num amount-burden">+2.41억</td>
-          <td class="num amount-burden">+3.91억</td>
-          <td class="num amount-burden">+6.24억</td>
-          <td class="num amount-burden">+8.49억</td>
-        </tr>
-        <tr>
-          <td>27평</td>
-          <td class="num">14.5억</td>
-          <td class="num">15.96억</td>
-          <td class="num amount-refund">-1.82억</td>
-          <td class="num amount-burden">+0.76억</td>
-          <td class="num amount-burden">+2.26억</td>
-          <td class="num amount-burden">+4.59억</td>
-          <td class="num amount-burden">+6.84억</td>
-        </tr>
-        <tr>
-          <td>32평</td>
-          <td class="num">16.0억</td>
-          <td class="num">17.61억</td>
-          <td class="num amount-refund">-3.47억</td>
-          <td class="num amount-refund">-0.89억</td>
-          <td class="num amount-burden">+0.61억</td>
-          <td class="num amount-burden">+2.94억</td>
-          <td class="num amount-burden">+5.19억</td>
-        </tr>
-        <tr>
-          <td>38평</td>
-          <td class="num">16.6억</td>
-          <td class="num">18.27억</td>
-          <td class="num amount-refund">-4.13억</td>
-          <td class="num amount-refund">-1.55억</td>
-          <td class="num amount-refund">-0.05억</td>
-          <td class="num amount-burden">+2.28억</td>
-          <td class="num amount-burden">+4.53억</td>
-        </tr>
-        <tr>
-          <td>42평</td>
-          <td class="num">17.0억</td>
-          <td class="num">18.71억</td>
-          <td class="num amount-refund">-4.57억</td>
-          <td class="num amount-refund">-1.99억</td>
-          <td class="num amount-refund">-0.49억</td>
-          <td class="num amount-burden">+1.84억</td>
-          <td class="num amount-burden">+4.09억</td>
-        </tr>
-        <tr>
-          <td>49평</td>
-          <td class="num">19.0억</td>
-          <td class="num">20.91억</td>
-          <td class="num amount-refund">-6.77억</td>
-          <td class="num amount-refund">-4.19억</td>
-          <td class="num amount-refund">-2.69억</td>
-          <td class="num amount-refund">-0.36억</td>
-          <td class="num amount-burden">+1.89억</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="contribution-mobile-list" aria-label="모바일 평형별 추정분담금">
-    <article class="contribution-mobile-card">
-      <div class="contribution-mobile-card__head">
-        <h3>종전 24평</h3>
-        <p>기존 집 추정가 13.0억 · 인정금액 14.31억</p>
+  <section class="contribution-tabs" aria-labelledby="scenario-tabs-title">
+    <h2 id="scenario-tabs-title">세 가지 산정 방향</h2>
+    <p>각 탭에서 공사비, 일반분양 평단가, 비례율, 평형별 금액을 같은 형식으로 확인할 수 있습니다.</p>
+    <div class="scenario-tabs">
+      <input class="scenario-tab-input" type="radio" name="scenario-tabs" id="scenario-base" checked="" />
+      <input class="scenario-tab-input" type="radio" name="scenario-tabs" id="scenario-one" />
+      <input class="scenario-tab-input" type="radio" name="scenario-tabs" id="scenario-two" />
+      <div class="scenario-tab-list" role="tablist" aria-label="추정분담금 산정 방향">
+        <label for="scenario-base" role="tab">기본 산정안<br /><span>880만원 / 6,000만원</span></label>
+        <label for="scenario-one" role="tab">가상 예시 1<br /><span>900만원 / 6,200만원</span></label>
+        <label for="scenario-two" role="tab">가상 예시 2<br /><span>840만원 / 6,800만원</span></label>
       </div>
-      <dl class="contribution-mobile-values">
-        <div><dt>신축 24평</dt><dd class="amount-refund">환급 0.17억</dd></div>
-        <div><dt>신축 30평</dt><dd class="amount-burden">부담 2.41억</dd></div>
-        <div><dt>신축 35평</dt><dd class="amount-burden">부담 3.91억</dd></div>
-        <div><dt>신축 41평</dt><dd class="amount-burden">부담 6.24억</dd></div>
-        <div><dt>신축 48평</dt><dd class="amount-burden">부담 8.49억</dd></div>
-      </dl>
-    </article>
-    <article class="contribution-mobile-card">
-      <div class="contribution-mobile-card__head">
-        <h3>종전 27평</h3>
-        <p>기존 집 추정가 14.5억 · 인정금액 15.96억</p>
-      </div>
-      <dl class="contribution-mobile-values">
-        <div><dt>신축 24평</dt><dd class="amount-refund">환급 1.82억</dd></div>
-        <div><dt>신축 30평</dt><dd class="amount-burden">부담 0.76억</dd></div>
-        <div><dt>신축 35평</dt><dd class="amount-burden">부담 2.26억</dd></div>
-        <div><dt>신축 41평</dt><dd class="amount-burden">부담 4.59억</dd></div>
-        <div><dt>신축 48평</dt><dd class="amount-burden">부담 6.84억</dd></div>
-      </dl>
-    </article>
-    <article class="contribution-mobile-card">
-      <div class="contribution-mobile-card__head">
-        <h3>종전 32평</h3>
-        <p>기존 집 추정가 16.0억 · 인정금액 17.61억</p>
-      </div>
-      <dl class="contribution-mobile-values">
-        <div><dt>신축 24평</dt><dd class="amount-refund">환급 3.47억</dd></div>
-        <div><dt>신축 30평</dt><dd class="amount-refund">환급 0.89억</dd></div>
-        <div><dt>신축 35평</dt><dd class="amount-burden">부담 약 6,100만 원</dd></div>
-        <div><dt>신축 41평</dt><dd class="amount-burden">부담 2.94억</dd></div>
-        <div><dt>신축 48평</dt><dd class="amount-burden">부담 5.19억</dd></div>
-      </dl>
-    </article>
-    <article class="contribution-mobile-card">
-      <div class="contribution-mobile-card__head">
-        <h3>종전 38평</h3>
-        <p>기존 집 추정가 16.6억 · 인정금액 18.27억</p>
-      </div>
-      <dl class="contribution-mobile-values">
-        <div><dt>신축 24평</dt><dd class="amount-refund">환급 4.13억</dd></div>
-        <div><dt>신축 30평</dt><dd class="amount-refund">환급 1.55억</dd></div>
-        <div><dt>신축 35평</dt><dd class="amount-refund">환급 0.05억</dd></div>
-        <div><dt>신축 41평</dt><dd class="amount-burden">부담 2.28억</dd></div>
-        <div><dt>신축 48평</dt><dd class="amount-burden">부담 4.53억</dd></div>
-      </dl>
-    </article>
-    <article class="contribution-mobile-card">
-      <div class="contribution-mobile-card__head">
-        <h3>종전 42평</h3>
-        <p>기존 집 추정가 17.0억 · 인정금액 18.71억</p>
-      </div>
-      <dl class="contribution-mobile-values">
-        <div><dt>신축 24평</dt><dd class="amount-refund">환급 4.57억</dd></div>
-        <div><dt>신축 30평</dt><dd class="amount-refund">환급 1.99억</dd></div>
-        <div><dt>신축 35평</dt><dd class="amount-refund">환급 0.49억</dd></div>
-        <div><dt>신축 41평</dt><dd class="amount-burden">부담 1.84억</dd></div>
-        <div><dt>신축 48평</dt><dd class="amount-burden">부담 4.09억</dd></div>
-      </dl>
-    </article>
-    <article class="contribution-mobile-card">
-      <div class="contribution-mobile-card__head">
-        <h3>종전 49평</h3>
-        <p>기존 집 추정가 19.0억 · 인정금액 20.91억</p>
-      </div>
-      <dl class="contribution-mobile-values">
-        <div><dt>신축 24평</dt><dd class="amount-refund">환급 6.77억</dd></div>
-        <div><dt>신축 30평</dt><dd class="amount-refund">환급 4.19억</dd></div>
-        <div><dt>신축 35평</dt><dd class="amount-refund">환급 2.69억</dd></div>
-        <div><dt>신축 41평</dt><dd class="amount-refund">환급 0.36억</dd></div>
-        <div><dt>신축 48평</dt><dd class="amount-burden">부담 1.89억</dd></div>
-      </dl>
-    </article>
-  </div>
+      <div class="scenario-panels">
+        <article class="scenario-panel scenario-panel--base">
+          <p class="scenario-panel__title">기본 산정안</p>
+          <p class="scenario-panel__summary">현재 안내의 기준값입니다. 공사비 평당 880만원, 일반분양 평단가 평균 6,000만원을 적용하면 비례율은 110.05%입니다.</p>
+          <section class="doc-grid scenario-metrics" aria-label="기본 산정안 핵심 조건">
+            <div class="doc-card"><strong>880만원</strong><span>공사비 평당 기준</span></div>
+            <div class="doc-card"><strong>6,000만원</strong><span>일반분양 평단가 평균</span></div>
+            <div class="doc-card"><strong>110.05%</strong><span>적용 비례율</span></div>
+          </section>
+          <p class="scenario-panel__note">32평에서 35평을 선택하는 경우 약 6,100만 원 부담으로 보는 기준안입니다.</p>
+          <div class="doc-table-wrap contribution-table-wrap">
+            <table class="contribution-table contribution-table--detail">
+              <thead>
+                <tr>
+                  <th>종전 평형</th>
+                  <th class="num">기존 집 추정가</th>
+                  <th class="num">기존 집 인정금액</th>
+                  <th class="num">신축 24평</th>
+                  <th class="num">신축 30평</th>
+                  <th class="num">신축 35평</th>
+                  <th class="num">신축 41평</th>
+                  <th class="num">신축 48평</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>24평</td><td class="num">13.0억</td><td class="num">14.31억</td><td class="num amount-refund">-0.17억</td><td class="num amount-burden">+2.41억</td><td class="num amount-burden">+3.91억</td><td class="num amount-burden">+6.24억</td><td class="num amount-burden">+8.49억</td></tr>
+                <tr><td>27평</td><td class="num">14.5억</td><td class="num">15.96억</td><td class="num amount-refund">-1.82억</td><td class="num amount-burden">+0.76억</td><td class="num amount-burden">+2.26억</td><td class="num amount-burden">+4.59억</td><td class="num amount-burden">+6.84억</td></tr>
+                <tr><td>32평</td><td class="num">16.0억</td><td class="num">17.61억</td><td class="num amount-refund">-3.47억</td><td class="num amount-refund">-0.89억</td><td class="num amount-burden">+0.61억</td><td class="num amount-burden">+2.94억</td><td class="num amount-burden">+5.19억</td></tr>
+                <tr><td>38평</td><td class="num">16.6억</td><td class="num">18.27억</td><td class="num amount-refund">-4.13억</td><td class="num amount-refund">-1.55억</td><td class="num amount-refund">-0.05억</td><td class="num amount-burden">+2.28억</td><td class="num amount-burden">+4.53억</td></tr>
+                <tr><td>42평</td><td class="num">17.0억</td><td class="num">18.71억</td><td class="num amount-refund">-4.57억</td><td class="num amount-refund">-1.99억</td><td class="num amount-refund">-0.49억</td><td class="num amount-burden">+1.84억</td><td class="num amount-burden">+4.09억</td></tr>
+                <tr><td>49평</td><td class="num">19.0억</td><td class="num">20.91억</td><td class="num amount-refund">-6.77억</td><td class="num amount-refund">-4.19억</td><td class="num amount-refund">-2.69억</td><td class="num amount-refund">-0.36억</td><td class="num amount-burden">+1.89억</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="contribution-mobile-list" aria-label="모바일 기본 산정안 평형별 추정분담금">
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 24평</h3><p>기존 집 추정가 13.0억 · 인정금액 14.31억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 0.17억</dd></div><div><dt>신축 30평</dt><dd class="amount-burden">부담 2.41억</dd></div><div><dt>신축 35평</dt><dd class="amount-burden">부담 3.91억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 6.24억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 8.49억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 27평</h3><p>기존 집 추정가 14.5억 · 인정금액 15.96억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 1.82억</dd></div><div><dt>신축 30평</dt><dd class="amount-burden">부담 0.76억</dd></div><div><dt>신축 35평</dt><dd class="amount-burden">부담 2.26억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 4.59억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 6.84억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 32평</h3><p>기존 집 추정가 16.0억 · 인정금액 17.61억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 3.47억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 0.89억</dd></div><div><dt>신축 35평</dt><dd class="amount-burden">부담 약 6,100만 원</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 2.94억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 5.19억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 38평</h3><p>기존 집 추정가 16.6억 · 인정금액 18.27억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 4.13억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 1.55억</dd></div><div><dt>신축 35평</dt><dd class="amount-refund">환급 0.05억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 2.28억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 4.53억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 42평</h3><p>기존 집 추정가 17.0억 · 인정금액 18.71억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 4.57억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 1.99억</dd></div><div><dt>신축 35평</dt><dd class="amount-refund">환급 0.49억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 1.84억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 4.09억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 49평</h3><p>기존 집 추정가 19.0억 · 인정금액 20.91억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 6.77억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 4.19억</dd></div><div><dt>신축 35평</dt><dd class="amount-refund">환급 2.69억</dd></div><div><dt>신축 41평</dt><dd class="amount-refund">환급 0.36억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 1.89억</dd></div></dl></article>
+          </div>
+        </article>
 
-  <h2 id="sensitivity">분담금은 두 가지 숫자에 따라 달라집니다</h2>
-  <p>가상 예시자료는 <strong>공사비</strong>와 <strong>일반분양가</strong> 두 조건을 바꿔 보면서 분담금이 어느 방향으로 움직이는지 보여주는 자료입니다.</p>
-  <section class="doc-grid" aria-label="분담금 변동 요인">
-    <div class="doc-card">
-      <strong>공사비가 오르면</strong>
-      <span>사업비가 커져 분담금이 늘어날 수 있습니다.</span>
+        <article class="scenario-panel scenario-panel--one">
+          <p class="scenario-panel__title">가상 예시 1</p>
+          <p class="scenario-panel__summary">공사비는 900만원으로 오르지만 일반분양 평단가도 6,200만원으로 오르는 경우입니다. 비례율은 110.65%로, 기본 산정안보다 전체적으로 분담금이 약 1천만원 내외 줄어드는 흐름입니다.</p>
+          <section class="doc-grid scenario-metrics" aria-label="가상 예시 1 핵심 조건">
+            <div class="doc-card"><strong>900만원</strong><span>공사비 평당 기준</span></div>
+            <div class="doc-card"><strong>6,200만원</strong><span>일반분양 평단가</span></div>
+            <div class="doc-card"><strong>110.65%</strong><span>적용 비례율</span></div>
+          </section>
+          <p class="scenario-panel__note">32평에서 35평 선택 시 부담은 0.52억으로, 기본 산정안 0.61억보다 낮아지는 예시입니다.</p>
+          <div class="doc-table-wrap contribution-table-wrap">
+            <table class="contribution-table contribution-table--detail">
+              <thead>
+                <tr>
+                  <th>종전 평형</th>
+                  <th class="num">기존 집 추정가</th>
+                  <th class="num">기존 집 인정금액</th>
+                  <th class="num">신축 24평</th>
+                  <th class="num">신축 30평</th>
+                  <th class="num">신축 35평</th>
+                  <th class="num">신축 41평</th>
+                  <th class="num">신축 48평</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>24평</td><td class="num">13.0억</td><td class="num">14.38억</td><td class="num amount-refund">-0.24억</td><td class="num amount-burden">+2.34억</td><td class="num amount-burden">+3.84억</td><td class="num amount-burden">+6.17억</td><td class="num amount-burden">+8.42억</td></tr>
+                <tr><td>27평</td><td class="num">14.5억</td><td class="num">16.04억</td><td class="num amount-refund">-1.90억</td><td class="num amount-burden">+0.68억</td><td class="num amount-burden">+2.18억</td><td class="num amount-burden">+4.51억</td><td class="num amount-burden">+6.76억</td></tr>
+                <tr><td>32평</td><td class="num">16.0억</td><td class="num">17.70억</td><td class="num amount-refund">-3.56억</td><td class="num amount-refund">-0.98억</td><td class="num amount-burden">+0.52억</td><td class="num amount-burden">+2.85억</td><td class="num amount-burden">+5.10억</td></tr>
+                <tr><td>38평</td><td class="num">16.6억</td><td class="num">18.37억</td><td class="num amount-refund">-4.23억</td><td class="num amount-refund">-1.65억</td><td class="num amount-refund">-0.15억</td><td class="num amount-burden">+2.18억</td><td class="num amount-burden">+4.43억</td></tr>
+                <tr><td>42평</td><td class="num">17.0억</td><td class="num">18.81억</td><td class="num amount-refund">-4.67억</td><td class="num amount-refund">-2.09억</td><td class="num amount-refund">-0.59억</td><td class="num amount-burden">+1.74억</td><td class="num amount-burden">+3.99억</td></tr>
+                <tr><td>49평</td><td class="num">19.0억</td><td class="num">21.02억</td><td class="num amount-refund">-6.88억</td><td class="num amount-refund">-4.30억</td><td class="num amount-refund">-2.80억</td><td class="num amount-refund">-0.47억</td><td class="num amount-burden">+1.78억</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="contribution-mobile-list" aria-label="모바일 가상 예시 1 평형별 추정분담금">
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 24평</h3><p>기존 집 추정가 13.0억 · 인정금액 14.38억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 0.24억</dd></div><div><dt>신축 30평</dt><dd class="amount-burden">부담 2.34억</dd></div><div><dt>신축 35평</dt><dd class="amount-burden">부담 3.84억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 6.17억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 8.42억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 27평</h3><p>기존 집 추정가 14.5억 · 인정금액 16.04억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 1.90억</dd></div><div><dt>신축 30평</dt><dd class="amount-burden">부담 0.68억</dd></div><div><dt>신축 35평</dt><dd class="amount-burden">부담 2.18억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 4.51억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 6.76억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 32평</h3><p>기존 집 추정가 16.0억 · 인정금액 17.70억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 3.56억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 0.98억</dd></div><div><dt>신축 35평</dt><dd class="amount-burden">부담 0.52억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 2.85억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 5.10억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 38평</h3><p>기존 집 추정가 16.6억 · 인정금액 18.37억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 4.23억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 1.65억</dd></div><div><dt>신축 35평</dt><dd class="amount-refund">환급 0.15억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 2.18억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 4.43억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 42평</h3><p>기존 집 추정가 17.0억 · 인정금액 18.81억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 4.67억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 2.09억</dd></div><div><dt>신축 35평</dt><dd class="amount-refund">환급 0.59억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 1.74억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 3.99억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 49평</h3><p>기존 집 추정가 19.0억 · 인정금액 21.02억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 6.88억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 4.30억</dd></div><div><dt>신축 35평</dt><dd class="amount-refund">환급 2.80억</dd></div><div><dt>신축 41평</dt><dd class="amount-refund">환급 0.47억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 1.78억</dd></div></dl></article>
+          </div>
+        </article>
+
+        <article class="scenario-panel scenario-panel--two">
+          <p class="scenario-panel__title">가상 예시 2</p>
+          <p class="scenario-panel__summary">공사비를 840만원, 일반분양 평단가를 6,800만원으로 적용한 예시입니다. 비례율은 118.11%로 높아지고, 전체적으로 분담금이 크게 낮아지는 방향을 보여줍니다.</p>
+          <section class="doc-grid scenario-metrics" aria-label="가상 예시 2 핵심 조건">
+            <div class="doc-card"><strong>840만원</strong><span>공사비 평당 기준</span></div>
+            <div class="doc-card"><strong>6,800만원</strong><span>일반분양 평단가</span></div>
+            <div class="doc-card"><strong>118.11%</strong><span>적용 비례율</span></div>
+          </section>
+          <p class="scenario-panel__note">32평에서 35평 선택 시 1.03억 환급으로 바뀌는 예시입니다. 확정 금액이나 목표 금액이 아니라 조건 변화에 따른 이해용 비교값입니다.</p>
+          <div class="doc-table-wrap contribution-table-wrap">
+            <table class="contribution-table contribution-table--detail">
+              <thead>
+                <tr>
+                  <th>종전 평형</th>
+                  <th class="num">기존 집 추정가</th>
+                  <th class="num">기존 집 인정금액</th>
+                  <th class="num">신축 24평</th>
+                  <th class="num">신축 30평</th>
+                  <th class="num">신축 35평</th>
+                  <th class="num">신축 41평</th>
+                  <th class="num">신축 48평</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>24평</td><td class="num">13.0억</td><td class="num">15.64억</td><td class="num amount-refund">-1.50억</td><td class="num amount-burden">+1.08억</td><td class="num amount-burden">+2.58억</td><td class="num amount-burden">+4.91억</td><td class="num amount-burden">+7.16억</td></tr>
+                <tr><td>27평</td><td class="num">14.5억</td><td class="num">17.45억</td><td class="num amount-refund">-3.31억</td><td class="num amount-refund">-0.73억</td><td class="num amount-burden">+0.77억</td><td class="num amount-burden">+3.10억</td><td class="num amount-burden">+5.35억</td></tr>
+                <tr><td>32평</td><td class="num">16.0억</td><td class="num">19.25억</td><td class="num amount-refund">-5.11억</td><td class="num amount-refund">-2.53억</td><td class="num amount-refund">-1.03억</td><td class="num amount-burden">+1.30억</td><td class="num amount-burden">+3.55억</td></tr>
+                <tr><td>38평</td><td class="num">16.6억</td><td class="num">19.97억</td><td class="num amount-refund">-5.83억</td><td class="num amount-refund">-3.25억</td><td class="num amount-refund">-1.75억</td><td class="num amount-burden">+0.58억</td><td class="num amount-burden">+2.83억</td></tr>
+                <tr><td>42평</td><td class="num">17.0억</td><td class="num">20.45억</td><td class="num amount-refund">-6.31억</td><td class="num amount-refund">-3.73억</td><td class="num amount-refund">-2.23억</td><td class="num amount-burden">+0.10억</td><td class="num amount-burden">+2.35억</td></tr>
+                <tr><td>49평</td><td class="num">19.0억</td><td class="num">22.86억</td><td class="num amount-refund">-8.72억</td><td class="num amount-refund">-6.14억</td><td class="num amount-refund">-4.64억</td><td class="num amount-refund">-2.31억</td><td class="num amount-refund">-0.06억</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="contribution-mobile-list" aria-label="모바일 가상 예시 2 평형별 추정분담금">
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 24평</h3><p>기존 집 추정가 13.0억 · 인정금액 15.64억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 1.50억</dd></div><div><dt>신축 30평</dt><dd class="amount-burden">부담 1.08억</dd></div><div><dt>신축 35평</dt><dd class="amount-burden">부담 2.58억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 4.91억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 7.16억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 27평</h3><p>기존 집 추정가 14.5억 · 인정금액 17.45억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 3.31억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 0.73억</dd></div><div><dt>신축 35평</dt><dd class="amount-burden">부담 0.77억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 3.10억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 5.35억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 32평</h3><p>기존 집 추정가 16.0억 · 인정금액 19.25억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 5.11억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 2.53억</dd></div><div><dt>신축 35평</dt><dd class="amount-refund">환급 1.03억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 1.30억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 3.55억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 38평</h3><p>기존 집 추정가 16.6억 · 인정금액 19.97억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 5.83억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 3.25억</dd></div><div><dt>신축 35평</dt><dd class="amount-refund">환급 1.75억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 0.58억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 2.83억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 42평</h3><p>기존 집 추정가 17.0억 · 인정금액 20.45억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 6.31억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 3.73억</dd></div><div><dt>신축 35평</dt><dd class="amount-refund">환급 2.23억</dd></div><div><dt>신축 41평</dt><dd class="amount-burden">부담 0.10억</dd></div><div><dt>신축 48평</dt><dd class="amount-burden">부담 2.35억</dd></div></dl></article>
+            <article class="contribution-mobile-card"><div class="contribution-mobile-card__head"><h3>종전 49평</h3><p>기존 집 추정가 19.0억 · 인정금액 22.86억</p></div><dl class="contribution-mobile-values"><div><dt>신축 24평</dt><dd class="amount-refund">환급 8.72억</dd></div><div><dt>신축 30평</dt><dd class="amount-refund">환급 6.14억</dd></div><div><dt>신축 35평</dt><dd class="amount-refund">환급 4.64억</dd></div><div><dt>신축 41평</dt><dd class="amount-refund">환급 2.31억</dd></div><div><dt>신축 48평</dt><dd class="amount-refund">환급 0.06억</dd></div></dl></article>
+          </div>
+        </article>
+      </div>
     </div>
-    <div class="doc-card">
-      <strong>일반분양가가 오르면</strong>
-      <span>분양수입이 커져 분담금이 줄어들 수 있습니다.</span>
-    </div>
-  </section>
-  <ul class="doc-checklist">
-    <li><strong>기본 산정 기준</strong>은 현재 단계의 공사비 평당 880만원, 일반분양가 평균 평당 6,000만원입니다.</li>
-    <li><strong>32평에서 35평 선택 예시</strong>의 추정분담금은 약 6,100만 원입니다.</li>
-    <li><strong>가상 예시자료</strong>는 이 두 숫자가 달라질 때 분담금이 어떻게 변하는지 이해하기 위한 설명용 자료입니다.</li>
-  </ul>
-
-  <h2 id="three-types">사업조건 변화에 따른 가상 예시자료</h2>
-  <p>아래 표는 공사비와 일반분양가를 바꿨을 때 추정분담금이 어떻게 달라지는지 비교한 것입니다. 두 예시자료는 기본 산정 기준이 아니라 조건 변화에 따른 이해용 비교값이며, 금액은 억원 단위입니다. "-"는 환급, "+"는 부담입니다.</p>
-  <div class="doc-table-wrap contribution-table-wrap">
-    <table class="contribution-table contribution-table--scenario">
-      <thead>
-        <tr>
-          <th>주요 케이스</th>
-          <th class="num">기본 산정 기준<br />880만원 / 6,000만원</th>
-          <th class="num">가상 예시 1<br />900만원 / 6,200만원</th>
-          <th class="num">가상 예시 2<br />840만원 / 6,800만원</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>적용 비례율</td>
-          <td class="num">110.05%</td>
-          <td class="num">110.65%</td>
-          <td class="num">118.11%</td>
-        </tr>
-        <tr>
-          <td>24평 → 24평</td>
-          <td class="num amount-refund">-0.17억</td>
-          <td class="num amount-refund">-0.24억</td>
-          <td class="num amount-refund">-1.50억</td>
-        </tr>
-        <tr>
-          <td>32평 → 35평</td>
-          <td class="num amount-burden">+0.61억</td>
-          <td class="num amount-burden">+0.52억</td>
-          <td class="num amount-refund">-1.03억</td>
-        </tr>
-        <tr>
-          <td>42평 → 41평</td>
-          <td class="num amount-burden">+1.84억</td>
-          <td class="num amount-burden">+1.74억</td>
-          <td class="num amount-burden">+0.10억</td>
-        </tr>
-        <tr>
-          <td>49평 → 48평</td>
-          <td class="num amount-burden">+1.89억</td>
-          <td class="num amount-burden">+1.78억</td>
-          <td class="num amount-refund">-0.06억</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="contribution-mobile-list contribution-mobile-list--scenario" aria-label="모바일 사업조건 변화에 따른 가상 예시자료">
-    <article class="contribution-mobile-card">
-      <div class="contribution-mobile-card__head">
-        <h3>적용 비례율</h3>
-      </div>
-      <dl class="contribution-mobile-values">
-        <div><dt>기본 산정 기준</dt><dd>110.05%</dd></div>
-        <div><dt>가상 예시 1</dt><dd>110.65%</dd></div>
-        <div><dt>가상 예시 2</dt><dd>118.11%</dd></div>
-      </dl>
-    </article>
-    <article class="contribution-mobile-card">
-      <div class="contribution-mobile-card__head">
-        <h3>24평 → 24평</h3>
-      </div>
-      <dl class="contribution-mobile-values">
-        <div><dt>기본 산정 기준</dt><dd class="amount-refund">환급 0.17억</dd></div>
-        <div><dt>가상 예시 1</dt><dd class="amount-refund">환급 0.24억</dd></div>
-        <div><dt>가상 예시 2</dt><dd class="amount-refund">환급 1.50억</dd></div>
-      </dl>
-    </article>
-    <article class="contribution-mobile-card">
-      <div class="contribution-mobile-card__head">
-        <h3>32평 → 35평</h3>
-      </div>
-      <dl class="contribution-mobile-values">
-        <div><dt>기본 산정 기준</dt><dd class="amount-burden">부담 약 6,100만 원</dd></div>
-        <div><dt>가상 예시 1</dt><dd class="amount-burden">부담 0.52억</dd></div>
-        <div><dt>가상 예시 2</dt><dd class="amount-refund">환급 1.03억</dd></div>
-      </dl>
-    </article>
-    <article class="contribution-mobile-card">
-      <div class="contribution-mobile-card__head">
-        <h3>42평 → 41평</h3>
-      </div>
-      <dl class="contribution-mobile-values">
-        <div><dt>기본 산정 기준</dt><dd class="amount-burden">부담 1.84억</dd></div>
-        <div><dt>가상 예시 1</dt><dd class="amount-burden">부담 1.74억</dd></div>
-        <div><dt>가상 예시 2</dt><dd class="amount-burden">부담 0.10억</dd></div>
-      </dl>
-    </article>
-    <article class="contribution-mobile-card">
-      <div class="contribution-mobile-card__head">
-        <h3>49평 → 48평</h3>
-      </div>
-      <dl class="contribution-mobile-values">
-        <div><dt>기본 산정 기준</dt><dd class="amount-burden">부담 1.89억</dd></div>
-        <div><dt>가상 예시 1</dt><dd class="amount-burden">부담 1.78억</dd></div>
-        <div><dt>가상 예시 2</dt><dd class="amount-refund">환급 0.06억</dd></div>
-      </dl>
-    </article>
-  </div>
-
-  <section class="doc-callout warning">
-    <h2>가상 예시자료 안내</h2>
-    <p>가상 예시 1·2는 사업조건 변화에 따른 분담금 민감도를 보여주는 설명용 자료입니다. 기본 산정 기준은 공사비 평당 880만원, 일반분양가 평균 평당 6,000만원이며, 이 기준에서 32평에서 35평을 선택하는 경우의 추정분담금은 약 6,100만 원입니다. 가상 예시자료의 금액은 확정 분담금이나 향후 목표 금액이 아닙니다.</p>
   </section>
 
   <h2 id="appraisal-limits">추정분담금 표의 한계</h2>
