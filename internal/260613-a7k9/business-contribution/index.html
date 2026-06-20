@@ -478,6 +478,132 @@
     background: #fff4f2;
   }
 
+  .internal-doc .contribution-logic {
+    margin: 1rem 0 1.35rem;
+    padding: 1rem;
+    border: 2px solid #f0b8af;
+    border-radius: 8px;
+    background: #fff8f6;
+  }
+
+  .internal-doc .contribution-logic__intro h2 {
+    margin: 0;
+    color: var(--doc-red);
+    font-size: 1.35rem;
+    line-height: 1.35;
+  }
+
+  .internal-doc .contribution-logic__intro p:last-child {
+    margin: 0.45rem 0 0;
+    color: var(--doc-ink);
+    line-height: 1.7;
+  }
+
+  .internal-doc .contribution-logic__formula {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0.9rem 0;
+  }
+
+  .internal-doc .contribution-logic__formula span {
+    display: grid;
+    min-height: 4.2rem;
+    place-items: center;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #f0b8af;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--doc-blue);
+    font-size: 0.92rem;
+    font-weight: 900;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .internal-doc .contribution-logic__formula strong {
+    color: var(--doc-red);
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  .internal-doc .contribution-logic__cases {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .internal-doc .contribution-logic-card {
+    padding: 0.9rem;
+    border: 1px solid var(--doc-line);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .internal-doc .contribution-logic-card h3 {
+    margin: 0 0 0.65rem;
+    color: var(--doc-blue);
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+
+  .internal-doc .contribution-logic-card dl {
+    margin: 0;
+  }
+
+  .internal-doc .contribution-logic-card dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.7rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #edf1f5;
+  }
+
+  .internal-doc .contribution-logic-card dt,
+  .internal-doc .contribution-logic-card dd {
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .internal-doc .contribution-logic-card dt {
+    color: var(--doc-muted);
+    font-size: 0.86rem;
+    font-weight: 800;
+  }
+
+  .internal-doc .contribution-logic-card dd {
+    color: var(--doc-ink);
+    font-size: 0.9rem;
+    font-weight: 900;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .internal-doc .contribution-logic-card > strong {
+    display: block;
+    margin-top: 0.7rem;
+    font-size: 1.22rem;
+    line-height: 1.3;
+    font-weight: 900;
+  }
+
+  .internal-doc .contribution-logic-card--burden > strong {
+    color: var(--doc-red);
+  }
+
+  .internal-doc .contribution-logic-card--refund > strong {
+    color: var(--doc-teal);
+  }
+
+  .internal-doc .contribution-logic__note {
+    margin: 0.9rem 0 0;
+    color: var(--doc-ink);
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1.65;
+  }
+
   .internal-doc .contribution-table tbody tr:hover td {
     background: #f8fbff;
   }
@@ -696,6 +822,27 @@
 
     .internal-doc .contribution-case {
       min-height: auto;
+    }
+
+    .internal-doc .contribution-logic {
+      padding: 0.85rem;
+    }
+
+    .internal-doc .contribution-logic__formula {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+    }
+
+    .internal-doc .contribution-logic__formula span {
+      min-height: auto;
+    }
+
+    .internal-doc .contribution-logic__formula strong {
+      text-align: center;
+    }
+
+    .internal-doc .contribution-logic__cases {
+      grid-template-columns: 1fr;
     }
 
     .internal-doc .site-plan-list {
@@ -1086,7 +1233,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc" aria-label="Table of contents">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
-              <ul class="toc__menu"><li><a href="#contribution-quick">추정분담금 먼저 보기</a></li><li><a href="#assumptions">기본 산정안 산정 조건</a></li><li><a href="#unit-plan">세대 구성</a></li><li><a href="#contribution-table">평형별 추정분담금</a></li><li><a href="#sensitivity">분담금은 두 가지 숫자에 따라 달라집니다</a></li><li><a href="#three-types">사업조건 변화에 따른 가상 예시자료</a></li><li><a href="#appraisal-limits">추정분담금 표의 한계</a></li></ul>
+              <ul class="toc__menu"><li><a href="#contribution-quick">추정분담금 먼저 보기</a></li><li><a href="#assumptions">기본 산정안 산정 조건</a></li><li><a href="#unit-plan">세대 구성</a></li><li><a href="#contribution-table">평형별 추정분담금</a></li><li><a href="#contribution-logic-title">평수가 줄어도 분담금이 나올 수 있습니다</a></li><li><a href="#sensitivity">분담금은 두 가지 숫자에 따라 달라집니다</a></li><li><a href="#three-types">사업조건 변화에 따른 가상 예시자료</a></li><li><a href="#appraisal-limits">추정분담금 표의 한계</a></li></ul>
             </nav>
           </aside>
         
@@ -1257,6 +1404,49 @@
 
   <h2 id="contribution-table">평형별 추정분담금</h2>
   <p>아래 표는 공사비 평당 880만원, 일반분양가 평균 평당 6,000만원, 비례율 110.05%를 적용한 기본 산정 기준입니다. 32평에서 35평 선택 기준의 약 6,100만 원은 여러 평형 이동 중 하나의 예시이며, 나머지 평형별 금액도 선택 평형에 따라 달라지는 참고값으로 봅니다. "+"는 부담, "-"는 환급을 뜻합니다.</p>
+
+  <section class="contribution-logic" aria-labelledby="contribution-logic-title">
+    <div class="contribution-logic__intro">
+      <p class="doc-kicker">표를 볼 때 가장 헷갈리는 부분</p>
+      <h2 id="contribution-logic-title">평수가 줄어도 분담금이 나올 수 있습니다</h2>
+      <p>추정분담금은 기존 평형과 신축 평형의 숫자 차이로 정해지지 않습니다. <strong>선택한 신축 평형의 조합원분양가</strong>가 <strong>내 기존 주택의 권리가액</strong>보다 높으면, 평형이 줄어드는 경우에도 차액을 부담하게 됩니다.</p>
+    </div>
+    <div class="contribution-logic__formula" aria-label="추정분담금 계산식">
+      <span>신축 평형<br />조합원분양가</span>
+      <strong>-</strong>
+      <span>내 기존 주택<br />권리가액</span>
+      <strong>=</strong>
+      <span>추정분담금</span>
+    </div>
+    <div class="contribution-logic__cases">
+      <article class="contribution-logic-card contribution-logic-card--burden">
+        <h3>42평 → 41평</h3>
+        <dl>
+          <div><dt>신축 41평 조합원분양가</dt><dd>20.55억</dd></div>
+          <div><dt>기존 42평 권리가액</dt><dd>18.71억</dd></div>
+        </dl>
+        <strong>차액 1.84억 부담</strong>
+      </article>
+      <article class="contribution-logic-card contribution-logic-card--burden">
+        <h3>49평 → 48평</h3>
+        <dl>
+          <div><dt>신축 48평 조합원분양가</dt><dd>22.80억</dd></div>
+          <div><dt>기존 49평 권리가액</dt><dd>20.91억</dd></div>
+        </dl>
+        <strong>차액 1.89억 부담</strong>
+      </article>
+      <article class="contribution-logic-card contribution-logic-card--refund">
+        <h3>49평 → 41평</h3>
+        <dl>
+          <div><dt>신축 41평 조합원분양가</dt><dd>20.55억</dd></div>
+          <div><dt>기존 49평 권리가액</dt><dd>20.91억</dd></div>
+        </dl>
+        <strong>차액 0.36억 환급</strong>
+      </article>
+    </div>
+    <p class="contribution-logic__note">즉, 신축 41평·48평은 신축 대형 평형에 해당해 조합원분양가가 높게 산정됩니다. 그래서 기존 권리가액보다 신축 평형 가격이 높으면 부담, 낮으면 환급으로 표시됩니다.</p>
+  </section>
+
   <div class="doc-table-wrap contribution-table-wrap">
     <table class="contribution-table contribution-table--detail">
       <thead>
