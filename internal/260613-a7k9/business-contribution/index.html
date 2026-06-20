@@ -422,11 +422,12 @@
     background: #fff8f6;
   }
 
-  .internal-doc .contribution-logic__intro h2 {
+  .internal-doc .contribution-logic__heading {
     margin: 0;
     color: var(--doc-red);
     font-size: 1.35rem;
     line-height: 1.35;
+    font-weight: 900;
   }
 
   .internal-doc .contribution-logic__intro p:last-child {
@@ -498,7 +499,7 @@
     background: #fff;
   }
 
-  .internal-doc .contribution-logic-card h3 {
+  .internal-doc .contribution-logic-card h4 {
     margin: 0 0 0.65rem;
     color: var(--doc-blue);
     font-size: 1.05rem;
@@ -1308,7 +1309,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc" aria-label="Table of contents">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> 목차</h4></header>
-              <ul class="toc__menu"><li><a href="#contribution-drivers-title">분담금을 움직이는 두 가지 숫자</a></li><li><a href="#unit-plan">세대 구성</a></li><li><a href="#contribution-table">시나리오별 상세 보기</a></li><li><a href="#scenario-tabs-title">세 가지 산정 방향</a><ul><li><a href="#scenario-base-assumptions">기본 산정안 산정 조건</a></li></ul></li><li><a href="#contribution-logic-title">평수가 줄어도 분담금이 나올 수 있습니다</a></li><li><a href="#appraisal-limits">추정분담금 표의 한계</a></li></ul>
+              <ul class="toc__menu"><li><a href="#contribution-drivers-title">분담금을 움직이는 두 가지 숫자</a></li><li><a href="#unit-plan">세대 구성</a></li><li><a href="#contribution-table">시나리오별 상세 보기</a></li><li><a href="#scenario-tabs-title">세 가지 산정 방향</a><ul><li><a href="#scenario-base-assumptions">기본 산정안 산정 조건</a></li></ul></li><li><a href="#appraisal-limits">추정분담금 표의 한계</a></li></ul>
             </nav>
           </aside>
         
@@ -1488,6 +1489,51 @@
             </div>
           </section>
           <p class="scenario-panel__note">32평에서 35평을 선택하는 경우 약 6,100만 원 부담으로 보는 기준안입니다.</p>
+          <section class="contribution-logic" aria-label="기본 산정안 평형 감소 설명">
+            <div class="contribution-logic__intro">
+              <p class="contribution-logic__heading">평수가 줄어도 분담금이 나올 수 있습니다</p>
+              <p>추정분담금은 기존 평형과 신축 평형의 숫자 차이로 정해지지 않습니다. <strong>새로 받을 집의 기준가격</strong>이 <strong>내 기존 집 인정금액</strong>보다 높으면, 평형이 줄어드는 경우에도 차액을 부담하게 됩니다.</p>
+            </div>
+            <div class="contribution-logic__formula" aria-label="추정분담금 계산식">
+              <span>새로 받을 집<br />기준가격</span>
+              <strong>-</strong>
+              <span>내 기존 집<br />인정금액</span>
+              <strong>=</strong>
+              <span>내거나<br />돌려받는 금액</span>
+            </div>
+            <ul class="contribution-logic__reasons">
+              <li><strong>평수 숫자만 단순 비교하면 안 됩니다.</strong> 구축과 신축은 면적 산정 방식, 발코니 서비스면적 등 차이가 있어 같은 숫자의 평형도 실제 체감 면적이 다를 수 있습니다.</li>
+              <li><strong>작은 평형일수록 평당 기준가격이 높게 잡히는 경향이 있습니다.</strong> 설명회에서도 평형이 커질수록 평당 기준가격이 낮아지는 흐름이 있다고 안내했습니다.</li>
+              <li><strong>그래도 최종 계산은 전체 금액 차이입니다.</strong> 새집 기준가격이 기존 집 인정금액보다 크면 부담, 작으면 환급입니다.</li>
+            </ul>
+            <div class="contribution-logic__cases">
+              <article class="contribution-logic-card contribution-logic-card--burden">
+                <h4>42평 → 41평</h4>
+                <dl>
+                  <div><dt>새 41평 기준가격</dt><dd>20.55억</dd></div>
+                  <div><dt>기존 42평 인정금액</dt><dd>18.71억</dd></div>
+                </dl>
+                <strong>차액 1.84억 부담</strong>
+              </article>
+              <article class="contribution-logic-card contribution-logic-card--burden">
+                <h4>49평 → 48평</h4>
+                <dl>
+                  <div><dt>새 48평 기준가격</dt><dd>22.80억</dd></div>
+                  <div><dt>기존 49평 인정금액</dt><dd>20.91억</dd></div>
+                </dl>
+                <strong>차액 1.89억 부담</strong>
+              </article>
+              <article class="contribution-logic-card contribution-logic-card--refund">
+                <h4>49평 → 41평</h4>
+                <dl>
+                  <div><dt>새 41평 기준가격</dt><dd>20.55억</dd></div>
+                  <div><dt>기존 49평 인정금액</dt><dd>20.91억</dd></div>
+                </dl>
+                <strong>차액 0.36억 환급</strong>
+              </article>
+            </div>
+            <p class="contribution-logic__note">즉, 새 41평·48평은 새 아파트 대형 평형에 해당해 기준가격이 높게 잡힙니다. 그래서 새집 기준가격이 내 기존 집 인정금액보다 높으면 부담, 낮으면 환급으로 표시됩니다.</p>
+          </section>
           <div class="doc-table-wrap contribution-table-wrap">
             <table class="contribution-table contribution-table--detail">
               <thead>
@@ -1531,6 +1577,51 @@
             <div class="doc-card"><strong>110.65%</strong><span>적용 비례율</span></div>
           </section>
           <p class="scenario-panel__note">32평에서 35평 선택 시 부담은 0.52억으로, 기본 산정안 0.61억보다 낮아지는 예시입니다.</p>
+          <section class="contribution-logic" aria-label="가상 예시 1 평형 감소 설명">
+            <div class="contribution-logic__intro">
+              <p class="contribution-logic__heading">평수가 줄어도 분담금이 나올 수 있습니다</p>
+              <p>추정분담금은 기존 평형과 신축 평형의 숫자 차이로 정해지지 않습니다. <strong>새로 받을 집의 기준가격</strong>이 <strong>내 기존 집 인정금액</strong>보다 높으면, 평형이 줄어드는 경우에도 차액을 부담하게 됩니다.</p>
+            </div>
+            <div class="contribution-logic__formula" aria-label="추정분담금 계산식">
+              <span>새로 받을 집<br />기준가격</span>
+              <strong>-</strong>
+              <span>내 기존 집<br />인정금액</span>
+              <strong>=</strong>
+              <span>내거나<br />돌려받는 금액</span>
+            </div>
+            <ul class="contribution-logic__reasons">
+              <li><strong>평수 숫자만 단순 비교하면 안 됩니다.</strong> 구축과 신축은 면적 산정 방식, 발코니 서비스면적 등 차이가 있어 같은 숫자의 평형도 실제 체감 면적이 다를 수 있습니다.</li>
+              <li><strong>작은 평형일수록 평당 기준가격이 높게 잡히는 경향이 있습니다.</strong> 설명회에서도 평형이 커질수록 평당 기준가격이 낮아지는 흐름이 있다고 안내했습니다.</li>
+              <li><strong>그래도 최종 계산은 전체 금액 차이입니다.</strong> 새집 기준가격이 기존 집 인정금액보다 크면 부담, 작으면 환급입니다.</li>
+            </ul>
+            <div class="contribution-logic__cases">
+              <article class="contribution-logic-card contribution-logic-card--burden">
+                <h4>42평 → 41평</h4>
+                <dl>
+                  <div><dt>새 41평 기준가격</dt><dd>20.55억</dd></div>
+                  <div><dt>기존 42평 인정금액</dt><dd>18.81억</dd></div>
+                </dl>
+                <strong>차액 1.74억 부담</strong>
+              </article>
+              <article class="contribution-logic-card contribution-logic-card--burden">
+                <h4>49평 → 48평</h4>
+                <dl>
+                  <div><dt>새 48평 기준가격</dt><dd>22.80억</dd></div>
+                  <div><dt>기존 49평 인정금액</dt><dd>21.02억</dd></div>
+                </dl>
+                <strong>차액 1.78억 부담</strong>
+              </article>
+              <article class="contribution-logic-card contribution-logic-card--refund">
+                <h4>49평 → 41평</h4>
+                <dl>
+                  <div><dt>새 41평 기준가격</dt><dd>20.55억</dd></div>
+                  <div><dt>기존 49평 인정금액</dt><dd>21.02억</dd></div>
+                </dl>
+                <strong>차액 0.47억 환급</strong>
+              </article>
+            </div>
+            <p class="contribution-logic__note">즉, 새 41평·48평은 새 아파트 대형 평형에 해당해 기준가격이 높게 잡힙니다. 그래서 새집 기준가격이 내 기존 집 인정금액보다 높으면 부담, 낮으면 환급으로 표시됩니다.</p>
+          </section>
           <div class="doc-table-wrap contribution-table-wrap">
             <table class="contribution-table contribution-table--detail">
               <thead>
@@ -1574,6 +1665,51 @@
             <div class="doc-card"><strong>118.11%</strong><span>적용 비례율</span></div>
           </section>
           <p class="scenario-panel__note">32평에서 35평 선택 시 1.03억 환급으로 바뀌는 예시입니다. 확정 금액이나 목표 금액이 아니라 조건 변화에 따른 이해용 비교값입니다.</p>
+          <section class="contribution-logic" aria-label="가상 예시 2 평형 감소 설명">
+            <div class="contribution-logic__intro">
+              <p class="contribution-logic__heading">평수가 줄어도 분담금이 나올 수 있습니다</p>
+              <p>추정분담금은 기존 평형과 신축 평형의 숫자 차이로 정해지지 않습니다. <strong>새로 받을 집의 기준가격</strong>이 <strong>내 기존 집 인정금액</strong>보다 높으면, 평형이 줄어드는 경우에도 차액을 부담하게 됩니다.</p>
+            </div>
+            <div class="contribution-logic__formula" aria-label="추정분담금 계산식">
+              <span>새로 받을 집<br />기준가격</span>
+              <strong>-</strong>
+              <span>내 기존 집<br />인정금액</span>
+              <strong>=</strong>
+              <span>내거나<br />돌려받는 금액</span>
+            </div>
+            <ul class="contribution-logic__reasons">
+              <li><strong>평수 숫자만 단순 비교하면 안 됩니다.</strong> 구축과 신축은 면적 산정 방식, 발코니 서비스면적 등 차이가 있어 같은 숫자의 평형도 실제 체감 면적이 다를 수 있습니다.</li>
+              <li><strong>작은 평형일수록 평당 기준가격이 높게 잡히는 경향이 있습니다.</strong> 설명회에서도 평형이 커질수록 평당 기준가격이 낮아지는 흐름이 있다고 안내했습니다.</li>
+              <li><strong>그래도 최종 계산은 전체 금액 차이입니다.</strong> 새집 기준가격이 기존 집 인정금액보다 크면 부담, 작으면 환급입니다.</li>
+            </ul>
+            <div class="contribution-logic__cases">
+              <article class="contribution-logic-card contribution-logic-card--burden">
+                <h4>42평 → 41평</h4>
+                <dl>
+                  <div><dt>새 41평 기준가격</dt><dd>20.55억</dd></div>
+                  <div><dt>기존 42평 인정금액</dt><dd>20.45억</dd></div>
+                </dl>
+                <strong>차액 0.10억 부담</strong>
+              </article>
+              <article class="contribution-logic-card contribution-logic-card--refund">
+                <h4>49평 → 48평</h4>
+                <dl>
+                  <div><dt>새 48평 기준가격</dt><dd>22.80억</dd></div>
+                  <div><dt>기존 49평 인정금액</dt><dd>22.86억</dd></div>
+                </dl>
+                <strong>차액 0.06억 환급</strong>
+              </article>
+              <article class="contribution-logic-card contribution-logic-card--refund">
+                <h4>49평 → 41평</h4>
+                <dl>
+                  <div><dt>새 41평 기준가격</dt><dd>20.55억</dd></div>
+                  <div><dt>기존 49평 인정금액</dt><dd>22.86억</dd></div>
+                </dl>
+                <strong>차액 2.31억 환급</strong>
+              </article>
+            </div>
+            <p class="contribution-logic__note">즉, 새 41평·48평은 새 아파트 대형 평형에 해당해 기준가격이 높게 잡힙니다. 그래서 새집 기준가격이 내 기존 집 인정금액보다 높으면 부담, 낮으면 환급으로 표시됩니다.</p>
+          </section>
           <div class="doc-table-wrap contribution-table-wrap">
             <table class="contribution-table contribution-table--detail">
               <thead>
@@ -1609,52 +1745,6 @@
         </article>
       </div>
     </div>
-  </section>
-
-  <section class="contribution-logic" aria-labelledby="contribution-logic-title">
-    <div class="contribution-logic__intro">
-      <h2 id="contribution-logic-title">평수가 줄어도 분담금이 나올 수 있습니다</h2>
-      <p>추정분담금은 기존 평형과 신축 평형의 숫자 차이로 정해지지 않습니다. <strong>새로 받을 집의 기준가격</strong>이 <strong>내 기존 집 인정금액</strong>보다 높으면, 평형이 줄어드는 경우에도 차액을 부담하게 됩니다.</p>
-    </div>
-    <div class="contribution-logic__formula" aria-label="추정분담금 계산식">
-      <span>새로 받을 집<br />기준가격</span>
-      <strong>-</strong>
-      <span>내 기존 집<br />인정금액</span>
-      <strong>=</strong>
-      <span>내거나<br />돌려받는 금액</span>
-    </div>
-    <ul class="contribution-logic__reasons">
-      <li><strong>평수 숫자만 단순 비교하면 안 됩니다.</strong> 구축과 신축은 면적 산정 방식, 발코니 서비스면적 등 차이가 있어 같은 숫자의 평형도 실제 체감 면적이 다를 수 있습니다.</li>
-      <li><strong>작은 평형일수록 평당 기준가격이 높게 잡히는 경향이 있습니다.</strong> 설명회에서도 평형이 커질수록 평당 기준가격이 낮아지는 흐름이 있다고 안내했습니다.</li>
-      <li><strong>그래도 최종 계산은 전체 금액 차이입니다.</strong> 새집 기준가격이 기존 집 인정금액보다 크면 부담, 작으면 환급입니다.</li>
-    </ul>
-    <div class="contribution-logic__cases">
-      <article class="contribution-logic-card contribution-logic-card--burden">
-        <h3>42평 → 41평</h3>
-        <dl>
-          <div><dt>새 41평 기준가격</dt><dd>20.55억</dd></div>
-          <div><dt>기존 42평 인정금액</dt><dd>18.71억</dd></div>
-        </dl>
-        <strong>차액 1.84억 부담</strong>
-      </article>
-      <article class="contribution-logic-card contribution-logic-card--burden">
-        <h3>49평 → 48평</h3>
-        <dl>
-          <div><dt>새 48평 기준가격</dt><dd>22.80억</dd></div>
-          <div><dt>기존 49평 인정금액</dt><dd>20.91억</dd></div>
-        </dl>
-        <strong>차액 1.89억 부담</strong>
-      </article>
-      <article class="contribution-logic-card contribution-logic-card--refund">
-        <h3>49평 → 41평</h3>
-        <dl>
-          <div><dt>새 41평 기준가격</dt><dd>20.55억</dd></div>
-          <div><dt>기존 49평 인정금액</dt><dd>20.91억</dd></div>
-        </dl>
-        <strong>차액 0.36억 환급</strong>
-      </article>
-    </div>
-    <p class="contribution-logic__note">즉, 새 41평·48평은 새 아파트 대형 평형에 해당해 기준가격이 높게 잡힙니다. 그래서 새집 기준가격이 내 기존 집 인정금액보다 높으면 부담, 낮으면 환급으로 표시됩니다.</p>
   </section>
 
   <h2 id="appraisal-limits">추정분담금 표의 한계</h2>
