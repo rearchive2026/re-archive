@@ -528,6 +528,27 @@
     line-height: 1;
   }
 
+  .internal-doc .contribution-logic__reasons {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0 0 0.9rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .internal-doc .contribution-logic__reasons li {
+    padding: 0.7rem 0.8rem;
+    border: 1px solid #f1d0cb;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--doc-ink);
+    line-height: 1.6;
+  }
+
+  .internal-doc .contribution-logic__reasons strong {
+    color: var(--doc-blue);
+  }
+
   .internal-doc .contribution-logic__cases {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1274,8 +1295,8 @@
   </section>
 
   <section class="doc-callout critical">
-    <h2>분담금은 이렇게 계산됩니다</h2>
-    <p><strong>권리가액 = 종전자산가액 × 비례율</strong>이고, <strong>추정분담금 = 조합원분양가 - 권리가액</strong>입니다. 따라서 내 집의 종전자산 평가액, 선택 평형의 조합원분양가, 최종 비례율이 모두 달라지면 분담금도 달라집니다.</p>
+    <h2>분담금은 이렇게 보면 됩니다</h2>
+    <p><strong>새로 받을 집의 기준가격</strong>에서 <strong>내 기존 집 인정금액</strong>을 뺀 차액이 분담금 또는 환급금입니다. 새집 기준가격이 더 높으면 부담, 내 기존 집 인정금액이 더 높으면 환급으로 표시됩니다. 공식 용어로는 기존 집 인정금액을 권리가액, 새집 기준가격을 조합원분양가라고 부릅니다.</p>
   </section>
 
   <section class="contribution-focus" aria-labelledby="contribution-quick">
@@ -1409,42 +1430,47 @@
     <div class="contribution-logic__intro">
       <p class="doc-kicker">표를 볼 때 가장 헷갈리는 부분</p>
       <h2 id="contribution-logic-title">평수가 줄어도 분담금이 나올 수 있습니다</h2>
-      <p>추정분담금은 기존 평형과 신축 평형의 숫자 차이로 정해지지 않습니다. <strong>선택한 신축 평형의 조합원분양가</strong>가 <strong>내 기존 주택의 권리가액</strong>보다 높으면, 평형이 줄어드는 경우에도 차액을 부담하게 됩니다.</p>
+      <p>추정분담금은 기존 평형과 신축 평형의 숫자 차이로 정해지지 않습니다. <strong>새로 받을 집의 기준가격</strong>이 <strong>내 기존 집 인정금액</strong>보다 높으면, 평형이 줄어드는 경우에도 차액을 부담하게 됩니다.</p>
     </div>
     <div class="contribution-logic__formula" aria-label="추정분담금 계산식">
-      <span>신축 평형<br />조합원분양가</span>
+      <span>새로 받을 집<br />기준가격</span>
       <strong>-</strong>
-      <span>내 기존 주택<br />권리가액</span>
+      <span>내 기존 집<br />인정금액</span>
       <strong>=</strong>
-      <span>추정분담금</span>
+      <span>내거나<br />돌려받는 금액</span>
     </div>
+    <ul class="contribution-logic__reasons">
+      <li><strong>평수 숫자만 단순 비교하면 안 됩니다.</strong> 구축과 신축은 면적 산정 방식, 발코니 서비스면적 등 차이가 있어 같은 숫자의 평형도 실제 체감 면적이 다를 수 있습니다.</li>
+      <li><strong>작은 평형일수록 평당 기준가격이 높게 잡히는 경향이 있습니다.</strong> 설명회에서도 평형이 커질수록 평당 기준가격이 낮아지는 흐름이 있다고 안내했습니다.</li>
+      <li><strong>그래도 최종 계산은 전체 금액 차이입니다.</strong> 새집 기준가격이 기존 집 인정금액보다 크면 부담, 작으면 환급입니다.</li>
+    </ul>
     <div class="contribution-logic__cases">
       <article class="contribution-logic-card contribution-logic-card--burden">
         <h3>42평 → 41평</h3>
         <dl>
-          <div><dt>신축 41평 조합원분양가</dt><dd>20.55억</dd></div>
-          <div><dt>기존 42평 권리가액</dt><dd>18.71억</dd></div>
+          <div><dt>새 41평 기준가격</dt><dd>20.55억</dd></div>
+          <div><dt>기존 42평 인정금액</dt><dd>18.71억</dd></div>
         </dl>
         <strong>차액 1.84억 부담</strong>
       </article>
       <article class="contribution-logic-card contribution-logic-card--burden">
         <h3>49평 → 48평</h3>
         <dl>
-          <div><dt>신축 48평 조합원분양가</dt><dd>22.80억</dd></div>
-          <div><dt>기존 49평 권리가액</dt><dd>20.91억</dd></div>
+          <div><dt>새 48평 기준가격</dt><dd>22.80억</dd></div>
+          <div><dt>기존 49평 인정금액</dt><dd>20.91억</dd></div>
         </dl>
         <strong>차액 1.89억 부담</strong>
       </article>
       <article class="contribution-logic-card contribution-logic-card--refund">
         <h3>49평 → 41평</h3>
         <dl>
-          <div><dt>신축 41평 조합원분양가</dt><dd>20.55억</dd></div>
-          <div><dt>기존 49평 권리가액</dt><dd>20.91억</dd></div>
+          <div><dt>새 41평 기준가격</dt><dd>20.55억</dd></div>
+          <div><dt>기존 49평 인정금액</dt><dd>20.91억</dd></div>
         </dl>
         <strong>차액 0.36억 환급</strong>
       </article>
     </div>
-    <p class="contribution-logic__note">즉, 신축 41평·48평은 신축 대형 평형에 해당해 조합원분양가가 높게 산정됩니다. 그래서 기존 권리가액보다 신축 평형 가격이 높으면 부담, 낮으면 환급으로 표시됩니다.</p>
+    <p class="contribution-logic__note">즉, 새 41평·48평은 새 아파트 대형 평형에 해당해 기준가격이 높게 잡힙니다. 그래서 새집 기준가격이 내 기존 집 인정금액보다 높으면 부담, 낮으면 환급으로 표시됩니다.</p>
   </section>
 
   <div class="doc-table-wrap contribution-table-wrap">
@@ -1452,8 +1478,8 @@
       <thead>
         <tr>
           <th>종전 평형</th>
-          <th class="num">종전자산</th>
-          <th class="num">권리가액</th>
+          <th class="num">기존 집 추정가</th>
+          <th class="num">기존 집 인정금액</th>
           <th class="num">신축 24평</th>
           <th class="num">신축 30평</th>
           <th class="num">신축 35평</th>
@@ -1529,7 +1555,7 @@
     <article class="contribution-mobile-card">
       <div class="contribution-mobile-card__head">
         <h3>종전 24평</h3>
-        <p>종전자산 13.0억 · 권리가액 14.31억</p>
+        <p>기존 집 추정가 13.0억 · 인정금액 14.31억</p>
       </div>
       <dl class="contribution-mobile-values">
         <div><dt>신축 24평</dt><dd class="amount-refund">환급 0.17억</dd></div>
@@ -1542,7 +1568,7 @@
     <article class="contribution-mobile-card">
       <div class="contribution-mobile-card__head">
         <h3>종전 27평</h3>
-        <p>종전자산 14.5억 · 권리가액 15.96억</p>
+        <p>기존 집 추정가 14.5억 · 인정금액 15.96억</p>
       </div>
       <dl class="contribution-mobile-values">
         <div><dt>신축 24평</dt><dd class="amount-refund">환급 1.82억</dd></div>
@@ -1555,7 +1581,7 @@
     <article class="contribution-mobile-card">
       <div class="contribution-mobile-card__head">
         <h3>종전 32평</h3>
-        <p>종전자산 16.0억 · 권리가액 17.61억</p>
+        <p>기존 집 추정가 16.0억 · 인정금액 17.61억</p>
       </div>
       <dl class="contribution-mobile-values">
         <div><dt>신축 24평</dt><dd class="amount-refund">환급 3.47억</dd></div>
@@ -1568,7 +1594,7 @@
     <article class="contribution-mobile-card">
       <div class="contribution-mobile-card__head">
         <h3>종전 38평</h3>
-        <p>종전자산 16.6억 · 권리가액 18.27억</p>
+        <p>기존 집 추정가 16.6억 · 인정금액 18.27억</p>
       </div>
       <dl class="contribution-mobile-values">
         <div><dt>신축 24평</dt><dd class="amount-refund">환급 4.13억</dd></div>
@@ -1581,7 +1607,7 @@
     <article class="contribution-mobile-card">
       <div class="contribution-mobile-card__head">
         <h3>종전 42평</h3>
-        <p>종전자산 17.0억 · 권리가액 18.71억</p>
+        <p>기존 집 추정가 17.0억 · 인정금액 18.71억</p>
       </div>
       <dl class="contribution-mobile-values">
         <div><dt>신축 24평</dt><dd class="amount-refund">환급 4.57억</dd></div>
@@ -1594,7 +1620,7 @@
     <article class="contribution-mobile-card">
       <div class="contribution-mobile-card__head">
         <h3>종전 49평</h3>
-        <p>종전자산 19.0억 · 권리가액 20.91억</p>
+        <p>기존 집 추정가 19.0억 · 인정금액 20.91억</p>
       </div>
       <dl class="contribution-mobile-values">
         <div><dt>신축 24평</dt><dd class="amount-refund">환급 6.77억</dd></div>
@@ -1730,14 +1756,14 @@
 
   <h2 id="appraisal-limits">추정분담금 표의 한계</h2>
   <ul class="doc-checklist">
-    <li><strong>현재 표는 전체 사업성 검토용입니다.</strong> 같은 평형은 같은 종전자산가액으로 놓고 계산했습니다.</li>
+    <li><strong>현재 표는 전체 사업성 검토용입니다.</strong> 같은 평형은 같은 기존 집 추정가로 놓고 계산했습니다.</li>
     <li><strong>정식 감정평가와 다릅니다.</strong> 발표자는 향후 정식 감정평가에서는 대지지분율, 층, 호, 위치, 향, 주거환경 효용지수 등을 종합 반영한다고 설명했습니다.</li>
     <li><strong>단지·세대 간 상대 배분은 후속 단계의 쟁점입니다.</strong> 현 단계에서는 전체 사업성 판단을 위한 개략 추정치로 보는 것이 맞습니다.</li>
   </ul>
 
   <section class="doc-callout warning">
     <h2>반드시 함께 안내할 주의사항</h2>
-    <p>추정분담금은 현재 단계의 사업성 검토값입니다. 공사비, 일반분양가, 종전자산가액 모두 현재 시점의 주변 사례와 통계 기준으로 산정됐으며, 미래 확정 금액이 아닙니다. 실제 분담금은 종전자산 감정평가, 조합원 분양가, 일반분양가, 공사비, 금융비, 설계 변경, 공공기여 조건, 관리처분계획에 따라 달라집니다.</p>
+    <p>추정분담금은 현재 단계의 사업성 검토값입니다. 공사비, 일반분양 기준가격, 기존 집 추정가 모두 현재 시점의 주변 사례와 통계 기준으로 산정됐으며, 미래 확정 금액이 아닙니다. 실제 분담금은 기존 집 감정평가, 새집 기준가격, 일반분양 기준가격, 공사비, 금융비, 설계 변경, 공공기여 조건, 관리처분계획에 따라 달라집니다.</p>
   </section>
 
   <p class="doc-note">본 문서는 주민 이해를 돕기 위한 설명자료입니다. 투자 판단이나 개별 권리 산정의 확정 근거로 사용할 수 없으며, 향후 법정 감정평가와 관리처분계획을 통해 개별 금액이 산정됩니다.</p>
